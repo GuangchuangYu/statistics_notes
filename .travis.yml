@@ -8,6 +8,8 @@ r_github_packages:
   - rstudio/bookdown
 
 install: true
+  - Rscript -e "if (!require('devtools')) install.packages('devtools')"
+  - Rscript -e "if (!require('bookdown')) devtools::install_github('rstudio/bookdown')"
   - Rscript -e "if (!require('ggplot2')) install.packages('ggplot2')"
 
 before_script:
