@@ -8,6 +8,12 @@ documentclass: book
 biblio-style: apalike
 link-citations: yes
 description: "YGC的统计学笔记"
+bookdown::gitbook:
+  config:
+    sharing:
+      facebook: yes
+	  twitter: yes
+	  weibo: yes
 ---
 
 
