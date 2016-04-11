@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>统计笔记</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="YGC的统计学笔记">
+  <meta name="generator" content="bookdown 0.0.63 and GitBook 2.6.7">
+
+  <meta property="og:title" content="统计笔记" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="YGC的统计学笔记" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="统计笔记" />
+  
+  <meta name="twitter:description" content="YGC的统计学笔记" />
+  
+
+<meta name="author" content="余光创">
+
+<meta name="date" content="2016-04-11">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="index.html">
+
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> 前言</a></li>
+<li class="chapter" data-level="2" data-path="t.html"><a href="t.html"><i class="fa fa-check"></i><b>2</b> 单样本T检验</a><ul>
+<li class="chapter" data-level="2.1" data-path="t.html"><a href="t.html#section-2.1"><i class="fa fa-check"></i><b>2.1</b> 前提条件</a></li>
+<li class="chapter" data-level="2.2" data-path="t.html"><a href="t.html#section-2.2"><i class="fa fa-check"></i><b>2.2</b> 数据标准化</a></li>
+<li class="chapter" data-level="2.3" data-path="t.html"><a href="t.html#z"><i class="fa fa-check"></i><b>2.3</b> Z检验</a></li>
+<li class="chapter" data-level="2.4" data-path="t.html"><a href="t.html#t"><i class="fa fa-check"></i><b>2.4</b> t检验</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">统计笔记</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="t" class="section level1">
+<h1><span class="header-section-number">2</span> 单样本T检验</h1>
+<div id="section-2.1" class="section level2">
+<h2><span class="header-section-number">2.1</span> 前提条件</h2>
+<p>使用T检验，前提条件必须是满足正态分布，如果样本量足够多的时候，根据<a href="confidence_interval.html">中心极限定理</a>，数据分布不呈正态也是没问题的。</p>
+</div>
+<div id="section-2.2" class="section level2">
+<h2><span class="header-section-number">2.2</span> 数据标准化</h2>
+<p>在满足前提条件的基础上，我们假定均值的分布是呈正态的。</p>
+<p>简单点说，我们的任务是看样本均值偏离总体均值有多远，越远则p值越小，这是绝对正相关的。那么直接计算 <span class="math inline">\(| \bar{x} - \mu |\)</span> 行不行？显然可以，但是it depends。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">get_sample_mean &lt;-<span class="st"> </span>function(size, population, <span class="dt">n=</span><span class="dv">1000</span>) {
+    <span class="kw">sapply</span>(<span class="dv">1</span>:n, function(i) {
+        x &lt;-<span class="st"> </span><span class="kw">sample</span>(population, size)
+        <span class="kw">mean</span>(x)
+    })
+}
+m1 &lt;-<span class="st"> </span><span class="kw">get_sample_mean</span>(<span class="dv">5</span>, <span class="kw">rnorm</span>(<span class="dv">1000</span>))
+m2 &lt;-<span class="st"> </span><span class="kw">get_sample_mean</span>(<span class="dv">5</span>, <span class="kw">rnorm</span>(<span class="dv">1000</span>, <span class="dt">sd=</span><span class="dv">3</span>))
+
+<span class="kw">hist</span>(m2, <span class="dt">col=</span><span class="st">&quot;green&quot;</span>, <span class="dt">main=</span><span class="st">&quot;Histogram of sample means&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Means&quot;</span>, <span class="dt">breaks=</span><span class="dv">30</span>)
+<span class="kw">hist</span>(m1, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">add=</span>T, <span class="dt">breaks=</span><span class="dv">30</span>)
+<span class="kw">legend</span>(<span class="dt">legend=</span><span class="kw">c</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(sigma==<span class="dv">1</span>)), <span class="kw">expression</span>(<span class="kw">paste</span>(sigma==<span class="dv">3</span>))), <span class="dt">fill=</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>), <span class="st">&quot;topright&quot;</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/t.fig1-1.png" alt="" /><!-- --></p>
+<p>我们知道正态分布由两个参数决定，均值和方差，所以 <span class="math inline">\(| \bar{x} - \mu |\)</span> 的大小，不能直接对应到p值，从上图绿色中抽到一个<span class="math inline">\(| \bar{x} - \mu | = 3\)</span> 的样本，概率并不低，但从红色分布中得到这样一个样本，几乎是不可能的。</p>
+<p>拿 <span class="math inline">\(| \bar{x} - \mu |\)</span> 来度量的话，你必须提供 <span class="math inline">\(sd(\bar{x})\)</span> ，<span class="math inline">\(| \bar{x} - \mu |\)</span> 不能直接比较。</p>
+<p>如果<span class="math inline">\(sd(\bar{x})\)</span> 相同的话，<span class="math inline">\(| \bar{x} - \mu |\)</span> 就是很好的度量方法，它是可比较的，值越大，p值越小。那么我们需要做的，就是把数据压缩到同一个scale上，既然均值分布呈正态分布，而所有的正态分布都可以scale到标准正态分布上，显然我们可以用相同的方法来处理，把数据统一scale到 <span class="math inline">\(SEM = 1\)</span> ，于是差值 <span class="math inline">\(| scale(\bar{x}) - \mu |\)</span> 就完全可以拿来比较，年纪大点的人，上学时候p值是通过查表获得的，查表用的值就是 <span class="math inline">\(| scale(\bar{x}) - \mu |\)</span> 。</p>
+</div>
+<div id="z" class="section level2">
+<h2><span class="header-section-number">2.3</span> Z检验</h2>
+<p>在讲T检验前，先回顾一下Z检验，标准正态分布称之为Z分布，根据Z分布来做统计检验，便是Z检验。 我们把一个正态分布scale到标准正态分布上，通过: <span class="math display">\[ \frac{x-\mu}{sd}\]</span></p>
+<p>在这里检验的统计量是均值 <span class="math inline">\(\bar{x}\)</span> ，均值的sd，也就是SEM， <span class="math inline">\(SEM=\frac{\sigma}{\sqrt{n}}\)</span> ，通过 <span class="math inline">\(\frac{sd(x)}{\sqrt{n}}\)</span> 估计，具体参考<a href="confidence_interval.html">置信区间一节</a>，</p>
+<p>所以我们使用以下公式，把均值分布scale到z分布上： <span class="math display">\[z= \frac{\bar{x}-\mu}{sd(x)/\sqrt{n}}\]</span></p>
+<p>那么通过z值在z分布上的位置，就可以算出p值，进行z检验。</p>
+</div>
+<div id="t" class="section level2">
+<h2><span class="header-section-number">2.4</span> t检验</h2>
+<pre><code>
+In theory, there is no difference between theory and practice. But, in practice, there is.
+
+                                                        -- Jan L.A. van de Snepscheut </code></pre>
+<p>虽然可以直接利用正态分布来计算p值，然而理想状态很丰满，现实却很骨感，如果样本量n较大时，不单t分布逼近正态分布， <span class="math inline">\(\chi^2_{(n)}\)</span> ,Poisson( <span class="math inline">\(lambda\)</span> ),和二项分布B(n,p)都逼近正态，然而我们没有那么大的样本量，所以在不理想的现实中，有各种各样的检验来应对各种情景和现实条件。</p>
+<p>我们要通过样本参数来估计总体参数，特别是对于小样本来说，非常不靠谱。可以说正态是理想状态，而T分布是其现实版本。<a href="probability_distributions.html">T分布</a>中心比正态分布平，尾巴比正态分布长，特别是在自由度较小的情况下，所以T检验计算出来的p值比Z检验要保守些。</p>
+<p>相应的，t值的计算和z值的计算是一样的。 <span class="math display">\[t=\frac{\bar{x}-\mu}{sd(x)/\sqrt{n}}\]</span></p>
+<p>使用R进行单样本的T检验，是一件非常容易的事情。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:<span class="dv">100</span>, <span class="dv">10</span>)
+<span class="kw">print</span>(x)</code></pre></div>
+<pre><code>##  [1]  7 77 84 82 18 14 75 85 17 61</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(x, <span class="dt">mu=</span><span class="dv">20</span>)</code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  x
+## t = 3.021, df = 9, p-value = 0.01446
+## alternative hypothesis: true mean is not equal to 20
+## 95 percent confidence interval:
+##  28.03821 75.96179
+## sample estimates:
+## mean of x 
+##        52</code></pre>
+<pre><code>2013-03-26</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+
+<script src="libs/gitbook-2.6.7/js/app.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
