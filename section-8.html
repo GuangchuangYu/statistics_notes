@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>统计笔记</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="YGC的统计学笔记">
+  <meta name="generator" content="bookdown 0.0.63 and GitBook 2.6.7">
+
+  <meta property="og:title" content="统计笔记" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="YGC的统计学笔记" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="统计笔记" />
+  
+  <meta name="twitter:description" content="YGC的统计学笔记" />
+  
+
+<meta name="author" content="余光创">
+
+<meta name="date" content="2016-04-11">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="correlation.html">
+<link rel="next" href="general-linear-model.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> 前言</a></li>
+<li class="chapter" data-level="2" data-path="r.html"><a href="r.html"><i class="fa fa-check"></i><b>2</b> R语言简介</a><ul>
+<li class="chapter" data-level="2.1" data-path="r.html"><a href="r.html#-flow-control"><i class="fa fa-check"></i><b>2.1</b> 控制流 （Flow Control)</a></li>
+<li class="chapter" data-level="2.2" data-path="r.html"><a href="r.html#-looping"><i class="fa fa-check"></i><b>2.2</b> 循环 (Looping)</a></li>
+<li class="chapter" data-level="2.3" data-path="r.html"><a href="r.html#covariancecorrelation"><i class="fa fa-check"></i><b>2.3</b> 协方差（covariance）和相关性（correlation）</a></li>
+<li class="chapter" data-level="2.4" data-path="r.html"><a href="r.html#section-2.4"><i class="fa fa-check"></i><b>2.4</b> 对称性度量</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>3</b> 使用ggplot2画图</a><ul>
+<li class="chapter" data-level="3.1" data-path="ggplot2.html"><a href="ggplot2.html#why-use-ggplot2"><i class="fa fa-check"></i><b>3.1</b> Why use ggplot2</a></li>
+<li class="chapter" data-level="3.2" data-path="ggplot2.html"><a href="ggplot2.html#ggplot2"><i class="fa fa-check"></i><b>3.2</b> ggplot2基本要素</a></li>
+<li class="chapter" data-level="3.3" data-path="ggplot2.html"><a href="ggplot2.html#datamapping"><i class="fa fa-check"></i><b>3.3</b> 数据（Data）和映射（Mapping)</a></li>
+<li class="chapter" data-level="3.4" data-path="ggplot2.html"><a href="ggplot2.html#geometric"><i class="fa fa-check"></i><b>3.4</b> 几何对象（Geometric）</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="ggplot2.html"><a href="ggplot2.html#section-3.4.1"><i class="fa fa-check"></i><b>3.4.1</b> 直方图</a></li>
+<li class="chapter" data-level="3.4.2" data-path="ggplot2.html"><a href="ggplot2.html#section-3.4.2"><i class="fa fa-check"></i><b>3.4.2</b> 密度函数图</a></li>
+<li class="chapter" data-level="3.4.3" data-path="ggplot2.html"><a href="ggplot2.html#section-3.4.3"><i class="fa fa-check"></i><b>3.4.3</b> 箱式图</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="ggplot2.html"><a href="ggplot2.html#scale"><i class="fa fa-check"></i><b>3.5</b> 标尺（Scale）</a></li>
+<li class="chapter" data-level="3.6" data-path="ggplot2.html"><a href="ggplot2.html#statistics"><i class="fa fa-check"></i><b>3.6</b> 统计变换（Statistics）</a></li>
+<li class="chapter" data-level="3.7" data-path="ggplot2.html"><a href="ggplot2.html#coordinante"><i class="fa fa-check"></i><b>3.7</b> 坐标系统（Coordinante）</a></li>
+<li class="chapter" data-level="3.8" data-path="ggplot2.html"><a href="ggplot2.html#layer"><i class="fa fa-check"></i><b>3.8</b> 图层（Layer）</a></li>
+<li class="chapter" data-level="3.9" data-path="ggplot2.html"><a href="ggplot2.html#facet"><i class="fa fa-check"></i><b>3.9</b> 分面（Facet）</a></li>
+<li class="chapter" data-level="3.10" data-path="ggplot2.html"><a href="ggplot2.html#theme"><i class="fa fa-check"></i><b>3.10</b> 主题（Theme）</a></li>
+<li class="chapter" data-level="3.11" data-path="ggplot2.html"><a href="ggplot2.html#section-3.11"><i class="fa fa-check"></i><b>3.11</b> 二维密度图</a></li>
+<li class="chapter" data-level="3.12" data-path="ggplot2.html"><a href="ggplot2.html#ggplot2"><i class="fa fa-check"></i><b>3.12</b> ggplot2实战</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="section-4.html"><a href="section-4.html"><i class="fa fa-check"></i><b>4</b> 统计检验基础</a><ul>
+<li class="chapter" data-level="4.1" data-path="section-4.html"><a href="section-4.html#section-4.1"><i class="fa fa-check"></i><b>4.1</b> 概率分布</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="section-4.html"><a href="section-4.html#section-4.1.1"><i class="fa fa-check"></i><b>4.1.1</b> 均值与方差</a></li>
+<li class="chapter" data-level="4.1.2" data-path="section-4.html"><a href="section-4.html#section-4.1.2"><i class="fa fa-check"></i><b>4.1.2</b> 二项式分布</a></li>
+<li class="chapter" data-level="4.1.3" data-path="section-4.html"><a href="section-4.html#poisson"><i class="fa fa-check"></i><b>4.1.3</b> Poisson分布</a></li>
+<li class="chapter" data-level="4.1.4" data-path="section-4.html"><a href="section-4.html#section-4.1.4"><i class="fa fa-check"></i><b>4.1.4</b> 正态分布</a></li>
+<li class="chapter" data-level="4.1.5" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>4.1.5</b> t分布</a></li>
+<li class="chapter" data-level="4.1.6" data-path="section-4.html"><a href="section-4.html#section-4.1.6"><i class="fa fa-check"></i><b>4.1.6</b> 卡方分布</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="section-4.html"><a href="section-4.html#p"><i class="fa fa-check"></i><b>4.2</b> 统计检验与p值</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="section-4.html"><a href="section-4.html#section-4.2.1"><i class="fa fa-check"></i><b>4.2.1</b> 零假设</a></li>
+<li class="chapter" data-level="4.2.2" data-path="section-4.html"><a href="section-4.html#p"><i class="fa fa-check"></i><b>4.2.2</b> P值</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="section-4.html"><a href="section-4.html#confidence-intervals"><i class="fa fa-check"></i><b>4.3</b> Confidence Intervals</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="section-4.html"><a href="section-4.html#section-4.3.1"><i class="fa fa-check"></i><b>4.3.1</b> 均值置信区间</a></li>
+<li class="chapter" data-level="4.3.2" data-path="section-4.html"><a href="section-4.html#section-4.3.2"><i class="fa fa-check"></i><b>4.3.2</b> 比例的置信区间</a></li>
+<li class="chapter" data-level="4.3.3" data-path="section-4.html"><a href="section-4.html#section-4.3.3"><i class="fa fa-check"></i><b>4.3.3</b> 方差和标准差的置信区间</a></li>
+<li class="chapter" data-level="4.3.4" data-path="section-4.html"><a href="section-4.html#section-4.3.4"><i class="fa fa-check"></i><b>4.3.4</b> 均值差的置信区间</a></li>
+<li class="chapter" data-level="4.3.5" data-path="section-4.html"><a href="section-4.html#section-4.3.5"><i class="fa fa-check"></i><b>4.3.5</b> 相关性置信区间</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>5</b> T检验</a><ul>
+<li class="chapter" data-level="5.1" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>5.1</b> 单样本T检验</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="t.html"><a href="t.html"><i class="fa fa-check"></i><b>5.1.1</b> 前提条件</a></li>
+<li class="chapter" data-level="5.1.2" data-path="t.html"><a href="t.html#section-5.1.2"><i class="fa fa-check"></i><b>5.1.2</b> 数据标准化</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="t.html"><a href="t.html#z"><i class="fa fa-check"></i><b>5.2</b> Z检验</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="t.html"><a href="t.html#t-1"><i class="fa fa-check"></i><b>5.2.1</b> t检验</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>5.3</b> 两样本T检验</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>5.3.1</b> 成对T检验</a></li>
+<li class="chapter" data-level="5.3.2" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>5.3.2</b> 方差相同的两样本T检验</a></li>
+<li class="chapter" data-level="5.3.3" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>5.3.3</b> 方差不同的两样本T检验</a></li>
+<li class="chapter" data-level="5.3.4" data-path="t.html"><a href="t.html#rt"><i class="fa fa-check"></i><b>5.3.4</b> 使用R进行T检验</a></li>
+<li class="chapter" data-level="5.3.5" data-path="t.html"><a href="t.html#section-5.3.5"><i class="fa fa-check"></i><b>5.3.5</b> 结论</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="section-6.html"><a href="section-6.html"><i class="fa fa-check"></i><b>6</b> 方差分析</a><ul>
+<li class="chapter" data-level="6.1" data-path="section-6.html"><a href="section-6.html#one-way-anova"><i class="fa fa-check"></i><b>6.1</b> One-Way ANOVA</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="section-6.html"><a href="section-6.html#section-6.1.1"><i class="fa fa-check"></i><b>6.1.1</b> 单向方差分析</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="section-6.html"><a href="section-6.html#tukeyhsd---tukey-honestly-significant-difference"><i class="fa fa-check"></i><b>6.2</b> TukeyHSD - Tukey honestly significant difference</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>6.2.1</b> 两两T检验</a></li>
+<li class="chapter" data-level="6.2.2" data-path="section-6.html"><a href="section-6.html#section-6.2.2"><i class="fa fa-check"></i><b>6.2.2</b> 如何理解方差分析</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="section-6.html"><a href="section-6.html#two-way-anova"><i class="fa fa-check"></i><b>6.3</b> Two-Way ANOVA</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="section-6.html"><a href="section-6.html#-1"><i class="fa fa-check"></i><b>6.3.1</b> 前提条件</a></li>
+<li class="chapter" data-level="6.3.2" data-path="section-6.html"><a href="section-6.html#-1"><i class="fa fa-check"></i><b>6.3.2</b> 零假设</a></li>
+<li class="chapter" data-level="6.3.3" data-path="section-6.html"><a href="section-6.html#section-6.3.3"><i class="fa fa-check"></i><b>6.3.3</b> 方差计算</a></li>
+<li class="chapter" data-level="6.3.4" data-path="section-4.html"><a href="section-4.html#p"><i class="fa fa-check"></i><b>6.3.4</b> p值计算</a></li>
+<li class="chapter" data-level="6.3.5" data-path="section-6.html"><a href="section-6.html#anova-using-r"><i class="fa fa-check"></i><b>6.3.5</b> ANOVA using R</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="section-6.html"><a href="section-6.html#advanced-anova"><i class="fa fa-check"></i><b>6.4</b> Advanced ANOVA</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="section-6.html"><a href="section-6.html#repeated-measures-anova"><i class="fa fa-check"></i><b>6.4.1</b> Repeated-Measures ANOVA</a></li>
+<li class="chapter" data-level="6.4.2" data-path="section-6.html"><a href="section-6.html#mixed-factorial-anova"><i class="fa fa-check"></i><b>6.4.2</b> Mixed-Factorial ANOVA</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="correlation.html"><a href="correlation.html"><i class="fa fa-check"></i><b>7</b> Correlation</a><ul>
+<li class="chapter" data-level="7.1" data-path="correlation.html"><a href="correlation.html#-covariance"><i class="fa fa-check"></i><b>7.1</b> 协方差 (Covariance)</a></li>
+<li class="chapter" data-level="7.2" data-path="correlation.html"><a href="correlation.html#-correlation"><i class="fa fa-check"></i><b>7.2</b> 相关性 (Correlation)</a></li>
+<li class="chapter" data-level="7.3" data-path="correlation.html"><a href="correlation.html#section-7.3"><i class="fa fa-check"></i><b>7.3</b> 相关性统计检验</a></li>
+<li class="chapter" data-level="7.4" data-path="correlation.html"><a href="correlation.html#section-7.4"><i class="fa fa-check"></i><b>7.4</b> 置信区间</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="section-8.html"><a href="section-8.html"><i class="fa fa-check"></i><b>8</b> 线性回归</a><ul>
+<li class="chapter" data-level="8.1" data-path="section-8.html"><a href="section-8.html#simple-linear-regression"><i class="fa fa-check"></i><b>8.1</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="section-8.html"><a href="section-8.html#section-8.1.1"><i class="fa fa-check"></i><b>8.1.1</b> 评估参数准确性</a></li>
+<li class="chapter" data-level="8.1.2" data-path="section-8.html"><a href="section-8.html#section-8.1.2"><i class="fa fa-check"></i><b>8.1.2</b> 评估模型准确性</a></li>
+<li class="chapter" data-level="8.1.3" data-path="section-6.html"><a href="section-6.html#-1"><i class="fa fa-check"></i><b>8.1.3</b> 方差分析</a></li>
+<li class="chapter" data-level="8.1.4" data-path="section-8.html"><a href="section-8.html#section-8.1.4"><i class="fa fa-check"></i><b>8.1.4</b> 可视化辅助诊断模型</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="section-8.html"><a href="section-8.html#multiple-linear-regression"><i class="fa fa-check"></i><b>8.2</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="section-8.html"><a href="section-8.html#section-8.2.1"><i class="fa fa-check"></i><b>8.2.1</b> 相关问题</a></li>
+<li class="chapter" data-level="8.2.2" data-path="section-8.html"><a href="section-8.html#section-8.2.2"><i class="fa fa-check"></i><b>8.2.2</b> 数值运算</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="general-linear-model.html"><a href="general-linear-model.html"><i class="fa fa-check"></i><b>9</b> General Linear Model</a><ul>
+<li class="chapter" data-level="9.1" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>9.1</b> T检验是回归的特例</a></li>
+<li class="chapter" data-level="9.2" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>9.2</b> T检验是方差分析的特例</a></li>
+<li class="chapter" data-level="9.3" data-path="general-linear-model.html"><a href="general-linear-model.html#anova"><i class="fa fa-check"></i><b>9.3</b> ANOVA是多重回归的特例</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a></li>
+<li class="chapter" data-level="11" data-path="section-11.html"><a href="section-11.html"><i class="fa fa-check"></i><b>11</b> 生物实验统计分析</a><ul>
+<li class="chapter" data-level="11.1" data-path="section-11.html"><a href="section-11.html#rt-pcr"><i class="fa fa-check"></i><b>11.1</b> RT-PCR</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="section-11.html"><a href="section-11.html#data"><i class="fa fa-check"></i><b>11.1.1</b> Data</a></li>
+<li class="chapter" data-level="11.1.2" data-path="section-11.html"><a href="section-11.html#data-clean"><i class="fa fa-check"></i><b>11.1.2</b> Data clean</a></li>
+<li class="chapter" data-level="11.1.3" data-path="section-11.html"><a href="section-11.html#calculate-statistical-metric"><i class="fa fa-check"></i><b>11.1.3</b> Calculate statistical metric</a></li>
+<li class="chapter" data-level="11.1.4" data-path="section-11.html"><a href="section-11.html#statistical-analysis"><i class="fa fa-check"></i><b>11.1.4</b> Statistical Analysis</a></li>
+<li class="chapter" data-level="11.1.5" data-path="section-11.html"><a href="section-11.html#plot"><i class="fa fa-check"></i><b>11.1.5</b> Plot</a></li>
+<li class="chapter" data-level="11.1.6" data-path="section-11.html"><a href="section-11.html#summary"><i class="fa fa-check"></i><b>11.1.6</b> Summary</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">统计笔记</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="section-8" class="section level1">
+<h1><span class="header-section-number">8</span> 线性回归</h1>
+<div id="simple-linear-regression" class="section level2">
+<h2><span class="header-section-number">8.1</span> Simple Linear Regression</h2>
+<blockquote>
+<p>Many shall be restored that now are fallen;</p>
+</blockquote>
+<blockquote>
+<p>Many shall be fallen that now are in honor.</p>
+</blockquote>
+<p><a href="correlation.html">相关性</a>是简单线性回归它爹，回归的概念来自于Francis Galton，他发现高个子男人生出来的儿子会比自己矮，而矮个子男人生出来的儿子会比自己高，并称这种现象为<a href="http://www.biostat.washington.edu/~bsweir/BIOST551/Galton1886.pdf">回归平庸(regression toward mediocrity)</a>，现在被称之为回归均值(regression to the mean)，Galton有个学生叫Karl Pearson，他给出了相关性和回归的数学公式，这也是相关系数被命名为Pearson相关系数的原因，而相关系数的符号r则取自于回归(regression)一词。</p>
+<p>简单线性回归名副其实，非常简单，在假定X和Y是线性关系，使用单变量X来预测Y。</p>
+<p><span class="math display">\[ Y \approx \beta_0 + \beta_1 X \]</span></p>
+<p>假设我们要用花萼长度来预测花瓣长度，</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(ggplot2)
+<span class="kw">data</span>(iris)
+<span class="kw">attach</span>(iris)</code></pre></div>
+<pre><code>## The following objects are masked from iris (pos = 3):
+## 
+##     Petal.Length, Petal.Width, Sepal.Length, Sepal.Width, Species</code></pre>
+<pre><code>## The following objects are masked from iris (pos = 9):
+## 
+##     Petal.Length, Petal.Width, Sepal.Length, Sepal.Width, Species</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(Sepal.Length, Petal.Length))+
+<span class="st">        </span><span class="kw">geom_point</span>(<span class="dt">shape=</span><span class="dv">1</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>)
+<span class="kw">print</span>(p)</code></pre></div>
+<p><img src="_main_files/figure-html/lm.fig1-1.png" /><!-- --> 我们需要拟合： <span class="math display">\[ Petal \approx \beta_0 + \beta_1 Sepal \]</span></p>
+<p><span class="math inline">\(\beta_0\)</span> 和 <span class="math inline">\(\beta_1\)</span> 代表线性模型的截距和斜率，这两个模型参数是未知的，需要通过训练数据估计 <span class="math inline">\(\hat{\beta_0}\)</span> 和 <span class="math inline">\(\hat{\beta_1}\)</span> 。</p>
+<p>使得直线 <span class="math display">\[ \hat{y} = \hat{\beta_0} + \hat{\beta_1} x \]</span> 与数据集中的点最接近，有多种方法来来计算“接近度“，最常用的是最小二乘法(least squares)。</p>
+<p>最小二乘法通过计算残差平方和（RSS, residual sum of squares） <span class="math display">\[ RSS = {e_1}^2 + {e_2}^2 + … + {e_n}^2 \]</span> 其中 <span class="math inline">\(e_i = y_i - \hat{y_i}\)</span> . 问题转换为找出 <span class="math inline">\(\hat{\beta_0}\)</span> 和 <span class="math inline">\(\hat{\beta_1}\)</span> 使得RSS的值最小。 通过计算，可以得到： <span class="math display">\[ \hat{\beta_1} = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^n (x_i - \bar{x})^2} = r_{xy} (\frac{s_y}{s_x})\]</span> <span class="math display">\[ \hat{\beta_0} = \bar{y} - \hat{\beta_1}\bar{x} \]</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b1 &lt;-<span class="st"> </span><span class="kw">sum</span>((Petal.Length-<span class="kw">mean</span>(Petal.Length)) *<span class="st"> </span>(Sepal.Length-<span class="kw">mean</span>(Sepal.Length)))/<span class="kw">sum</span>((Sepal.Length-<span class="kw">mean</span>(Sepal.Length))^<span class="dv">2</span>)
+b0 &lt;-<span class="st"> </span><span class="kw">mean</span>(Petal.Length) -<span class="st"> </span>b1 *<span class="st"> </span><span class="kw">mean</span>(Sepal.Length)
+<span class="kw">cat</span>(<span class="st">&quot;Intersect:</span><span class="ch">\t</span><span class="st">&quot;</span>, b0, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;Slope:</span><span class="ch">\t</span><span class="st">&quot;</span>, b1, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre></div>
+<pre><code>## Intersect:    -7.101443 
+##  Slope:   1.858433</code></pre>
+<p>stats包中的lm()函数，用于拟合线性模型。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">lm</span>(Petal.Length ~<span class="st"> </span>Sepal.Length, <span class="dt">data=</span>iris)
+model</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Petal.Length ~ Sepal.Length, data = iris)
+## 
+## Coefficients:
+##  (Intercept)  Sepal.Length  
+##       -7.101         1.858</code></pre>
+<div id="section-8.1.1" class="section level3">
+<h3><span class="header-section-number">8.1.1</span> 评估参数准确性</h3>
+<p>打个比方，我们使用样本均值 <span class="math inline">\(\hat{\mu}\)</span> 来估计总体均值 <span class="math inline">\(\mu\)</span> ，对于任意一个样本的 <span class="math inline">\(\hat{\mu}\)</span> 值，有可能会高估 <span class="math inline">\(\mu\)</span> ，也有可能会低估，需要量化到底 <span class="math inline">\(\hat{\mu}\)</span> 偏离 <span class="math inline">\(\mu\)</span> 有多远，这个问题通过计算standard error of <span class="math inline">\(\hat{\mu}\)</span> 来解决。</p>
+<p>同样地，我们估计出来的参数 <span class="math inline">\(\hat{\beta_0}\)</span> 和 <span class="math inline">\(\hat{\beta_1}\)</span> 和真实的参数到底偏离多远，需要通过计算参数的standard error来估计。 <span class="math display">\[ SE(\hat{\beta_0})^2 = \sigma^2 [\frac{1}{n} + \frac{\bar{x}^2}{\sum_{i=1}^n (x_i-\bar{x})^2}] \]</span> <span class="math display">\[ SE(\hat{\beta_1})^2 = \frac{\sigma^2}{\sum_{i=1}^n (x_i-\bar{x})^2} \]</span></p>
+<p>其中 <span class="math inline">\(\sigma^2 = Var(\epsilon)\)</span> ，通常情况下是未知的，使用残差标准误 <span class="math inline">\(RSE=\sqrt{RSS/(n-2)}\)</span> 来估计。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p+<span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">TRUE</span>, <span class="dt">level=</span><span class="fl">0.95</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/lm.fig2-1.png" /><!-- --> 上图中，阴影部分就是参数的95%置信区间。</p>
+<p>有了标准误，还可以用统计检验来检测X和Y是否具有相关性。 在这里，可以使用t检验，计算t统计量： <span class="math display">\[ t = \frac{\hat{\beta_1} - 0}{SE(\hat{\beta_1})} \]</span></p>
+<p>这些统计量，lm()函数都会计算。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(model)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Petal.Length ~ Sepal.Length, data = iris)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.47747 -0.59072 -0.00668  0.60484  2.49512 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  -7.10144    0.50666  -14.02   &lt;2e-16 ***
+## Sepal.Length  1.85843    0.08586   21.65   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.8678 on 148 degrees of freedom
+## Multiple R-squared:   0.76,  Adjusted R-squared:  0.7583 
+## F-statistic: 468.6 on 1 and 148 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div id="section-8.1.2" class="section level3">
+<h3><span class="header-section-number">8.1.2</span> 评估模型准确性</h3>
+<div id="rse-residual-standard-error" class="section level4">
+<h4><span class="header-section-number">8.1.2.1</span> 残差标准误(RSE, residual standard error)</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris$fitted &lt;-<span class="st"> </span><span class="kw">predict</span>(model)
+p %+%<span class="st"> </span>iris +<span class="st">  </span><span class="kw">aes</span>(<span class="dt">x=</span>fitted, <span class="dt">y=</span>Petal.Length-fitted) +<span class="st"> </span><span class="kw">geom_linerange</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> <span class="dv">0</span>, <span class="dt">ymax =</span> Petal.Length -<span class="st"> </span>fitted), <span class="dt">colour =</span> <span class="st">&quot;purple&quot;</span>) +<span class="st"> </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>)) +<span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual Distribution&quot;</span>)+<span class="kw">ylab</span>(<span class="st">&quot;Residual&quot;</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/lm.fig3-1.png" /><!-- --></p>
+<p>RSE是Y值和回归直线偏离值均值： <span class="math display">\[ RSE = \sqrt{\frac{RSS}{n-2}} = \sqrt{\frac{\sum_{i=1}^n (y_i-\hat{y_i})^2}{n-2}} \]</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rse &lt;-<span class="st"> </span><span class="kw">with</span>(iris, <span class="kw">sqrt</span>(<span class="kw">sum</span>((fitted -<span class="st"> </span>Petal.Length)^<span class="dv">2</span>)/(<span class="kw">length</span>(Petal.Length)-<span class="dv">2</span>)))
+<span class="kw">print</span>(rse)</code></pre></div>
+<pre><code>## [1] 0.8678147</code></pre>
+<p>通过RSE，可以计算模型预测值和真实值平均水平偏离多少。偏离量大不大，可以用 <span class="math inline">\(RSE/\bar{y}\)</span> 来估计。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(iris, rse/<span class="kw">mean</span>(Petal.Length))</code></pre></div>
+<pre><code>## [1] 0.2309246</code></pre>
+<p>RSE度量的是失拟（lack of fit），如果RSE很小，则 <span class="math inline">\(\hat{y_i}\)</span> 和 <span class="math inline">\(y_i\)</span> 很接近，模型对数据的拟合非常好，如果RSE很大，则表明模型对数据的拟合很差。</p>
+</div>
+<div id="r2-" class="section level4">
+<h4><span class="header-section-number">8.1.2.2</span> <span class="math inline">\(R^2\)</span> 统计量</h4>
+<p>RSE是绝对值，不够清晰，用 <span class="math inline">\(RSE/\bar{y}\)</span> 相对值会好一些。 <span class="math inline">\(R^2\)</span> 提供另外一种度量方式: <span class="math display">\[ R^2 = \frac{TSS - RSS}{TSS} = 1 - \frac{RSS}{TSS}\]</span></p>
+<p>其中 <span class="math inline">\(TSS=\sum(y_i - \bar{y})^2\)</span> ,TSS度量Y的方差，也就是拟合前总的方差；而RSS度量的是残差的方差，也就是拟合后无法解释的方差；TSS-RSS度量的是能够由拟合模型解释的方差；继而， <span class="math inline">\(R^2\)</span> 统计量度量的是Y的方差能由X来解释的比例。</p>
+<p><span class="math inline">\(R^2\)</span> 接近1，表明回归能解释Y的方差，回归模型拟合得好。而接近0的话，则表明无法解释Y的大部分方差，拟合模型很差，甚至可能是错的。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tss &lt;-<span class="st"> </span><span class="kw">with</span>(iris, <span class="kw">sum</span>((Petal.Length -<span class="st"> </span><span class="kw">mean</span>(Petal.Length))^<span class="dv">2</span>))
+rss &lt;-<span class="st"> </span><span class="kw">with</span>(iris, <span class="kw">sum</span>((fitted-Petal.Length)^<span class="dv">2</span>))
+rr &lt;-<span class="st"> </span><span class="dv">1</span> -<span class="st"> </span>rss/tss
+rr</code></pre></div>
+<pre><code>## [1] 0.7599546</code></pre>
+<p><span class="math inline">\(R^2\)</span> 统计量度量的是X和Y的线性相关性，我们知道相关系数r定义为： <span class="math display">\[ Cor(X, Y) = \frac{\sum_{i=1}^n (x_i - \bar{x}) (y_i - \bar{y})}{\sqrt{\sum_{i=1}^n (x_i - \bar{x})^2)}\sqrt{\sum_{i=1}^n (y_i - \bar{y})^2)}}\]</span></p>
+<p>同样我们可以用相关系数r来评估模型，事实上 <span class="math inline">\(R^2 = r^2\)</span> ，可以说 <span class="math inline">\(R^2\)</span> 是 <span class="math inline">\(r^2\)</span> 的通用形式，相关系数只能用于单变量，如果要用多变量做线性回归的话，就没法用，从这个角度来看，也可以说 <span class="math inline">\(R^2\)</span> 是 <span class="math inline">\(r^2\)</span> 的扩展形式。</p>
+</div>
+</div>
+<div id="-1" class="section level3">
+<h3><span class="header-section-number">8.1.3</span> 方差分析</h3>
+<p>如前所述，Y的方差TSS，由两部分组成，残差方差(RSS)和回归方差(TSS-RSS)，继而我们可以进行方差分析，TSS的自由度是n-1, 回归方差是1(简单线性回归是单变量),残差方差的自由度是n-2 （TSS的df - 回归方差df），将方差除以自由度，得到平均方差。</p>
+<p>如果不存在线性关系，那么回归平均方差和残差平均方差大致相等。可以使用F统计量来检验是否存在线性关系。 <span class="math display">\[ F = \frac{regression\; mean\; square}{residual\; mean\; square} = \frac{TSS-RSS}{RSS/(n-2)}\]</span></p>
+<p>F统计量服从1和n-2自由度的F分析，继而可以计算出p值，当然可以直接扔给anova函数，进行统计计算。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="kw">nrow</span>(iris)
+fstat &lt;-<span class="st"> </span>(tss-rss)/(rss/(n<span class="dv">-2</span>))
+<span class="kw">print</span>(fstat)</code></pre></div>
+<pre><code>## [1] 468.5502</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pf</span>(fstat, <span class="dv">1</span>, n<span class="dv">-2</span>, <span class="dt">lower.tail=</span>F)</code></pre></div>
+<pre><code>## [1] 1.038667e-47</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">anova</span>(model)</code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: Petal.Length
+##               Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## Sepal.Length   1 352.87  352.87  468.55 &lt; 2.2e-16 ***
+## Residuals    148 111.46    0.75                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div id="section-8.1.4" class="section level3">
+<h3><span class="header-section-number">8.1.4</span> 可视化辅助诊断模型</h3>
+<p>评估模型最重要的指标是残差，R提供了函数可视化残差，残差 vs 拟合值, 残差开方 vs 拟合值, 残差的QQ图，标准化残差 vs Leverage, <a href="http://onlinestatbook.com/2/regression/influential.html">leverage度量的是数据点对回归线的影响</a>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))
+<span class="kw">plot</span>(model)</code></pre></div>
+<p><img src="_main_files/figure-html/lm.fig4-1.png" /><!-- --></p>
+</div>
+</div>
+<div id="multiple-linear-regression" class="section level2">
+<h2><span class="header-section-number">8.2</span> Multiple Linear Regression</h2>
+<p>在简<a href="simple_linear_regression.html">单线性回归</a>中，我们使用花萼长度来预测花瓣长度，在iris数据集里，还有花萼宽度、花瓣宽度的数据，如果我们想探索花萼宽度和花瓣宽度与花瓣长度的关系，可以分别做简单线性回归，这样子每一个简单线性回归，都忽略了其它两个因素的影响。事实上，一个现象常常与多个因素相联系，由多个变量组合共同来预测因变量，会更加有效。</p>
+<p>多元线性回归模型和简单线性回归一样，每个变量需要一个斜率参数： <span class="math display">\[ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdot\cdot\cdot + \beta_p X_p + \epsilon \]</span></p>
+<p>假设这里有p个变量， <span class="math inline">\(X_j\)</span> 代表第j个变量， <span class="math inline">\(\beta_j\)</span> 代表 <span class="math inline">\(X_j\)</span> 每升高一个单位对Y的平均影响。</p>
+<p>真实的参数是未知的，我们需要估计 <span class="math inline">\(\hat{\beta}_0,\hat{\beta}_1,...,\hat{\beta}_p\)</span> 来估计回归参数 <span class="math inline">\(\beta_0,\beta_1,...,\beta_p\)</span> ，于是回归模型就变成：</p>
+<p><span class="math display">\[ \hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x_1 + \hat{\beta}_2 x_2 + \cdot\cdot\cdot + \hat{\beta}_p x_p\]</span></p>
+<p>参数估计依然使用最小二乘法，找出参数 <span class="math inline">\(\hat{\beta}_0,\hat{\beta}_1,...,\hat{\beta}_p\)</span> 使得RSS最小。 <span class="math display">\[ RSS= \sum_{i=1}^n (y_i - \hat{y}_i)^2 \\
+= \sum_{i=1}^n (y_i - \hat{\beta}_0 - \hat{\beta}_1 x_1 - \hat{\beta}_2 x_2 - \cdot\cdot\cdot - \hat{\beta}_p x_p)^2 \]</span></p>
+<p>从数值计算上看，这是个优化问题，使用矩阵运算还是比较容易的，<a href="http://ygc.name/2011/03/29/machine-learning-ex3-multivariate-linear-regression/">具体请戳这里</a>。</p>
+<p>在R里，依然可以使用lm函数来做多元线性回归：</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(iris)
+lm.fit &lt;-<span class="st"> </span><span class="kw">lm</span>(Petal.Length ~<span class="st"> </span>Petal.Width+Sepal.Length+Sepal.Width, <span class="dt">data=</span>iris)
+lm.fit</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Petal.Length ~ Petal.Width + Sepal.Length + Sepal.Width, 
+##     data = iris)
+## 
+## Coefficients:
+##  (Intercept)   Petal.Width  Sepal.Length   Sepal.Width  
+##      -0.2627        1.4468        0.7291       -0.6460</code></pre>
+<div id="section-8.2.1" class="section level3">
+<h3><span class="header-section-number">8.2.1</span> 相关问题</h3>
+<p>进行多元线性回归，我们需要回答以下一些重要的问题： + X和Y是否存在关系? + 所有自变量都有助于解释Y吗？或者说是否只有一部分自变量对Y的预测是有用的？ + 模型对数据的拟合有多好？ + 预测的准确性有多好？</p>
+<div id="xy" class="section level4">
+<h4><span class="header-section-number">8.2.1.1</span> X和Y是否存在关系?</h4>
+<p>对于这个问题，可以使用在<a href="simple_linear_regression.html">简单线性回归</a>中提到的RSE和 <span class="math inline">\(R^2\)</span> 来评估。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## TSS
+tss &lt;-<span class="st"> </span><span class="kw">with</span>(iris, <span class="kw">sum</span>((Petal.Length -<span class="st"> </span><span class="kw">mean</span>(Petal.Length))^<span class="dv">2</span>))</code></pre></div>
+<pre><code>## if calculate prediction values manually, use the following command:
+## b &lt;- lm.fit$coefficients
+## iris$&quot;(Intercept)&quot; &lt;- 1
+## d &lt;- as.matrix(iris[, names(b)])
+## iris$fitted &lt;- d %*% as.matrix(b, ncol=1)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## RSS
+iris$fitted &lt;-<span class="st"> </span><span class="kw">predict</span>(lm.fit)
+rss &lt;-<span class="st"> </span><span class="kw">with</span>(iris, <span class="kw">sum</span>((fitted-Petal.Length)^<span class="dv">2</span>))
+b &lt;-<span class="st"> </span>lm.fit$coefficients
+p &lt;-<span class="st"> </span><span class="kw">length</span>(b) -<span class="st"> </span><span class="dv">1</span>
+n &lt;-<span class="st"> </span><span class="kw">nrow</span>(iris)
+df &lt;-<span class="st"> </span>n -<span class="st"> </span>p -<span class="dv">1</span>
+
+## RSE
+rse &lt;-<span class="st"> </span><span class="kw">sqrt</span>( rss/df )
+<span class="kw">print</span>(rse)</code></pre></div>
+<pre><code>## [1] 0.3189554</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## R-squared
+rr &lt;-<span class="st"> </span><span class="dv">1</span> -<span class="st"> </span>rss/tss
+<span class="kw">print</span>(rr)</code></pre></div>
+<pre><code>## [1] 0.9680118</code></pre>
+<p><span class="math inline">\(R^2\)</span> 是很高的，证明X和Y确实是存在关系的。 另一方面，可以做统计检验，如果X和Y没有关系，那么参数 <span class="math inline">\(\beta_1 = \beta_2 = \cdot\cdot\cdot = \beta_p = 0\)</span> ，我们可以检验零假设： <span class="math display">\[ H_{0}: \beta_1 = \beta_2 =... = \beta_p = 0\]</span> <span class="math display">\[H_{a}: at\; least\; one\; \beta_j\; is\; non-zero.\]</span></p>
+<p>这个假设检验通过计算F统计量： <span class="math display">\[ F = \frac{(TSS-RSS)/p}{RSS/(n-p-1)}\]</span></p>
+<p>其中 <span class="math inline">\(TSS=\sum(y_i - \bar{y})^2\)</span> 而 <span class="math inline">\(RSS=\sum(y_i - \hat{y}_i)^2\)</span> ，如果线性模型是正确的，那么： <span class="math display">\[E\{RSS/(n-p-1)\} = \sigma^2\]</span> 如果 <span class="math inline">\(H_0\)</span> 是对的，则 <span class="math display">\[E\{(TSS - RSS)/p\} = \sigma^2\]</span></p>
+<p>因此如果 <span class="math inline">\(H_0\)</span> 是对的，那么F统计量的值因为接近于1，如果 <span class="math inline">\(H_a\)</span> 是对的，则 <span class="math inline">\(E\{(TSS - RSS)/p\} &gt; \sigma^2\)</span> ，F统计量要大于1。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## F-statistic
+fstat &lt;-<span class="st"> </span>((tss-rss)/p) /<span class="st"> </span>(rss/df)
+<span class="kw">print</span>(fstat)</code></pre></div>
+<pre><code>## [1] 1472.726</code></pre>
+<p>F统计量服从F分布，可以根据F分布来计算p值，以决定是否reject <span class="math inline">\(H_0\)</span> 。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pf</span>(fstat, p, n-p<span class="dv">-1</span>, <span class="dt">lower.tail=</span>F)</code></pre></div>
+<pre><code>## [1] 6.976868e-109</code></pre>
+<p>上面计算的这些统计量，lm函数都有计算。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(lm.fit)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Petal.Length ~ Petal.Width + Sepal.Length + Sepal.Width, 
+##     data = iris)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.99333 -0.17656 -0.01004  0.18558  1.06909 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  -0.26271    0.29741  -0.883    0.379    
+## Petal.Width   1.44679    0.06761  21.399   &lt;2e-16 ***
+## Sepal.Length  0.72914    0.05832  12.502   &lt;2e-16 ***
+## Sepal.Width  -0.64601    0.06850  -9.431   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.319 on 146 degrees of freedom
+## Multiple R-squared:  0.968,  Adjusted R-squared:  0.9674 
+## F-statistic:  1473 on 3 and 146 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>而且还对每个变量计算了p值，这些p值给出了每一个 <span class="math inline">\(x_j\)</span> 和y是否相关的信息。</p>
+</div>
+<div id="section-8.2.1.2" class="section level4">
+<h4><span class="header-section-number">8.2.1.2</span> 变量选择</h4>
+<p>通过上面输出中每个参数的p值，可以看出每个变量对y的贡献是不一样的，很多情况下，y只和其中某一部分 <span class="math inline">\(x_j\)</span> 有关，这就涉及到变量选择问题。</p>
+<p>针对这个问题有三种方法： + Forward selection：从空模型（只包含截距）开始，对p个变量分别做简单线性回归，对产生最小RSS的变量加入到模型中，继而做两变量拟合，把产生最小RSS的第二个变量，再加入到模型中，不断迭代直到停止条件产生。 + Backward selection：所有变量一起拟合，然后移除p值最大的变量，再对(p-1)个变量重新拟合，再移除最大p值的变量，不断迭代，直到停止条件出现。 + Mixed selection：这是Forward和Backward selection的组合，从空模型开始，按照Forward selection来做，变量一个个地加入，在这个过程中，某些变量的p值是有可能升高的，如果p值高于某个阈值，移除这个变量。不断地进行forward和backward步骤，直到模型中的所有变量p值都足够小，而模型外的变量，如果加入到模型中，会产生比较大的p值。</p>
+<p>Backward selection不能应用于 p &gt; n的情况下，而Forward selection则可以，Forward selection是贪婪方法，开始加入的变量到了后面可能变成冗余，而Mixed selection可以弥补这一点。</p>
+</div>
+<div id="section-8.2.1.3" class="section level4">
+<h4><span class="header-section-number">8.2.1.3</span> 模型拟合</h4>
+<p>模型对数据的拟合度有多好，可以使用之前计算过的RSE和 <span class="math inline">\(R^2\)</span> 来评估。 <a href="simple_linear_regression.html">简单线性回归</a>给出的RSE公式，是针对简单线性回归的简化形式，其通过形式为： <span class="math display">\[ RSE = \sqrt{\frac{RSS}{n-p-1}} \]</span></p>
+<p>在简单线性回归中 <span class="math inline">\(R^2\)</span> 是X和Y的相关系数的平方，在多元线性回归中，它等于Y和 <span class="math inline">\(\hat(Y)\)</span> 的相关系数的平方。事实上拟合后的模型，除了RSS最小之外， <span class="math inline">\(R^2\)</span> 是最大的。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(iris, <span class="kw">cor</span>(fitted, Petal.Length)^<span class="dv">2</span>)</code></pre></div>
+<pre><code>## [1] 0.9680118</code></pre>
+<p>按相关系数计算的 <span class="math inline">\(R^2\)</span> 和之前使用 <span class="math inline">\(1 - \frac{RSS}{TSS}\)</span> 计算的是一样的。</p>
+</div>
+<div id="section-8.2.1.4" class="section level4">
+<h4><span class="header-section-number">8.2.1.4</span> 模型预测</h4>
+<p>参数预测本身是有误差的，即使我们知道真实的参数，也不可能完美地预测数据，因为模型中包含有随机误差 <span class="math inline">\(\epsilon\)</span> ，在预测的时候，最好使用置信区间，这样把uncertainty的信息也包括在内。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xx &lt;-<span class="st"> </span><span class="kw">predict</span>(lm.fit, <span class="dt">se.fit=</span><span class="ot">TRUE</span>, <span class="dt">interval=</span><span class="st">&quot;confidence&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>)
+xx &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(xx$fit)
+xx$y &lt;-<span class="st"> </span>iris$Petal.Length
+<span class="kw">head</span>(xx)</code></pre></div>
+<pre><code>##        fit      lwr      upr   y
+## 1 1.484210 1.393923 1.574497 1.4
+## 2 1.661389 1.569631 1.753146 1.4
+## 3 1.386358 1.296915 1.475802 1.3
+## 4 1.378046 1.284284 1.471808 1.5
+## 5 1.346695 1.251095 1.442294 1.4
+## 6 1.733905 1.619998 1.847812 1.7</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(<span class="kw">with</span>(xx, y&gt;<span class="st"> </span>lwr &amp;<span class="st"> </span>y &lt;<span class="st"> </span>upr))</code></pre></div>
+<pre><code>## [1] 0.3266667</code></pre>
+<p>这个模型的 <span class="math inline">\(R^2\)</span> 是0.968，拟合得如此好的模型，预测起来，偏差还是有那么些，真实值落在预测的95%置信区间里，只占了35%不到。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">yy &lt;-<span class="st"> </span><span class="kw">predict</span>(lm.fit, <span class="dt">se.fit=</span><span class="ot">TRUE</span>, <span class="dt">interval=</span><span class="st">&quot;prediction&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>)$fit</code></pre></div>
+<pre><code>## Warning in predict.lm(lm.fit, se.fit = TRUE, interval = &quot;prediction&quot;, level = 0.95): predictions on current data refer to _future_ responses</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(yy) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;fitpred&quot;</span>, <span class="st">&quot;lwrpred&quot;</span>, <span class="st">&quot;uprpred&quot;</span>)
+xx &lt;-<span class="st"> </span><span class="kw">cbind</span>(xx, yy)
+<span class="kw">head</span>(xx)</code></pre></div>
+<pre><code>##        fit      lwr      upr   y  fitpred   lwrpred  uprpred
+## 1 1.484210 1.393923 1.574497 1.4 1.484210 0.8474110 2.121009
+## 2 1.661389 1.569631 1.753146 1.4 1.661389 1.0243794 2.298398
+## 3 1.386358 1.296915 1.475802 1.3 1.386358 0.7496783 2.023038
+## 4 1.378046 1.284284 1.471808 1.5 1.378046 0.7407447 2.015347
+## 5 1.346695 1.251095 1.442294 1.4 1.346695 0.7091209 1.984269
+## 6 1.733905 1.619998 1.847812 1.7 1.733905 1.0933304 2.374480</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(<span class="kw">with</span>(xx, y&gt;<span class="st"> </span>lwrpred &amp;<span class="st"> </span>y &lt;<span class="st"> </span>uprpred))</code></pre></div>
+<pre><code>## [1] 0.9733333</code></pre>
+<p>显然用prediction方法，给出的预测值置信区间要靠谱得多。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(xx, <span class="kw">aes</span>(fit, y))+<span class="kw">geom_point</span>() +<span class="st"> </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>fit)) +<span class="st"> </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>lwr), <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) +<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>upr), <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) +<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>lwrpred), <span class="dt">color=</span><span class="st">&quot;blue&quot;</span>) +<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>uprpred), <span class="dt">color=</span><span class="st">&quot;blue&quot;</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/mlm.fig1-1.png" /><!-- --></p>
+</div>
+</div>
+<div id="section-8.2.2" class="section level3">
+<h3><span class="header-section-number">8.2.2</span> 数值运算</h3>
+<p>参考<a href="http://guangchuangyu.github.io/2011/03/machine-learning-ex3-multivariate-linear-regression/">以前的博文</a> <span class="math display">\[ B = (X^TX)^{-1}(X^TY)\]</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X=iris[,<span class="kw">c</span>(<span class="st">&quot;Petal.Width&quot;</span>, <span class="st">&quot;Sepal.Length&quot;</span>, <span class="st">&quot;Sepal.Width&quot;</span>)]
+X=<span class="kw">as.matrix</span>(X)
+X=<span class="kw">cbind</span>(<span class="dt">x0=</span><span class="dv">1</span>, X)
+Y=<span class="kw">as.matrix</span>(iris[, <span class="st">&quot;Petal.Length&quot;</span>])
+<span class="kw">solve</span>(<span class="kw">t</span>(X) %*%<span class="st"> </span>X) %*%<span class="st"> </span><span class="kw">t</span>(X) %*%<span class="st"> </span>Y</code></pre></div>
+<pre><code>##                    [,1]
+## x0           -0.2627112
+## Petal.Width   1.4467934
+## Sepal.Length  0.7291384
+## Sepal.Width  -0.6460124</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lm.fit</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Petal.Length ~ Petal.Width + Sepal.Length + Sepal.Width, 
+##     data = iris)
+## 
+## Coefficients:
+##  (Intercept)   Petal.Width  Sepal.Length   Sepal.Width  
+##      -0.2627        1.4468        0.7291       -0.6460</code></pre>
+<p>按照公式计算出来，和lm.fit的结果是一样的。</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="correlation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="general-linear-model.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

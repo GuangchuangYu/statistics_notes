@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>统计笔记</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="YGC的统计学笔记">
+  <meta name="generator" content="bookdown 0.0.63 and GitBook 2.6.7">
+
+  <meta property="og:title" content="统计笔记" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="YGC的统计学笔记" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="统计笔记" />
+  
+  <meta name="twitter:description" content="YGC的统计学笔记" />
+  
+
+<meta name="author" content="余光创">
+
+<meta name="date" content="2016-04-11">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="t.html">
+<link rel="next" href="correlation.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> 前言</a></li>
+<li class="chapter" data-level="2" data-path="r.html"><a href="r.html"><i class="fa fa-check"></i><b>2</b> R语言简介</a><ul>
+<li class="chapter" data-level="2.1" data-path="r.html"><a href="r.html#-flow-control"><i class="fa fa-check"></i><b>2.1</b> 控制流 （Flow Control)</a></li>
+<li class="chapter" data-level="2.2" data-path="r.html"><a href="r.html#-looping"><i class="fa fa-check"></i><b>2.2</b> 循环 (Looping)</a></li>
+<li class="chapter" data-level="2.3" data-path="r.html"><a href="r.html#covariancecorrelation"><i class="fa fa-check"></i><b>2.3</b> 协方差（covariance）和相关性（correlation）</a></li>
+<li class="chapter" data-level="2.4" data-path="r.html"><a href="r.html#section-2.4"><i class="fa fa-check"></i><b>2.4</b> 对称性度量</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>3</b> 使用ggplot2画图</a><ul>
+<li class="chapter" data-level="3.1" data-path="ggplot2.html"><a href="ggplot2.html#why-use-ggplot2"><i class="fa fa-check"></i><b>3.1</b> Why use ggplot2</a></li>
+<li class="chapter" data-level="3.2" data-path="ggplot2.html"><a href="ggplot2.html#ggplot2"><i class="fa fa-check"></i><b>3.2</b> ggplot2基本要素</a></li>
+<li class="chapter" data-level="3.3" data-path="ggplot2.html"><a href="ggplot2.html#datamapping"><i class="fa fa-check"></i><b>3.3</b> 数据（Data）和映射（Mapping)</a></li>
+<li class="chapter" data-level="3.4" data-path="ggplot2.html"><a href="ggplot2.html#geometric"><i class="fa fa-check"></i><b>3.4</b> 几何对象（Geometric）</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="ggplot2.html"><a href="ggplot2.html#section-3.4.1"><i class="fa fa-check"></i><b>3.4.1</b> 直方图</a></li>
+<li class="chapter" data-level="3.4.2" data-path="ggplot2.html"><a href="ggplot2.html#section-3.4.2"><i class="fa fa-check"></i><b>3.4.2</b> 密度函数图</a></li>
+<li class="chapter" data-level="3.4.3" data-path="ggplot2.html"><a href="ggplot2.html#section-3.4.3"><i class="fa fa-check"></i><b>3.4.3</b> 箱式图</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="ggplot2.html"><a href="ggplot2.html#scale"><i class="fa fa-check"></i><b>3.5</b> 标尺（Scale）</a></li>
+<li class="chapter" data-level="3.6" data-path="ggplot2.html"><a href="ggplot2.html#statistics"><i class="fa fa-check"></i><b>3.6</b> 统计变换（Statistics）</a></li>
+<li class="chapter" data-level="3.7" data-path="ggplot2.html"><a href="ggplot2.html#coordinante"><i class="fa fa-check"></i><b>3.7</b> 坐标系统（Coordinante）</a></li>
+<li class="chapter" data-level="3.8" data-path="ggplot2.html"><a href="ggplot2.html#layer"><i class="fa fa-check"></i><b>3.8</b> 图层（Layer）</a></li>
+<li class="chapter" data-level="3.9" data-path="ggplot2.html"><a href="ggplot2.html#facet"><i class="fa fa-check"></i><b>3.9</b> 分面（Facet）</a></li>
+<li class="chapter" data-level="3.10" data-path="ggplot2.html"><a href="ggplot2.html#theme"><i class="fa fa-check"></i><b>3.10</b> 主题（Theme）</a></li>
+<li class="chapter" data-level="3.11" data-path="ggplot2.html"><a href="ggplot2.html#section-3.11"><i class="fa fa-check"></i><b>3.11</b> 二维密度图</a></li>
+<li class="chapter" data-level="3.12" data-path="ggplot2.html"><a href="ggplot2.html#ggplot2"><i class="fa fa-check"></i><b>3.12</b> ggplot2实战</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="section-4.html"><a href="section-4.html"><i class="fa fa-check"></i><b>4</b> 统计检验基础</a><ul>
+<li class="chapter" data-level="4.1" data-path="section-4.html"><a href="section-4.html#section-4.1"><i class="fa fa-check"></i><b>4.1</b> 概率分布</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="section-4.html"><a href="section-4.html#section-4.1.1"><i class="fa fa-check"></i><b>4.1.1</b> 均值与方差</a></li>
+<li class="chapter" data-level="4.1.2" data-path="section-4.html"><a href="section-4.html#section-4.1.2"><i class="fa fa-check"></i><b>4.1.2</b> 二项式分布</a></li>
+<li class="chapter" data-level="4.1.3" data-path="section-4.html"><a href="section-4.html#poisson"><i class="fa fa-check"></i><b>4.1.3</b> Poisson分布</a></li>
+<li class="chapter" data-level="4.1.4" data-path="section-4.html"><a href="section-4.html#section-4.1.4"><i class="fa fa-check"></i><b>4.1.4</b> 正态分布</a></li>
+<li class="chapter" data-level="4.1.5" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>4.1.5</b> t分布</a></li>
+<li class="chapter" data-level="4.1.6" data-path="section-4.html"><a href="section-4.html#section-4.1.6"><i class="fa fa-check"></i><b>4.1.6</b> 卡方分布</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="section-4.html"><a href="section-4.html#p"><i class="fa fa-check"></i><b>4.2</b> 统计检验与p值</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="section-4.html"><a href="section-4.html#section-4.2.1"><i class="fa fa-check"></i><b>4.2.1</b> 零假设</a></li>
+<li class="chapter" data-level="4.2.2" data-path="section-4.html"><a href="section-4.html#p"><i class="fa fa-check"></i><b>4.2.2</b> P值</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="section-4.html"><a href="section-4.html#confidence-intervals"><i class="fa fa-check"></i><b>4.3</b> Confidence Intervals</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="section-4.html"><a href="section-4.html#section-4.3.1"><i class="fa fa-check"></i><b>4.3.1</b> 均值置信区间</a></li>
+<li class="chapter" data-level="4.3.2" data-path="section-4.html"><a href="section-4.html#section-4.3.2"><i class="fa fa-check"></i><b>4.3.2</b> 比例的置信区间</a></li>
+<li class="chapter" data-level="4.3.3" data-path="section-4.html"><a href="section-4.html#section-4.3.3"><i class="fa fa-check"></i><b>4.3.3</b> 方差和标准差的置信区间</a></li>
+<li class="chapter" data-level="4.3.4" data-path="section-4.html"><a href="section-4.html#section-4.3.4"><i class="fa fa-check"></i><b>4.3.4</b> 均值差的置信区间</a></li>
+<li class="chapter" data-level="4.3.5" data-path="section-4.html"><a href="section-4.html#section-4.3.5"><i class="fa fa-check"></i><b>4.3.5</b> 相关性置信区间</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>5</b> T检验</a><ul>
+<li class="chapter" data-level="5.1" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>5.1</b> 单样本T检验</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="t.html"><a href="t.html"><i class="fa fa-check"></i><b>5.1.1</b> 前提条件</a></li>
+<li class="chapter" data-level="5.1.2" data-path="t.html"><a href="t.html#section-5.1.2"><i class="fa fa-check"></i><b>5.1.2</b> 数据标准化</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="t.html"><a href="t.html#z"><i class="fa fa-check"></i><b>5.2</b> Z检验</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="t.html"><a href="t.html#t-1"><i class="fa fa-check"></i><b>5.2.1</b> t检验</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>5.3</b> 两样本T检验</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>5.3.1</b> 成对T检验</a></li>
+<li class="chapter" data-level="5.3.2" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>5.3.2</b> 方差相同的两样本T检验</a></li>
+<li class="chapter" data-level="5.3.3" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>5.3.3</b> 方差不同的两样本T检验</a></li>
+<li class="chapter" data-level="5.3.4" data-path="t.html"><a href="t.html#rt"><i class="fa fa-check"></i><b>5.3.4</b> 使用R进行T检验</a></li>
+<li class="chapter" data-level="5.3.5" data-path="t.html"><a href="t.html#section-5.3.5"><i class="fa fa-check"></i><b>5.3.5</b> 结论</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="section-6.html"><a href="section-6.html"><i class="fa fa-check"></i><b>6</b> 方差分析</a><ul>
+<li class="chapter" data-level="6.1" data-path="section-6.html"><a href="section-6.html#one-way-anova"><i class="fa fa-check"></i><b>6.1</b> One-Way ANOVA</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="section-6.html"><a href="section-6.html#section-6.1.1"><i class="fa fa-check"></i><b>6.1.1</b> 单向方差分析</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="section-6.html"><a href="section-6.html#tukeyhsd---tukey-honestly-significant-difference"><i class="fa fa-check"></i><b>6.2</b> TukeyHSD - Tukey honestly significant difference</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>6.2.1</b> 两两T检验</a></li>
+<li class="chapter" data-level="6.2.2" data-path="section-6.html"><a href="section-6.html#section-6.2.2"><i class="fa fa-check"></i><b>6.2.2</b> 如何理解方差分析</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="section-6.html"><a href="section-6.html#two-way-anova"><i class="fa fa-check"></i><b>6.3</b> Two-Way ANOVA</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="section-6.html"><a href="section-6.html#-1"><i class="fa fa-check"></i><b>6.3.1</b> 前提条件</a></li>
+<li class="chapter" data-level="6.3.2" data-path="section-6.html"><a href="section-6.html#-1"><i class="fa fa-check"></i><b>6.3.2</b> 零假设</a></li>
+<li class="chapter" data-level="6.3.3" data-path="section-6.html"><a href="section-6.html#section-6.3.3"><i class="fa fa-check"></i><b>6.3.3</b> 方差计算</a></li>
+<li class="chapter" data-level="6.3.4" data-path="section-4.html"><a href="section-4.html#p"><i class="fa fa-check"></i><b>6.3.4</b> p值计算</a></li>
+<li class="chapter" data-level="6.3.5" data-path="section-6.html"><a href="section-6.html#anova-using-r"><i class="fa fa-check"></i><b>6.3.5</b> ANOVA using R</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="section-6.html"><a href="section-6.html#advanced-anova"><i class="fa fa-check"></i><b>6.4</b> Advanced ANOVA</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="section-6.html"><a href="section-6.html#repeated-measures-anova"><i class="fa fa-check"></i><b>6.4.1</b> Repeated-Measures ANOVA</a></li>
+<li class="chapter" data-level="6.4.2" data-path="section-6.html"><a href="section-6.html#mixed-factorial-anova"><i class="fa fa-check"></i><b>6.4.2</b> Mixed-Factorial ANOVA</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="correlation.html"><a href="correlation.html"><i class="fa fa-check"></i><b>7</b> Correlation</a><ul>
+<li class="chapter" data-level="7.1" data-path="correlation.html"><a href="correlation.html#-covariance"><i class="fa fa-check"></i><b>7.1</b> 协方差 (Covariance)</a></li>
+<li class="chapter" data-level="7.2" data-path="correlation.html"><a href="correlation.html#-correlation"><i class="fa fa-check"></i><b>7.2</b> 相关性 (Correlation)</a></li>
+<li class="chapter" data-level="7.3" data-path="correlation.html"><a href="correlation.html#section-7.3"><i class="fa fa-check"></i><b>7.3</b> 相关性统计检验</a></li>
+<li class="chapter" data-level="7.4" data-path="correlation.html"><a href="correlation.html#section-7.4"><i class="fa fa-check"></i><b>7.4</b> 置信区间</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="section-8.html"><a href="section-8.html"><i class="fa fa-check"></i><b>8</b> 线性回归</a><ul>
+<li class="chapter" data-level="8.1" data-path="section-8.html"><a href="section-8.html#simple-linear-regression"><i class="fa fa-check"></i><b>8.1</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="section-8.html"><a href="section-8.html#section-8.1.1"><i class="fa fa-check"></i><b>8.1.1</b> 评估参数准确性</a></li>
+<li class="chapter" data-level="8.1.2" data-path="section-8.html"><a href="section-8.html#section-8.1.2"><i class="fa fa-check"></i><b>8.1.2</b> 评估模型准确性</a></li>
+<li class="chapter" data-level="8.1.3" data-path="section-6.html"><a href="section-6.html#-1"><i class="fa fa-check"></i><b>8.1.3</b> 方差分析</a></li>
+<li class="chapter" data-level="8.1.4" data-path="section-8.html"><a href="section-8.html#section-8.1.4"><i class="fa fa-check"></i><b>8.1.4</b> 可视化辅助诊断模型</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="section-8.html"><a href="section-8.html#multiple-linear-regression"><i class="fa fa-check"></i><b>8.2</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="section-8.html"><a href="section-8.html#section-8.2.1"><i class="fa fa-check"></i><b>8.2.1</b> 相关问题</a></li>
+<li class="chapter" data-level="8.2.2" data-path="section-8.html"><a href="section-8.html#section-8.2.2"><i class="fa fa-check"></i><b>8.2.2</b> 数值运算</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="general-linear-model.html"><a href="general-linear-model.html"><i class="fa fa-check"></i><b>9</b> General Linear Model</a><ul>
+<li class="chapter" data-level="9.1" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>9.1</b> T检验是回归的特例</a></li>
+<li class="chapter" data-level="9.2" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>9.2</b> T检验是方差分析的特例</a></li>
+<li class="chapter" data-level="9.3" data-path="general-linear-model.html"><a href="general-linear-model.html#anova"><i class="fa fa-check"></i><b>9.3</b> ANOVA是多重回归的特例</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a></li>
+<li class="chapter" data-level="11" data-path="section-11.html"><a href="section-11.html"><i class="fa fa-check"></i><b>11</b> 生物实验统计分析</a><ul>
+<li class="chapter" data-level="11.1" data-path="section-11.html"><a href="section-11.html#rt-pcr"><i class="fa fa-check"></i><b>11.1</b> RT-PCR</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="section-11.html"><a href="section-11.html#data"><i class="fa fa-check"></i><b>11.1.1</b> Data</a></li>
+<li class="chapter" data-level="11.1.2" data-path="section-11.html"><a href="section-11.html#data-clean"><i class="fa fa-check"></i><b>11.1.2</b> Data clean</a></li>
+<li class="chapter" data-level="11.1.3" data-path="section-11.html"><a href="section-11.html#calculate-statistical-metric"><i class="fa fa-check"></i><b>11.1.3</b> Calculate statistical metric</a></li>
+<li class="chapter" data-level="11.1.4" data-path="section-11.html"><a href="section-11.html#statistical-analysis"><i class="fa fa-check"></i><b>11.1.4</b> Statistical Analysis</a></li>
+<li class="chapter" data-level="11.1.5" data-path="section-11.html"><a href="section-11.html#plot"><i class="fa fa-check"></i><b>11.1.5</b> Plot</a></li>
+<li class="chapter" data-level="11.1.6" data-path="section-11.html"><a href="section-11.html#summary"><i class="fa fa-check"></i><b>11.1.6</b> Summary</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">统计笔记</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="section-6" class="section level1">
+<h1><span class="header-section-number">6</span> 方差分析</h1>
+<div id="one-way-anova" class="section level2">
+<h2><span class="header-section-number">6.1</span> One-Way ANOVA</h2>
+<p>T检验只能比较两样本均值，而方差分析（analysis of variance, ANOVA）能够同时比较多个均值，ANOVA通过分析方差来计算均值是否和总体有显著性差异，ANOVA把方差分为处理效应（treatment effect，真实差异)和误差（error，抽样误差或个体差异）两个来源，两个方差的比值服从F分布，因为方差本身就是个体和均值差平方和，所以对方差组成的分析能够反映均值的差异。</p>
+<p>“处理”项是均值间的差异，而“误差”项是组内的差异，习惯性地称之为组间(between)差异和组内(within)差异。 把所有分组混在一起，当成一个样本，总的方差为： <span class="math display">\[SS_{tot} = \sum(x-\bar{x})^2\]</span> 将其分为组间方差和组内方差： <span class="math display">\[SS_{tot} = SS_b+SS_w\]</span> 其中组间方差为： <span class="math display">\[SS_b=\sum_{j=1}^k n_j(\bar{x_j}-\bar{\bar{x}})^2\]</span> 组间自由度是k-1，k是分组的个数，通常将组间方差除以组间自由度，得到组间均方(between groups mean square)，代表组间均值的处理效应。 组内方差为： <span class="math display">\[SS_w=\sum_{j=1}^k\sum_{i=1}^{n_j}(x_{ij}-\bar{x_j})^2\]</span> 组内自由度是N-k，N是把所有分组当成一个样本的样本量，通常将组内方差除以组内自由度，得到组内均方(within groups mean square)，代表组内误差。</p>
+<p>方差分析所使用的均方，也就是上面公式所计算的方差除以相应的自由度。</p>
+<div id="section-6.1.1" class="section level3">
+<h3><span class="header-section-number">6.1.1</span> 单向方差分析</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(mpg)
+mpg$cyl=<span class="kw">factor</span>(mpg$cyl)
+<span class="kw">head</span>(mpg)</code></pre></div>
+<pre><code>##   manufacturer model displ year cyl      trans drv cty hwy fl   class
+## 1         audi    a4   1.8 1999   4   auto(l5)   f  18  29  p compact
+## 2         audi    a4   1.8 1999   4 manual(m5)   f  21  29  p compact
+## 3         audi    a4   2.0 2008   4 manual(m6)   f  20  31  p compact
+## 4         audi    a4   2.0 2008   4   auto(av)   f  21  30  p compact
+## 5         audi    a4   2.8 1999   6   auto(l5)   f  16  26  p compact
+## 6         audi    a4   2.8 1999   6 manual(m5)   f  18  26  p compact</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(displ~cyl, <span class="dt">data=</span>mpg)</code></pre></div>
+<p><img src="_main_files/figure-html/aov1.fig1-1.png" /><!-- --> 如果我们根据不同汽缸数（cylinders, cyl变量）对汽车进行分组，分析发动机排量（engine displacement, displ变量）均值是否不同，从图上可以看到，汽缸数越多，排量越大。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res=<span class="kw">aov</span>(displ~cyl, <span class="dt">data=</span>mpg)
+<span class="kw">summary</span>(res)</code></pre></div>
+<pre><code>##              Df Sum Sq Mean Sq F value Pr(&gt;F)    
+## cyl           3  339.7  113.22   528.9 &lt;2e-16 ***
+## Residuals   230   49.2    0.21                   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>one way ANOVA的零假设是所有均值都相等，备择假设是至少有一个均值是有差别的。 这里计算出来的p值非常小，意味着reject零假设，接受备择假设。</p>
+<p>one way anova给出的是总体信息，并没有对均值间两两进行统计的信息，并不清楚分组间谁和谁有显著性差异，想要知道这个信息，需要再进行后续分析。</p>
+<p>我们可以先看一下均值：</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">model.tables</span>(res, <span class="dt">type=</span><span class="st">&quot;means&quot;</span>)</code></pre></div>
+<pre><code>## Tables of means
+## Grand mean
+##          
+## 3.471795 
+## 
+##  cyl 
+##          4   5      6      8
+##      2.146 2.5  3.409  5.133
+## rep 81.000 4.0 79.000 70.000</code></pre>
+</div>
+</div>
+<div id="tukeyhsd---tukey-honestly-significant-difference" class="section level2">
+<h2><span class="header-section-number">6.2</span> TukeyHSD - Tukey honestly significant difference</h2>
+<p>对one way anova进行后续分析有很多方法，方差分析由R. A. Fisher提出，他设计出Fisher LSD (least significant difference)标准，现在很多统计学者认为这个方法太自由，现在普遍使用的是Tukey HSD检验，比Fisher LSD要保守得多。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">TukeyHSD</span>(res)</code></pre></div>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = displ ~ cyl, data = mpg)
+## 
+## $cyl
+##          diff        lwr       upr     p adj
+## 5-4 0.3543210 -0.2589862 0.9676282 0.4421149
+## 6-4 1.2631817  1.0738406 1.4525229 0.0000000
+## 8-4 2.9871781  2.7917721 3.1825842 0.0000000
+## 6-5 0.9088608  0.2951884 1.5225332 0.0009354
+## 8-5 2.6328571  2.0172865 3.2484278 0.0000000
+## 8-6 1.7239964  1.5274470 1.9205458 0.0000000</code></pre>
+<p>它会计算不同组两两之间的差异、置信区间和较正后的p值。</p>
+<p>TukeyHSD并不仅限于单向方差分析，它可以对各种方差分析进行后续的分析。</p>
+<div id="t" class="section level3">
+<h3><span class="header-section-number">6.2.1</span> 两两T检验</h3>
+<p>如果只是多组实验，只需要两两比较均值的话，可以对分组两两进行T检验，当然必须进行p值较正，因为随着统计检验次数的增加，犯I类错误的概率会不断增大。方差分析对于复杂的实验设计是很有优势的，比如<a href="advanced_anova.html">多因素，重复测量数据</a>。</p>
+<p>stats包里提供了pairwise.t.test()函数，可以进行两两T检验，还能对p值进行较正，使用起来很方便：</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(mpg, <span class="kw">pairwise.t.test</span>(displ, cyl, <span class="dt">p.adjust.method=</span><span class="st">&quot;bonferroni&quot;</span>))</code></pre></div>
+<pre><code>## 
+##  Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  displ and cyl 
+## 
+##   4       5       6      
+## 5 0.81757 -       -      
+## 6 &lt; 2e-16 0.00098 -      
+## 8 &lt; 2e-16 &lt; 2e-16 &lt; 2e-16
+## 
+## P value adjustment method: bonferroni</code></pre>
+</div>
+<div id="section-6.2.2" class="section level3">
+<h3><span class="header-section-number">6.2.2</span> 如何理解方差分析</h3>
+<p>单向方差分析是最简单的，因为只有一个因素，<a href="two_way_anova.html">双向方差分析</a>考虑两个因素，理解了这两种ANOVA分析，那么对于多因素N-WAY ANOVA自然也不在话下。而一些高级的ANOVA可以针对复杂的实验设计，虽然复杂，但其基础思想是高度一致的。</p>
+<p>很多人可能有疑问，为什么分析方差可以来检验均值？方差本身就是离均差的平方和，但这样的解释似乎不够。</p>
+<p>我们来看一下T检验，T检验的形式是 <span class="math inline">\(t=\frac{\bar{x}-\mu}{SE}\)</span> ,我在<a href="one_sample_t.test.html">T检验一节</a>里，讲这相当于把数据归一化到标准正态分布上，也可以这么讲，把差值放到标准误SE的尺度上，我们要看的是差值有多大，但要把它放到SE的尺度上来看，SE代表的是统计量 <span class="math inline">\(\bar{x}\)</span> 的离散度，衡量的是不确定性。从这个角度上看，我们可以把分子当成是信号，而分母当成是噪声，于是t值计算的就是信噪比。</p>
+<p>再来看方差分析，有多组均值，零假设是这些均值没有差别。只有一两组的时候，使用T检验，信号是差值，但现在有多组，我们把差值加和起来的话，差值可正可负，正负加和会抵消，所以很自然的，把差值进行平方运算，当然要使用样本量进行加权，因为样本量越大的数据，越可靠，权重要大一些，于是信号（分子）是 <span class="math inline">\(SS_b=\sum_{j=1}^k n_j(\bar{x_j}-\bar{\bar{x}})^2\)</span> ，这就是组间方差，当然最终的信号是均方，需要除以自由度，以消除分组数目的影响。</p>
+<p>分母是对数据不确定性的度量，也就是噪声，通过组内数据方差来估计。</p>
+<p>对于j分组，样本方差为： <span class="math inline">\(s_j = \sum_{i=1}^{n_j} (x_{ij} - \bar{x_j})^2\)</span> 均值误差为： <span class="math inline">\(SE_j = \sqrt{\frac{s_j^2}{n_j}}\)</span> 那么我们可以使用各个分组的均值误差对总体均值误差进行估计： <span class="math display">\[SE_{tot}^2 = \frac{\sum_{j=1}^k (n_j-1)SE_j^2}{\sum_{j=1}^k n_j - k} \\ = \frac{\sum_{j=1}^k (n_j-1) \frac{s_j^2}{n_j}}{\sum_{j=1}^k n_j - k} \\ \simeq \frac{\sum_{j=1}^k s_j^2}{\sum n_j - k}\]</span></p>
+<p>从上面的公式可以发现分子 <span class="math inline">\(\sum_{j=1}^k s_j^2\)</span> 是组内方差，而分母 <span class="math inline">\(\sum n_j - k\)</span> 是自由度N-k，总体误差的估计就是方差分析中的误差均方。</p>
+<p>所以方差分析和T检验是高度一致的，分子是信号，T检验中是差值，方差分析中为了消除差值正负的影响，用差值平方和，也就是方差。 分母是噪声，也就是度量不确定性的误差，T检验中使用标准误SE，而方差分析中使用方差，也就是标准误SE的平方。</p>
+<p>分子度量差别到底有多大，然后把它放在不确定性的尺度(分母)上看，这就是T检验和方差分析的原理。</p>
+</div>
+</div>
+<div id="two-way-anova" class="section level2">
+<h2><span class="header-section-number">6.3</span> Two-Way ANOVA</h2>
+<p>ANOVA可以分析两个或多个因子的复合效应，ANOVA的设计越复杂，对结果的解析同样会变得很复杂。</p>
+<div class="figure">
+<img src="figure/anova.png" alt="双向ANOVA" />
+<p class="caption">双向ANOVA</p>
+</div>
+<p>双向ANOVA分析是单向ANOVA的扩展，分析两个因素，我们称之为A和B，假如A有r个水平，B有c个水平，则总共有rxc个分组，每个分组的数据数目要一致。</p>
+<div id="-1" class="section level3">
+<h3><span class="header-section-number">6.3.1</span> 前提条件</h3>
+<p>使用Two-Way ANOVA，需要满足以下假设： + 总体须是正态分布或接近于正态分布 + 样本必须是独立样本 + 方差齐性 + 分组样本量一样</p>
+</div>
+<div id="-1" class="section level3">
+<h3><span class="header-section-number">6.3.2</span> 零假设</h3>
+<p>双向ANOVA能够同时检验3个零假设： + 单独考虑A因素，总体均值间没有差别。这相当于对A因子进行单向ANOVA + 单独考虑B因素，总体均值间没有差别。这相当于对B因子进行单向ANOVA + A和B两个因素，没有相互作用。这相当于使用二联表进行独立性分析</p>
+</div>
+<div id="section-6.3.3" class="section level3">
+<h3><span class="header-section-number">6.3.3</span> 方差计算</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;data/gender_dose.tsv&quot;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>)
+data</code></pre></div>
+<pre><code>##    Observation Gender Dosage Alertness
+## 1            1      m      a         8
+## 2            2      m      a        12
+## 3            3      m      a        13
+## 4            4      m      a        12
+## 5            5      m      b         6
+## 6            6      m      b         7
+## 7            7      m      b        23
+## 8            8      m      b        14
+## 9            9      f      a        15
+## 10          10      f      a        12
+## 11          11      f      a        22
+## 12          12      f      a        14
+## 13          13      f      b        15
+## 14          14      f      b        12
+## 15          15      f      b        18
+## 16          16      f      b        22</code></pre>
+<p>我们来分析上面这份数据，看Gender和Dosage两个因素对Alerness水平的影响。Gender和Dosage都是2个水平，这是最简单的2x2设计。 进行双向方差分析，需要计算6个方差。</p>
+<div id="section-6.3.3.1" class="section level4">
+<h4><span class="header-section-number">6.3.3.1</span> 总方差</h4>
+<p>不对数据进行分组，计算出来的方差，为总方差，自由度为样本量减1.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grand.mean &lt;-<span class="st"> </span><span class="kw">with</span>(data, <span class="kw">mean</span>(Alertness))
+N &lt;-<span class="st"> </span><span class="kw">with</span>(data, <span class="kw">length</span>(Alertness))
+N</code></pre></div>
+<pre><code>## [1] 16</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">SS.tot &lt;-<span class="st"> </span><span class="kw">with</span>(data, <span class="kw">sum</span>((Alertness-grand.mean)^<span class="dv">2</span>))
+SS.tot</code></pre></div>
+<pre><code>## [1] 392.9375</code></pre>
+</div>
+<div id="section-6.3.3.2" class="section level4">
+<h4><span class="header-section-number">6.3.3.2</span> 单元格方差</h4>
+<p>两个因素A和B，分别有r和c个水平，则组成rxc的二联表，把数据分成rxc个组，和单向ANOVA分析一样，计算组间方差： <span class="math display">\[ SS_{tot} = \sum(x-\bar{\bar{x}})^2\]</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(plyr)
+grp &lt;-<span class="st"> </span><span class="kw">ddply</span>(data, .(Gender, Dosage), function(x) <span class="kw">data.frame</span>(<span class="dt">n=</span><span class="kw">length</span>(x$Alertness), <span class="dt">m=</span><span class="kw">mean</span>(x$Alertness)))
+grp</code></pre></div>
+<pre><code>##   Gender Dosage n     m
+## 1      f      a 4 15.75
+## 2      f      b 4 16.75
+## 3      m      a 4 11.25
+## 4      m      b 4 12.50</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">SS.cells &lt;-<span class="st"> </span><span class="kw">with</span>(grp, <span class="kw">sum</span>(n*(m-grand.mean)^<span class="dv">2</span>))
+SS.cells</code></pre></div>
+<pre><code>## [1] 81.6875</code></pre>
+</div>
+<div id="a" class="section level4">
+<h4><span class="header-section-number">6.3.3.3</span> 因素A的方差</h4>
+<p>只考虑因素A，对于这个数据来说，是性别因素，只使用性别因素对数据进行分组，按单向ANOVA分析一样，计算组间方差：</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Am &lt;-<span class="st"> </span><span class="kw">with</span>(data, <span class="kw">tapply</span>(Alertness, Gender, mean))
+An &lt;-<span class="st"> </span><span class="kw">with</span>(data, <span class="kw">tapply</span>(Alertness, Gender, length))
+SS.gender &lt;-<span class="st"> </span><span class="kw">sum</span>(An *<span class="st"> </span>(Am -<span class="st"> </span>grand.mean)^<span class="dv">2</span>)
+SS.gender</code></pre></div>
+<pre><code>## [1] 76.5625</code></pre>
+<p>自由度是因素A的水平减1，既r-1，这里r=2，所以df=1。</p>
+</div>
+<div id="b" class="section level4">
+<h4><span class="header-section-number">6.3.3.4</span> 因素B的方差</h4>
+<p>只考虑因素B，对于这个数据来说，是药剂用量因素，只使用dosage因素对数据进行分组，按单向ANOVA分析一样，计算组间方差：</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Bm &lt;-<span class="st"> </span><span class="kw">with</span>(data, <span class="kw">tapply</span>(Alertness, Dosage, mean))
+Bn &lt;-<span class="st"> </span><span class="kw">with</span>(data, <span class="kw">tapply</span>(Alertness, Dosage, length))
+SS.dosage &lt;-<span class="st"> </span><span class="kw">sum</span>(Bn *<span class="st"> </span>(Bm -<span class="st"> </span>grand.mean)^<span class="dv">2</span>)
+SS.dosage</code></pre></div>
+<pre><code>## [1] 5.0625</code></pre>
+<p>自由度是因素B的水平减1，既c-1，这里c=2，所以df=1。</p>
+</div>
+<div id="ab" class="section level4">
+<h4><span class="header-section-number">6.3.3.5</span> 因素A和B相互作用的方差</h4>
+<p>单元格方差由A因素和B因素组成，可以拆分为因素A的方差、因素B的方差和AB互作的方差，即： <span class="math display">\[ SS_{cells} = SS_A + SS_B + SS_{AB}\]</span> 所以A和B互作的方差： <span class="math display">\[ SS_{AB} = SS_{cells} - SS_A - SS_B\]</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">SS.gender.dosage &lt;-<span class="st"> </span>SS.cells -<span class="st"> </span>SS.gender -<span class="st"> </span>SS.dosage
+SS.gender.dosage</code></pre></div>
+<pre><code>## [1] 0.0625</code></pre>
+<p>自由度是A的自由度乘以B的自由度，即：(r-1)(c-1)。</p>
+</div>
+<div id="section-6.3.3.6" class="section level4">
+<h4><span class="header-section-number">6.3.3.6</span> 误差方差</h4>
+<p>最后是组内方差，它度量误差，方差分析和线性回归是高度一致的，在R的aov函数里，会把误差方差写成残差方差，这其实来自于线性回归。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dw &lt;-<span class="st"> </span><span class="kw">ddply</span>(data, .(Gender, Dosage), function(x) x$Alertness -<span class="st"> </span><span class="kw">mean</span>(x$Alertness))
+dw</code></pre></div>
+<pre><code>##   Gender Dosage    V1    V2    V3    V4
+## 1      f      a -0.75 -3.75  6.25 -1.75
+## 2      f      b -1.75 -4.75  1.25  5.25
+## 3      m      a -3.25  0.75  1.75  0.75
+## 4      m      b -6.50 -5.50 10.50  1.50</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(dw[,-<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]^<span class="dv">2</span>)</code></pre></div>
+<pre><code>## [1] 311.25</code></pre>
+<p>上面按照A和B两个因素，分成rxc组，按单向ANOVA分析方法，计算组内方差。 实际上，误差方差等于总方差减去单元格方差，也就是总方差中不能由因素A和B解释的，就是误差方差：</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">SS.err =<span class="st"> </span>SS.tot -<span class="st"> </span>SS.cells
+SS.err</code></pre></div>
+<pre><code>## [1] 311.25</code></pre>
+<p>自由度是总自由度减去A，B和AB互作的自由度，即(N-1) - (r-1) - (c-1) - (r-1)(c-1).</p>
+</div>
+</div>
+<div id="p" class="section level3">
+<h3><span class="header-section-number">6.3.4</span> p值计算</h3>
+<p>计算了这6个方差之后，就要以计算F值，进而计算p值。计算F值需要用均方，即方差除以自由度。分子相当于信号，而分母相当于噪声。信噪比足够高，则这个因素有作用。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pf</span>(SS.gender/<span class="dv">1</span> /<span class="st"> </span>(SS.err/<span class="dv">12</span>), <span class="dt">df1=</span><span class="dv">1</span>, <span class="dt">df2=</span><span class="dv">12</span>, <span class="dt">lower.tail=</span>F)</code></pre></div>
+<pre><code>## [1] 0.1114507</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pf</span>(SS.dosage/<span class="dv">1</span> /<span class="st"> </span>(SS.err/<span class="dv">12</span>), <span class="dt">df1=</span><span class="dv">1</span>, <span class="dt">df2=</span><span class="dv">12</span>, <span class="dt">lower.tail=</span>F)</code></pre></div>
+<pre><code>## [1] 0.6664956</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pf</span>(SS.gender.dosage/<span class="dv">1</span> /<span class="st"> </span>(SS.err/<span class="dv">12</span>), <span class="dt">df1=</span><span class="dv">1</span>, <span class="dt">df2=</span><span class="dv">12</span>, <span class="dt">lower.tail=</span>F)</code></pre></div>
+<pre><code>## [1] 0.9616567</code></pre>
+<p>上面分别看了Gender, Dosage, Gender和Dosage相互作用的p值，分别对应于前面提到的三个零假设。</p>
+</div>
+<div id="anova-using-r" class="section level3">
+<h3><span class="header-section-number">6.3.5</span> ANOVA using R</h3>
+<p>stats包中的aov()函数，可以进行双向方差分析，我们并不需要手工计算这么多的统计量。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">with</span>(data, <span class="kw">aov</span>(Alertness~Gender*Dosage)))</code></pre></div>
+<pre><code>##               Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Gender         1  76.56   76.56   2.952  0.111
+## Dosage         1   5.06    5.06   0.195  0.666
+## Gender:Dosage  1   0.06    0.06   0.002  0.962
+## Residuals     12 311.25   25.94</code></pre>
+<p>虽然这里相互作用没有显著性，但做为演示，依然可以画一下相互作用图，使用stats包提供的interaction.plot，如果有显著性，可以从图中看出效应。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(data, <span class="kw">interaction.plot</span>(Gender, Dosage, Alertness))</code></pre></div>
+<p><img src="_main_files/figure-html/aov2.fig1-1.png" /><!-- --> 这个图其实就是以Gender为X轴，按Dosage进行分组，以分组的Alertness均值为Y轴，进行画图，自己使用ggplot2来画也是非常简单的，还可以给均值加上errorbar或confidence interval，都是很容易的事情。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(ggplot2)
+grp &lt;-<span class="st"> </span><span class="kw">ddply</span>(data, .(Gender, Dosage), function(x) <span class="kw">data.frame</span>(<span class="dt">m=</span><span class="kw">mean</span>(x$Alertness)))
+<span class="kw">ggplot</span>(grp, <span class="kw">aes</span>(Gender, m, <span class="dt">group=</span>Dosage, <span class="dt">shape=</span>Dosage, <span class="dt">color=</span>Dosage, <span class="dt">linetype=</span>Dosage))+<span class="kw">geom_point</span>()+<span class="kw">geom_line</span>()</code></pre></div>
+<p><img src="_main_files/figure-html/aov2.fig2-1.png" /><!-- --></p>
+<p>对于分组数据均值是否有差异，也可以画boxplot或者是使用均值和置信区间来画图。</p>
+</div>
+</div>
+<div id="advanced-anova" class="section level2">
+<h2><span class="header-section-number">6.4</span> Advanced ANOVA</h2>
+<div id="repeated-measures-anova" class="section level3">
+<h3><span class="header-section-number">6.4.1</span> Repeated-Measures ANOVA</h3>
+<p>ANOVA分析要求测量值是独立的，但是很多情况下，并不独立，比如对一个病人用药后不同时间段进行测量，同一个病人的测量值显然是相关的。 这可以看成是成对T检验的扩展，可以应用于同一对象多个测量值的情况，所以称之为重复测量方差分析。</p>
+<p>假如我们有以下数据：</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;data/aov2.tsv&quot;</span>, <span class="dt">header=</span>T)
+data</code></pre></div>
+<pre><code>##    Observation Subject Task Valence Recall
+## 1            1     Jim Free     Neg      8
+## 2            2     Jim Free     Neu      9
+## 3            3     Jim Free     Pos      5
+## 4            4     Jim Cued     Neg      7
+## 5            5     Jim Cued     Neu      9
+## 6            6     Jim Cued     Pos     10
+## 7            7  Victor Free     Neg     12
+## 8            8  Victor Free     Neu     13
+## 9            9  Victor Free     Pos     14
+## 10          10  Victor Cued     Neg     16
+## 11          11  Victor Cued     Neu     13
+## 12          12  Victor Cued     Pos     14
+## 13          13    Faye Free     Neg     13
+## 14          14    Faye Free     Neu     13
+## 15          15    Faye Free     Pos     12
+## 16          16    Faye Cued     Neg     15
+## 17          17    Faye Cued     Neu     16
+## 18          18    Faye Cued     Pos     14
+## 19          19     Ron Free     Neg     12
+## 20          20     Ron Free     Neu     14
+## 21          21     Ron Free     Pos     15
+## 22          22     Ron Cued     Neg     17
+## 23          23     Ron Cued     Neu     18
+## 24          24     Ron Cued     Pos     20
+## 25          25   Jason Free     Neg      6
+## 26          26   Jason Free     Neu      7
+## 27          27   Jason Free     Pos      9
+## 28          28   Jason Cued     Neg      4
+## 29          29   Jason Cued     Neu      9
+## 30          30   Jason Cued     Pos     10</code></pre>
+<p>按照普通的方差分析</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">aov</span>(Recall~Task*Valence, <span class="dt">data=</span>data))</code></pre></div>
+<pre><code>##              Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Task          1   30.0   30.00   1.749  0.198
+## Valence       2    9.8    4.90   0.286  0.754
+## Task:Valence  2    1.4    0.70   0.041  0.960
+## Residuals    24  411.6   17.15</code></pre>
+<p>如果这样来做，忽略了同一受试对象(subject)各个观察值之间的相关性这一信息，好比把成对T检验的成对信息给扔了一样。</p>
+<p>方差分析按照因素进行分组，误差均方即为组间均方，因为数据是独立，但上面的数据并不独立。这里如果只按照因素进行分组，而不考虑受试对象的信息，则把受试对象内部的方差也给归入误差方差，像上面这种重复测量的数据，受试对象内部的方差应该从误差方差中分离出来，归入真实方差。</p>
+<div class="figure">
+<img src="figure/aov3.fig1.png" alt="重复测量ANOVA" />
+<p class="caption">重复测量ANOVA</p>
+</div>
+<p>重复测量方差分析和其它方差分析的差别在于对方差的划分不同。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">aov</span>(Recall~Task*Valence+<span class="kw">Error</span>(Subject/(Task*Valence)), <span class="dt">data=</span>data))</code></pre></div>
+<pre><code>## 
+## Error: Subject
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Residuals  4  349.1   87.28               
+## 
+## Error: Subject:Task
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)  
+## Task       1  30.00  30.000   7.347 0.0535 .
+## Residuals  4  16.33   4.083                 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Error: Subject:Valence
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Valence    2   9.80   4.900   1.459  0.288
+## Residuals  8  26.87   3.358               
+## 
+## Error: Subject:Task:Valence
+##              Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Task:Valence  2   1.40   0.700   0.291  0.755
+## Residuals     8  19.27   2.408</code></pre>
+<p>把受试对象内部的方差从误差方差中分离出去，误差项变小了，F值变大，p值变小，检验的power大了很多。</p>
+</div>
+<div id="mixed-factorial-anova" class="section level3">
+<h3><span class="header-section-number">6.4.2</span> Mixed-Factorial ANOVA</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">md &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;data/aov.mixed.tsv&quot;</span>, <span class="dt">header=</span>T)
+<span class="kw">head</span>(md)</code></pre></div>
+<pre><code>##   Obs Subject Gender Dosage Task Valence Recall
+## 1   1       A      M      A    F     Neg      8
+## 2   2       A      M      A    F     Neu      9
+## 3   3       A      M      A    F     Pos      5
+## 4   4       A      M      A    C     Neg      7
+## 5   5       A      M      A    C     Neu      9
+## 6   6       A      M      A    C     Pos     10</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(md)</code></pre></div>
+<pre><code>##     Obs Subject Gender Dosage Task Valence Recall
+## 103 103       R      F      C    F     Neg     19
+## 104 104       R      F      C    F     Neu     17
+## 105 105       R      F      C    F     Pos     19
+## 106 106       R      F      C    C     Neg     22
+## 107 107       R      F      C    C     Neu     21
+## 108 108       R      F      C    C     Pos     20</code></pre>
+<p>上面这个数据，有18个对象，9个男性9个女性，每个对象被使用了三种可能剂量的药，然后被测试使用两种记忆类型（cued和free call），能否回忆起三种类型的词(positive, negative和neutral)，这里有2个对象间变量：性别和剂量，2个对象内剂量：Task（2个水平）和Valence（3个水平）。</p>
+<p>下面的命令，对 对象内因子、对象内误差项、对象间因子 进行方差分析。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">aov</span>(Recall~(Task*Valence*Gender*Dosage)+<span class="kw">Error</span>(Subject/(Task*Valence))+(Gender*Dosage),<span class="dt">data=</span>md))</code></pre></div>
+<pre><code>## 
+## Error: Subject
+##               Df Sum Sq Mean Sq F value Pr(&gt;F)  
+## Gender         1  542.3   542.3   5.685 0.0345 *
+## Dosage         2  694.9   347.5   3.643 0.0580 .
+## Gender:Dosage  2   70.8    35.4   0.371 0.6976  
+## Residuals     12 1144.6    95.4                 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Error: Subject:Task
+##                    Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## Task                1  96.33   96.33  39.862 3.87e-05 ***
+## Task:Gender         1   1.33    1.33   0.552    0.472    
+## Task:Dosage         2   8.17    4.08   1.690    0.226    
+## Task:Gender:Dosage  2   3.17    1.58   0.655    0.537    
+## Residuals          12  29.00    2.42                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Error: Subject:Valence
+##                       Df Sum Sq Mean Sq F value Pr(&gt;F)  
+## Valence                2  14.69   7.343   2.998 0.0688 .
+## Valence:Gender         2   3.91   1.954   0.798 0.4619  
+## Valence:Dosage         4  20.26   5.065   2.068 0.1166  
+## Valence:Gender:Dosage  4   1.04   0.259   0.106 0.9793  
+## Residuals             24  58.78   2.449                 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Error: Subject:Task:Valence
+##                            Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Task:Valence                2   5.39  2.6944   1.320  0.286
+## Task:Valence:Gender         2   2.17  1.0833   0.531  0.595
+## Task:Valence:Dosage         4   2.78  0.6944   0.340  0.848
+## Task:Valence:Gender:Dosage  4   2.67  0.6667   0.327  0.857
+## Residuals                  24  49.00  2.0417</code></pre>
+<p>多元回归的F值和ANOVA的F值是一样的，事实上两者的底层是general linear model，R在计算ANOVA时使用的是多元回归的特例。</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="t.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="correlation.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

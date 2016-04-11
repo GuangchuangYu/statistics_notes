@@ -38,8 +38,8 @@ MathJax.Hub.Config({
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="section-4.html">
-<link rel="next" href="section-6.html">
+<link rel="prev" href="general-linear-model.html">
+<link rel="next" href="section-11.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -238,138 +238,99 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="t" class="section level1">
-<h1><span class="header-section-number">5</span> T检验</h1>
-<div id="t" class="section level2">
-<h2><span class="header-section-number">5.1</span> 单样本T检验</h2>
-<div id="section-5.1.1" class="section level3">
-<h3><span class="header-section-number">5.1.1</span> 前提条件</h3>
-<p>使用T检验，前提条件必须是满足正态分布，如果样本量足够多的时候，根据<a href="confidence_interval.html">中心极限定理</a>，数据分布不呈正态也是没问题的。</p>
-</div>
-<div id="section-5.1.2" class="section level3">
-<h3><span class="header-section-number">5.1.2</span> 数据标准化</h3>
-<p>在满足前提条件的基础上，我们假定均值的分布是呈正态的。</p>
-<p>简单点说，我们的任务是看样本均值偏离总体均值有多远，越远则p值越小，这是绝对正相关的。那么直接计算 <span class="math inline">\(| \bar{x} - \mu |\)</span> 行不行？显然可以，但是it depends。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m1 &lt;-<span class="st"> </span><span class="kw">get_sample_mean</span>(<span class="dv">5</span>, <span class="kw">rnorm</span>(<span class="dv">1000</span>))
-m2 &lt;-<span class="st"> </span><span class="kw">get_sample_mean</span>(<span class="dv">5</span>, <span class="kw">rnorm</span>(<span class="dv">1000</span>, <span class="dt">sd=</span><span class="dv">3</span>))
-
-<span class="kw">hist</span>(m2, <span class="dt">col=</span><span class="st">&quot;green&quot;</span>, <span class="dt">main=</span><span class="st">&quot;Histogram of sample means&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Means&quot;</span>, <span class="dt">breaks=</span><span class="dv">30</span>)
-<span class="kw">hist</span>(m1, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">add=</span>T, <span class="dt">breaks=</span><span class="dv">30</span>)
-<span class="kw">legend</span>(<span class="dt">legend=</span><span class="kw">c</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(sigma==<span class="dv">1</span>)), <span class="kw">expression</span>(<span class="kw">paste</span>(sigma==<span class="dv">3</span>))), <span class="dt">fill=</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>), <span class="st">&quot;topright&quot;</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/t.fig1-1.png" /><!-- --></p>
-<p>我们知道正态分布由两个参数决定，均值和方差，所以 <span class="math inline">\(| \bar{x} - \mu |\)</span> 的大小，不能直接对应到p值，从上图绿色中抽到一个<span class="math inline">\(| \bar{x} - \mu | = 3\)</span> 的样本，概率并不低，但从红色分布中得到这样一个样本，几乎是不可能的。</p>
-<p>拿 <span class="math inline">\(| \bar{x} - \mu |\)</span> 来度量的话，你必须提供 <span class="math inline">\(sd(\bar{x})\)</span> ，<span class="math inline">\(| \bar{x} - \mu |\)</span> 不能直接比较。</p>
-<p>如果<span class="math inline">\(sd(\bar{x})\)</span> 相同的话，<span class="math inline">\(| \bar{x} - \mu |\)</span> 就是很好的度量方法，它是可比较的，值越大，p值越小。那么我们需要做的，就是把数据压缩到同一个scale上，既然均值分布呈正态分布，而所有的正态分布都可以scale到标准正态分布上，显然我们可以用相同的方法来处理，把数据统一scale到 <span class="math inline">\(SEM = 1\)</span> ，于是差值 <span class="math inline">\(| scale(\bar{x}) - \mu |\)</span> 就完全可以拿来比较，年纪大点的人，上学时候p值是通过查表获得的，查表用的值就是 <span class="math inline">\(| scale(\bar{x}) - \mu |\)</span> 。</p>
-</div>
-</div>
-<div id="z" class="section level2">
-<h2><span class="header-section-number">5.2</span> Z检验</h2>
-<p>在讲T检验前，先回顾一下Z检验，标准正态分布称之为Z分布，根据Z分布来做统计检验，便是Z检验。 我们把一个正态分布scale到标准正态分布上，通过: <span class="math display">\[ \frac{x-\mu}{sd}\]</span></p>
-<p>在这里检验的统计量是均值 <span class="math inline">\(\bar{x}\)</span> ，均值的sd，也就是SEM， <span class="math inline">\(SEM=\frac{\sigma}{\sqrt{n}}\)</span> ，通过 <span class="math inline">\(\frac{sd(x)}{\sqrt{n}}\)</span> 估计，具体参考<a href="confidence_interval.html">置信区间一节</a>，</p>
-<p>所以我们使用以下公式，把均值分布scale到z分布上： <span class="math display">\[z= \frac{\bar{x}-\mu}{sd(x)/\sqrt{n}}\]</span></p>
-<p>那么通过z值在z分布上的位置，就可以算出p值，进行z检验。</p>
-<div id="t-1" class="section level3">
-<h3><span class="header-section-number">5.2.1</span> t检验</h3>
-<pre><code>
-In theory, there is no difference between theory and practice. But, in practice, there is.
-
-                                                        -- Jan L.A. van de Snepscheut </code></pre>
-<p>虽然可以直接利用正态分布来计算p值，然而理想状态很丰满，现实却很骨感，如果样本量n较大时，不单t分布逼近正态分布， <span class="math inline">\(\chi^2_{(n)}\)</span> ,Poisson( <span class="math inline">\(lambda\)</span> ),和二项分布B(n,p)都逼近正态，然而我们没有那么大的样本量，所以在不理想的现实中，有各种各样的检验来应对各种情景和现实条件。</p>
-<p>我们要通过样本参数来估计总体参数，特别是对于小样本来说，非常不靠谱。可以说正态是理想状态，而T分布是其现实版本。<a href="probability_distributions.html">T分布</a>中心比正态分布平，尾巴比正态分布长，特别是在自由度较小的情况下，所以T检验计算出来的p值比Z检验要保守些。</p>
-<p>相应的，t值的计算和z值的计算是一样的。 <span class="math display">\[t=\frac{\bar{x}-\mu}{sd(x)/\sqrt{n}}\]</span></p>
-<p>使用R进行单样本的T检验，是一件非常容易的事情。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:<span class="dv">100</span>, <span class="dv">10</span>)
-<span class="kw">print</span>(x)</code></pre></div>
-<pre><code>##  [1] 83 73 63 46 56 92 32 10 12  8</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(x, <span class="dt">mu=</span><span class="dv">20</span>)</code></pre></div>
-<pre><code>## 
-##  One Sample t-test
-## 
-## data:  x
-## t = 2.8014, df = 9, p-value = 0.02066
-## alternative hypothesis: true mean is not equal to 20
-## 95 percent confidence interval:
-##  25.29383 69.70617
-## sample estimates:
-## mean of x 
-##      47.5</code></pre>
-</div>
-</div>
-<div id="t" class="section level2">
-<h2><span class="header-section-number">5.3</span> 两样本T检验</h2>
-<p>和<a href="one_sample_t.test.html">单样本T检验</a>一样，前提条件是数据来自于正态分布，或者是样本量足够大，在这种情况下，两样本均值差的分布是呈现正态的，便可以应用T分布来计算<a href="pvalue.html">p值</a>。</p>
-<p>在理解了正态分布、T分布以及p值的计算之后，我们应该很清楚，T检验就是通过计算t值来计算显著性： <span class="math display">\[t = \frac{X-\mu}{SE}\]</span></p>
-<p>这里的X是我们的统计量，如单样本的 <span class="math inline">\(\bar{x}\)</span> ,而这里两样本，则为 <span class="math inline">\(\bar{x_1}-\bar{x_2}\)</span> ，而SE是统计量X的标准误，单样本T检验我们使用SEM来表示均值的标准误(standard error of the means)，相应的两样本T检验，我们使用SEDM来代表均值差的标准误（standard error of difference of means）。</p>
-<p>两样本t检验的通用形式为： <span class="math display">\[ t = \frac{(x_1-x_2)-(\mu_1-\mu_2)}{SEDM}\]</span></p>
-<p>由于零假设是均值没有差别，所以 <span class="math inline">\(\mu_1-\mu_2\)</span> 会被假定为0.</p>
-<p>T检验的问题就在于如何计算SE，在这里要做两样本T检验，问题就成了如何计算SEDM。</p>
-<p>在<a href="confidence_interval.html">置信区间</a>一节里，已经介绍了如何估计SEDM。</p>
-<div id="t" class="section level3">
-<h3><span class="header-section-number">5.3.1</span> 成对T检验</h3>
-<p>成对数据的 <span class="math inline">\(SEDM = = \frac{s_d}{\sqrt{n}}\)</span> 。 成对T检验本质上和单样本T检验是一样的，通过计算 <span class="math inline">\(d_i = x_{1i} -x_{2i}\)</span> ，对d值进行单样本t检验。</p>
+<div id="logistic-regression" class="section level1">
+<h1><span class="header-section-number">10</span> Logistic Regression</h1>
+<p>线性回归是从X预测出Y，Y是数值型；而逻辑回归也是从X预测Y，但Y是二分变量。<a href="http://compbio.soe.ucsc.edu/genex/genexTR2html/node12.html">Fisher线性区分法</a>通过寻找预测值的线性组合使得两组间的差异最大化，以此来预测分组的归属问题。这个方法要求预测变量必须是连续型，逻辑回归做为一个superior alternative，允许二分预测变量。</p>
+<p>Y值是二分变量，以(0,1)表示，我们可以把它当成是二项式过程，p是1的比例，q=1-p是0的比例，1代表成功而0代表失败，逻辑曲线，预测值总是0,1之间。</p>
+<p>首先把比例转换成odds，如果p是成功概率，那么支持成功的odds是： <span class="math display">\[ odds=\frac{p}{q}=\frac{p}{1-p}\]</span></p>
+<p>在逻辑回归中，我们使用的统计量叫分对数(logit)，它是odds的自然对数。 <span class="math display">\[ logit = ln(odds) = b_0+b_1x_1+b_2x_2+...+b_kx_k\]</span> 使用线性回归对logit进行预测，</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(iris)
-<span class="kw">attach</span>(iris)</code></pre></div>
-<pre><code>## The following objects are masked from iris (pos = 8):
-## 
-##     Petal.Length, Petal.Width, Sepal.Length, Sepal.Width, Species</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(Sepal.Length, Petal.Length, <span class="dt">paired=</span><span class="ot">TRUE</span>)</code></pre></div>
+dd=iris[iris$Species !=<span class="st"> &quot;setosa&quot;</span>,]
+dd$Species=<span class="kw">as.numeric</span>(dd$Species)-<span class="dv">2</span>
+res=<span class="kw">glm</span>(Species ~<span class="st"> </span>Sepal.Length+<span class="st"> </span>Sepal.Width+<span class="st"> </span>Petal.Length +<span class="st"> </span>Petal.Width, <span class="dt">data=</span>dd, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)
+<span class="kw">summary</span>(res)</code></pre></div>
 <pre><code>## 
-##  Paired t-test
+## Call:
+## glm(formula = Species ~ Sepal.Length + Sepal.Width + Petal.Length + 
+##     Petal.Width, family = &quot;binomial&quot;, data = dd)
 ## 
-## data:  Sepal.Length and Petal.Length
-## t = 22.813, df = 149, p-value &lt; 2.2e-16
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  1.904708 2.265959
-## sample estimates:
-## mean of the differences 
-##                2.085333</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d =<span class="st"> </span>Sepal.Length -<span class="st"> </span>Petal.Length
-<span class="kw">t.test</span>(d)</code></pre></div>
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -2.01105  -0.00541  -0.00001   0.00677   1.78065  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)  
+## (Intercept)   -42.638     25.707  -1.659   0.0972 .
+## Sepal.Length   -2.465      2.394  -1.030   0.3032  
+## Sepal.Width    -6.681      4.480  -1.491   0.1359  
+## Petal.Length    9.429      4.737   1.991   0.0465 *
+## Petal.Width    18.286      9.743   1.877   0.0605 .
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 138.629  on 99  degrees of freedom
+## Residual deviance:  11.899  on 95  degrees of freedom
+## AIC: 21.899
+## 
+## Number of Fisher Scoring iterations: 10</code></pre>
+<p>结果使用的是Wald z statistic，分析显示只有Petal.Length是显著的。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res2=<span class="kw">glm</span>(Species ~<span class="st"> </span>Petal.Length, <span class="dt">data=</span>dd, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)
+<span class="kw">summary</span>(res2)</code></pre></div>
 <pre><code>## 
-##  One Sample t-test
+## Call:
+## glm(formula = Species ~ Petal.Length, family = &quot;binomial&quot;, data = dd)
 ## 
-## data:  d
-## t = 22.813, df = 149, p-value &lt; 2.2e-16
-## alternative hypothesis: true mean is not equal to 0
-## 95 percent confidence interval:
-##  1.904708 2.265959
-## sample estimates:
-## mean of x 
-##  2.085333</code></pre>
-</div>
-<div id="t" class="section level3">
-<h3><span class="header-section-number">5.3.2</span> 方差相同的两样本T检验</h3>
-<p>这种情况下 <span class="math inline">\(SEDM = = \sqrt{\frac{s_p^2}{n_1}+\frac{s_p^2}{n_2}}\)</span> , 自由度是 <span class="math inline">\(n_1+n_2-2\)</span> 。 其中 <span class="math inline">\(s_p^2\)</span> 是合并方差： <span class="math inline">\(s_p^2=\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}\)</span></p>
-<p>很多教科书所说的两独立样本T检验就是指这种情况。记得以前老师讲过说T检验必须满足两个条件，一是正态，二是方差齐性，说的就是这个。</p>
-<p>当然T检验只需满足一个条件，那就是正态，方差不齐的情况下面会讲到。</p>
-<p>方差是否相同，可以计算两个样本的方差比值，方差相同，则比值应该在1左右，而方差不同，则比值会偏离1，这个比值称为F ratio，可以使用F检验来计算方差齐性的显著性。在方差齐性的前提条件下，我们使用上面的公式进行T检验。</p>
-</div>
-<div id="t" class="section level3">
-<h3><span class="header-section-number">5.3.3</span> 方差不同的两样本T检验</h3>
-<p>如果F检验把方差齐性的零假设给reject了，那么就得用Welch t检验。 <span class="math display">\[SEDM = \sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}\]</span> 自由度通过Welch-Satterhwaite公式计算： <span class="math display">\[ df = \frac{(s_1^2/n_1+s_2^2/n2)^2}{\frac{(s_1^2/n_1)^2}{n_1-1}+\frac{(s_2^2/n_2)^2}{n_2-1}}\]</span></p>
-</div>
-<div id="rt" class="section level3">
-<h3><span class="header-section-number">5.3.4</span> 使用R进行T检验</h3>
-<p>R的stats包提供了t.test函数，可以用于各种T检验，如果只提供一组数据，则进行单样本T检验，如果提供两组数据，则进行两样本T检验，主要的参数，无非是paired，TRUE则进行成对t检验，var.equal指定方差是否齐性，TRUE则进行经典方法，FALSE则进行Welch T检验。 使用实例可参考<a href="http://ygc.name/stats/RT_PCR.html">RT-PCR</a>一节。</p>
-</div>
-<div id="section-5.3.5" class="section level3">
-<h3><span class="header-section-number">5.3.5</span> 结论</h3>
-<p>成对数据我们可以把成对的信息扔了，混在一起做两独立样本T检验，方差齐了，我们也可以把它当做不齐，用Welch方法。所以如果稀里糊涂的情况下，就用Welch T检验。</p>
-<p>如果是成对数据，当然还是成对T检验好，比如病人在使用某药物前后的指标，如果不用成对，则病人之间的variance也混进去，方差估计会大一些，T检验的power也会减弱。</p>
-<p>Welch T检验的自由度会比方差齐性的经典方法要小，根据<a href="probability_distributions.html">T分布</a>，自由度越小，中心越平，而尾巴越长，也就是说，观察到同样一个t值，自由度小的分布计算出来的p值会更大，换句话说，自由度越小，T检验就越保守。</p>
-<p>这也是t.test函数默认使用Welch T test的原因，Welch T test较为保守，如果方差齐性，用经典方法可以检验出更小的差别。</p>
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -2.11738  -0.12758  -0.00009   0.05865   2.57260  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)   -43.781     11.110  -3.941 8.12e-05 ***
+## Petal.Length    9.002      2.283   3.943 8.04e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 138.629  on 99  degrees of freedom
+## Residual deviance:  33.432  on 98  degrees of freedom
+## AIC: 37.432
+## 
+## Number of Fisher Scoring iterations: 8</code></pre>
+<p>AIC(Akaike information criterion)用来度量模型拟合，它度量使用模型来描述Y变量信息损失的相对量，值越小，模型越好。 AIC可以用来做模型选择。像上面res和res2分别使用多个变量和单一变量来做拟合，AIC分别为21.9和37.43，显然第一个模型，使用多个变量来做拟合效果要好。</p>
+<p>模型拟合可以使用卡方检验来检验拟合得好不好，检验的是null deviance (the null model)和fitted model的差别。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(res, <span class="kw">pchisq</span>(null.deviance-deviance, df.null-df.residual, <span class="dt">lower.tail=</span><span class="ot">FALSE</span>))</code></pre></div>
+<pre><code>## [1] 1.947107e-26</code></pre>
+<p>p值很小，证明模型是非常好的。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))
+<span class="kw">plot</span>(res)</code></pre></div>
+<p><img src="_main_files/figure-html/glm.fig1-1.png" /><!-- --> 同样可以用plot画出各种图，来辅助诊断。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">logit=<span class="kw">log</span>(res$fitted.values/(<span class="dv">1</span>-res$fitted.values))
+<span class="kw">plot</span>(logit, res$fitted.values)</code></pre></div>
+<p><img src="_main_files/figure-html/glm.fig2-1.png" /><!-- --></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(<span class="kw">round</span>(res$fitted.values) ==<span class="st"> </span>dd$Species)</code></pre></div>
+<pre><code>## [1] 0.98</code></pre>
+<p>从数值上看，98%的数据归类是正确的。当然这个也可以使用卡方检验来检验：</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dd$fitted=<span class="kw">round</span>(res$fitted.values)
+<span class="kw">chisq.test</span>(<span class="kw">with</span>(dd, <span class="kw">table</span>(fitted, Species)))</code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s Chi-squared test with Yates&#39; continuity correction
+## 
+## data:  with(dd, table(fitted, Species))
+## X-squared = 88.36, df = 1, p-value &lt; 2.2e-16</code></pre>
+<p>逻辑回归也有很多alternative的方法，比如 <span class="math inline">\(Hotelling&#39;s\; T^2\)</span> 和Probit regression.</p>
 
-</div>
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="section-4.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="section-6.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="general-linear-model.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="section-11.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>

@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>统计笔记</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="YGC的统计学笔记">
+  <meta name="generator" content="bookdown 0.0.63 and GitBook 2.6.7">
+
+  <meta property="og:title" content="统计笔记" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="YGC的统计学笔记" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="统计笔记" />
+  
+  <meta name="twitter:description" content="YGC的统计学笔记" />
+  
+
+<meta name="author" content="余光创">
+
+<meta name="date" content="2016-04-11">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="logistic-regression.html">
+
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> 前言</a></li>
+<li class="chapter" data-level="2" data-path="r.html"><a href="r.html"><i class="fa fa-check"></i><b>2</b> R语言简介</a><ul>
+<li class="chapter" data-level="2.1" data-path="r.html"><a href="r.html#-flow-control"><i class="fa fa-check"></i><b>2.1</b> 控制流 （Flow Control)</a></li>
+<li class="chapter" data-level="2.2" data-path="r.html"><a href="r.html#-looping"><i class="fa fa-check"></i><b>2.2</b> 循环 (Looping)</a></li>
+<li class="chapter" data-level="2.3" data-path="r.html"><a href="r.html#covariancecorrelation"><i class="fa fa-check"></i><b>2.3</b> 协方差（covariance）和相关性（correlation）</a></li>
+<li class="chapter" data-level="2.4" data-path="r.html"><a href="r.html#section-2.4"><i class="fa fa-check"></i><b>2.4</b> 对称性度量</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>3</b> 使用ggplot2画图</a><ul>
+<li class="chapter" data-level="3.1" data-path="ggplot2.html"><a href="ggplot2.html#why-use-ggplot2"><i class="fa fa-check"></i><b>3.1</b> Why use ggplot2</a></li>
+<li class="chapter" data-level="3.2" data-path="ggplot2.html"><a href="ggplot2.html#ggplot2"><i class="fa fa-check"></i><b>3.2</b> ggplot2基本要素</a></li>
+<li class="chapter" data-level="3.3" data-path="ggplot2.html"><a href="ggplot2.html#datamapping"><i class="fa fa-check"></i><b>3.3</b> 数据（Data）和映射（Mapping)</a></li>
+<li class="chapter" data-level="3.4" data-path="ggplot2.html"><a href="ggplot2.html#geometric"><i class="fa fa-check"></i><b>3.4</b> 几何对象（Geometric）</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="ggplot2.html"><a href="ggplot2.html#section-3.4.1"><i class="fa fa-check"></i><b>3.4.1</b> 直方图</a></li>
+<li class="chapter" data-level="3.4.2" data-path="ggplot2.html"><a href="ggplot2.html#section-3.4.2"><i class="fa fa-check"></i><b>3.4.2</b> 密度函数图</a></li>
+<li class="chapter" data-level="3.4.3" data-path="ggplot2.html"><a href="ggplot2.html#section-3.4.3"><i class="fa fa-check"></i><b>3.4.3</b> 箱式图</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="ggplot2.html"><a href="ggplot2.html#scale"><i class="fa fa-check"></i><b>3.5</b> 标尺（Scale）</a></li>
+<li class="chapter" data-level="3.6" data-path="ggplot2.html"><a href="ggplot2.html#statistics"><i class="fa fa-check"></i><b>3.6</b> 统计变换（Statistics）</a></li>
+<li class="chapter" data-level="3.7" data-path="ggplot2.html"><a href="ggplot2.html#coordinante"><i class="fa fa-check"></i><b>3.7</b> 坐标系统（Coordinante）</a></li>
+<li class="chapter" data-level="3.8" data-path="ggplot2.html"><a href="ggplot2.html#layer"><i class="fa fa-check"></i><b>3.8</b> 图层（Layer）</a></li>
+<li class="chapter" data-level="3.9" data-path="ggplot2.html"><a href="ggplot2.html#facet"><i class="fa fa-check"></i><b>3.9</b> 分面（Facet）</a></li>
+<li class="chapter" data-level="3.10" data-path="ggplot2.html"><a href="ggplot2.html#theme"><i class="fa fa-check"></i><b>3.10</b> 主题（Theme）</a></li>
+<li class="chapter" data-level="3.11" data-path="ggplot2.html"><a href="ggplot2.html#section-3.11"><i class="fa fa-check"></i><b>3.11</b> 二维密度图</a></li>
+<li class="chapter" data-level="3.12" data-path="ggplot2.html"><a href="ggplot2.html#ggplot2"><i class="fa fa-check"></i><b>3.12</b> ggplot2实战</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="section-4.html"><a href="section-4.html"><i class="fa fa-check"></i><b>4</b> 统计检验基础</a><ul>
+<li class="chapter" data-level="4.1" data-path="section-4.html"><a href="section-4.html#section-4.1"><i class="fa fa-check"></i><b>4.1</b> 概率分布</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="section-4.html"><a href="section-4.html#section-4.1.1"><i class="fa fa-check"></i><b>4.1.1</b> 均值与方差</a></li>
+<li class="chapter" data-level="4.1.2" data-path="section-4.html"><a href="section-4.html#section-4.1.2"><i class="fa fa-check"></i><b>4.1.2</b> 二项式分布</a></li>
+<li class="chapter" data-level="4.1.3" data-path="section-4.html"><a href="section-4.html#poisson"><i class="fa fa-check"></i><b>4.1.3</b> Poisson分布</a></li>
+<li class="chapter" data-level="4.1.4" data-path="section-4.html"><a href="section-4.html#section-4.1.4"><i class="fa fa-check"></i><b>4.1.4</b> 正态分布</a></li>
+<li class="chapter" data-level="4.1.5" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>4.1.5</b> t分布</a></li>
+<li class="chapter" data-level="4.1.6" data-path="section-4.html"><a href="section-4.html#section-4.1.6"><i class="fa fa-check"></i><b>4.1.6</b> 卡方分布</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="section-4.html"><a href="section-4.html#p"><i class="fa fa-check"></i><b>4.2</b> 统计检验与p值</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="section-4.html"><a href="section-4.html#section-4.2.1"><i class="fa fa-check"></i><b>4.2.1</b> 零假设</a></li>
+<li class="chapter" data-level="4.2.2" data-path="section-4.html"><a href="section-4.html#p"><i class="fa fa-check"></i><b>4.2.2</b> P值</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="section-4.html"><a href="section-4.html#confidence-intervals"><i class="fa fa-check"></i><b>4.3</b> Confidence Intervals</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="section-4.html"><a href="section-4.html#section-4.3.1"><i class="fa fa-check"></i><b>4.3.1</b> 均值置信区间</a></li>
+<li class="chapter" data-level="4.3.2" data-path="section-4.html"><a href="section-4.html#section-4.3.2"><i class="fa fa-check"></i><b>4.3.2</b> 比例的置信区间</a></li>
+<li class="chapter" data-level="4.3.3" data-path="section-4.html"><a href="section-4.html#section-4.3.3"><i class="fa fa-check"></i><b>4.3.3</b> 方差和标准差的置信区间</a></li>
+<li class="chapter" data-level="4.3.4" data-path="section-4.html"><a href="section-4.html#section-4.3.4"><i class="fa fa-check"></i><b>4.3.4</b> 均值差的置信区间</a></li>
+<li class="chapter" data-level="4.3.5" data-path="section-4.html"><a href="section-4.html#section-4.3.5"><i class="fa fa-check"></i><b>4.3.5</b> 相关性置信区间</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>5</b> T检验</a><ul>
+<li class="chapter" data-level="5.1" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>5.1</b> 单样本T检验</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="t.html"><a href="t.html"><i class="fa fa-check"></i><b>5.1.1</b> 前提条件</a></li>
+<li class="chapter" data-level="5.1.2" data-path="t.html"><a href="t.html#section-5.1.2"><i class="fa fa-check"></i><b>5.1.2</b> 数据标准化</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="t.html"><a href="t.html#z"><i class="fa fa-check"></i><b>5.2</b> Z检验</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="t.html"><a href="t.html#t-1"><i class="fa fa-check"></i><b>5.2.1</b> t检验</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>5.3</b> 两样本T检验</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>5.3.1</b> 成对T检验</a></li>
+<li class="chapter" data-level="5.3.2" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>5.3.2</b> 方差相同的两样本T检验</a></li>
+<li class="chapter" data-level="5.3.3" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>5.3.3</b> 方差不同的两样本T检验</a></li>
+<li class="chapter" data-level="5.3.4" data-path="t.html"><a href="t.html#rt"><i class="fa fa-check"></i><b>5.3.4</b> 使用R进行T检验</a></li>
+<li class="chapter" data-level="5.3.5" data-path="t.html"><a href="t.html#section-5.3.5"><i class="fa fa-check"></i><b>5.3.5</b> 结论</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="section-6.html"><a href="section-6.html"><i class="fa fa-check"></i><b>6</b> 方差分析</a><ul>
+<li class="chapter" data-level="6.1" data-path="section-6.html"><a href="section-6.html#one-way-anova"><i class="fa fa-check"></i><b>6.1</b> One-Way ANOVA</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="section-6.html"><a href="section-6.html#section-6.1.1"><i class="fa fa-check"></i><b>6.1.1</b> 单向方差分析</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="section-6.html"><a href="section-6.html#tukeyhsd---tukey-honestly-significant-difference"><i class="fa fa-check"></i><b>6.2</b> TukeyHSD - Tukey honestly significant difference</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>6.2.1</b> 两两T检验</a></li>
+<li class="chapter" data-level="6.2.2" data-path="section-6.html"><a href="section-6.html#section-6.2.2"><i class="fa fa-check"></i><b>6.2.2</b> 如何理解方差分析</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="section-6.html"><a href="section-6.html#two-way-anova"><i class="fa fa-check"></i><b>6.3</b> Two-Way ANOVA</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="section-6.html"><a href="section-6.html#-1"><i class="fa fa-check"></i><b>6.3.1</b> 前提条件</a></li>
+<li class="chapter" data-level="6.3.2" data-path="section-6.html"><a href="section-6.html#-1"><i class="fa fa-check"></i><b>6.3.2</b> 零假设</a></li>
+<li class="chapter" data-level="6.3.3" data-path="section-6.html"><a href="section-6.html#section-6.3.3"><i class="fa fa-check"></i><b>6.3.3</b> 方差计算</a></li>
+<li class="chapter" data-level="6.3.4" data-path="section-4.html"><a href="section-4.html#p"><i class="fa fa-check"></i><b>6.3.4</b> p值计算</a></li>
+<li class="chapter" data-level="6.3.5" data-path="section-6.html"><a href="section-6.html#anova-using-r"><i class="fa fa-check"></i><b>6.3.5</b> ANOVA using R</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="section-6.html"><a href="section-6.html#advanced-anova"><i class="fa fa-check"></i><b>6.4</b> Advanced ANOVA</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="section-6.html"><a href="section-6.html#repeated-measures-anova"><i class="fa fa-check"></i><b>6.4.1</b> Repeated-Measures ANOVA</a></li>
+<li class="chapter" data-level="6.4.2" data-path="section-6.html"><a href="section-6.html#mixed-factorial-anova"><i class="fa fa-check"></i><b>6.4.2</b> Mixed-Factorial ANOVA</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="correlation.html"><a href="correlation.html"><i class="fa fa-check"></i><b>7</b> Correlation</a><ul>
+<li class="chapter" data-level="7.1" data-path="correlation.html"><a href="correlation.html#-covariance"><i class="fa fa-check"></i><b>7.1</b> 协方差 (Covariance)</a></li>
+<li class="chapter" data-level="7.2" data-path="correlation.html"><a href="correlation.html#-correlation"><i class="fa fa-check"></i><b>7.2</b> 相关性 (Correlation)</a></li>
+<li class="chapter" data-level="7.3" data-path="correlation.html"><a href="correlation.html#section-7.3"><i class="fa fa-check"></i><b>7.3</b> 相关性统计检验</a></li>
+<li class="chapter" data-level="7.4" data-path="correlation.html"><a href="correlation.html#section-7.4"><i class="fa fa-check"></i><b>7.4</b> 置信区间</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="section-8.html"><a href="section-8.html"><i class="fa fa-check"></i><b>8</b> 线性回归</a><ul>
+<li class="chapter" data-level="8.1" data-path="section-8.html"><a href="section-8.html#simple-linear-regression"><i class="fa fa-check"></i><b>8.1</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="section-8.html"><a href="section-8.html#section-8.1.1"><i class="fa fa-check"></i><b>8.1.1</b> 评估参数准确性</a></li>
+<li class="chapter" data-level="8.1.2" data-path="section-8.html"><a href="section-8.html#section-8.1.2"><i class="fa fa-check"></i><b>8.1.2</b> 评估模型准确性</a></li>
+<li class="chapter" data-level="8.1.3" data-path="section-6.html"><a href="section-6.html#-1"><i class="fa fa-check"></i><b>8.1.3</b> 方差分析</a></li>
+<li class="chapter" data-level="8.1.4" data-path="section-8.html"><a href="section-8.html#section-8.1.4"><i class="fa fa-check"></i><b>8.1.4</b> 可视化辅助诊断模型</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="section-8.html"><a href="section-8.html#multiple-linear-regression"><i class="fa fa-check"></i><b>8.2</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="section-8.html"><a href="section-8.html#section-8.2.1"><i class="fa fa-check"></i><b>8.2.1</b> 相关问题</a></li>
+<li class="chapter" data-level="8.2.2" data-path="section-8.html"><a href="section-8.html#section-8.2.2"><i class="fa fa-check"></i><b>8.2.2</b> 数值运算</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="general-linear-model.html"><a href="general-linear-model.html"><i class="fa fa-check"></i><b>9</b> General Linear Model</a><ul>
+<li class="chapter" data-level="9.1" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>9.1</b> T检验是回归的特例</a></li>
+<li class="chapter" data-level="9.2" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>9.2</b> T检验是方差分析的特例</a></li>
+<li class="chapter" data-level="9.3" data-path="general-linear-model.html"><a href="general-linear-model.html#anova"><i class="fa fa-check"></i><b>9.3</b> ANOVA是多重回归的特例</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a></li>
+<li class="chapter" data-level="11" data-path="section-11.html"><a href="section-11.html"><i class="fa fa-check"></i><b>11</b> 生物实验统计分析</a><ul>
+<li class="chapter" data-level="11.1" data-path="section-11.html"><a href="section-11.html#rt-pcr"><i class="fa fa-check"></i><b>11.1</b> RT-PCR</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="section-11.html"><a href="section-11.html#data"><i class="fa fa-check"></i><b>11.1.1</b> Data</a></li>
+<li class="chapter" data-level="11.1.2" data-path="section-11.html"><a href="section-11.html#data-clean"><i class="fa fa-check"></i><b>11.1.2</b> Data clean</a></li>
+<li class="chapter" data-level="11.1.3" data-path="section-11.html"><a href="section-11.html#calculate-statistical-metric"><i class="fa fa-check"></i><b>11.1.3</b> Calculate statistical metric</a></li>
+<li class="chapter" data-level="11.1.4" data-path="section-11.html"><a href="section-11.html#statistical-analysis"><i class="fa fa-check"></i><b>11.1.4</b> Statistical Analysis</a></li>
+<li class="chapter" data-level="11.1.5" data-path="section-11.html"><a href="section-11.html#plot"><i class="fa fa-check"></i><b>11.1.5</b> Plot</a></li>
+<li class="chapter" data-level="11.1.6" data-path="section-11.html"><a href="section-11.html#summary"><i class="fa fa-check"></i><b>11.1.6</b> Summary</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">统计笔记</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="section-11" class="section level1">
+<h1><span class="header-section-number">11</span> 生物实验统计分析</h1>
+<div id="rt-pcr" class="section level2">
+<h2><span class="header-section-number">11.1</span> RT-PCR</h2>
+<p>RT-PCR相对定量有两个模型，一是<span class="math inline">\(\Delta\Delta{Ct}\)</span> 模型，一个是扩增效率校正模型。这里我们先讨论简单的模型：<span class="math inline">\(\Delta\Delta{Ct}\)</span> 模型，在这一模型中，假定扩增效率为2，即每个PCR cycle，产物倍增，由以下公式给出：</p>
+<p><span class="math inline">\(Ratio = 2^{-\Delta\Delta{Ct}}\)</span></p>
+<p>其中<span class="math inline">\(\Delta\Delta{Ct} = \Delta{Ct}_{treated} - \Delta{Ct}_{control}\)</span> , <span class="math inline">\(\Delta{Ct}_{treated}\)</span> 和<span class="math inline">\(\Delta{Ct}_{control}\)</span> 分别是treatment组和control组中目标基因和参照基因的Ct差，即 <span class="math inline">\(\Delta{Ct} = Ct_{target} - Ct_{reference}\)</span> .</p>
+<p>扩增效率肯定是在(1,2)之间，理想状态下才是2，而理想状态通常是不存在的。这个模型的假设点其实是treatment组和control组的扩增效率一样，至于是不是2，比2小多少，并不影响后续的统计分析。</p>
+<div id="data" class="section level3">
+<h3><span class="header-section-number">11.1.1</span> Data</h3>
+<p>我们来看以下一份数据，4组重复实验，用RT-PCR测了gene01和gene02的表达量，HK代表house keeping gene，即参照。以下数值为原始的Ct值。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ct &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+            <span class="dt">sample =</span> <span class="kw">rep</span>(<span class="kw">rep</span>(<span class="dv">1</span>:<span class="dv">4</span>, <span class="dt">each=</span><span class="dv">3</span>), <span class="dv">2</span>),
+        <span class="dt">treatment =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Control&quot;</span>,<span class="st">&quot;Treated&quot;</span>), <span class="dt">each=</span><span class="dv">12</span>),
+        <span class="dt">gene01 =</span> <span class="kw">c</span>(<span class="fl">23.22</span>,<span class="fl">23.34</span>,<span class="fl">23.12</span>,<span class="fl">24.06</span>,<span class="fl">24.15</span>,<span class="fl">24.15</span>,<span class="fl">23.18</span>,<span class="fl">23.13</span>,
+                    <span class="fl">23.10</span>,<span class="fl">24.78</span>,<span class="fl">24.45</span>,<span class="fl">24.67</span>,<span class="fl">23.11</span>,<span class="fl">22.99</span>,<span class="fl">23.10</span>,<span class="fl">22.77</span>,
+                    <span class="fl">22.99</span>,<span class="fl">23.06</span>,<span class="fl">23.73</span>,<span class="fl">24.01</span>,<span class="fl">23.80</span>,<span class="fl">23.73</span>,<span class="fl">23.83</span>,<span class="fl">23.73</span>),
+        <span class="dt">gene02 =</span> <span class="kw">c</span>(<span class="fl">29.08</span>,<span class="fl">29.04</span>,<span class="fl">29.39</span>,<span class="fl">28.23</span>,<span class="fl">28.01</span>,<span class="fl">28.12</span>,<span class="fl">28.79</span>,<span class="fl">28.43</span>,
+                    <span class="fl">28.49</span>,<span class="fl">31.37</span>,<span class="fl">30.74</span>,<span class="fl">31.09</span>,<span class="fl">27.11</span>,<span class="fl">27.24</span>,<span class="fl">27.37</span>,<span class="fl">25.52</span>,
+                    <span class="fl">25.72</span>,<span class="fl">25.52</span>,<span class="fl">27.43</span>,<span class="fl">26.73</span>,<span class="fl">26.65</span>,<span class="fl">27.96</span>,<span class="fl">27.84</span>,<span class="fl">27.98</span>),
+        <span class="dt">HK =</span> <span class="kw">c</span>(<span class="fl">19.68</span>,<span class="fl">19.69</span>,<span class="fl">19.80</span>,<span class="fl">19.95</span>,<span class="fl">19.93</span>,<span class="fl">19.97</span>,<span class="fl">19.93</span>,<span class="fl">20.02</span>,<span class="fl">20.27</span>,
+                    <span class="fl">19.93</span>,<span class="fl">19.88</span>,<span class="fl">19.90</span>,<span class="fl">20.61</span>,<span class="fl">19.98</span>,<span class="fl">20.57</span>,<span class="fl">19.68</span>,<span class="fl">19.95</span>,
+                    <span class="fl">19.85</span>,<span class="fl">20.27</span>,<span class="fl">20.08</span>,<span class="fl">20.07</span>,<span class="fl">20.10</span>,<span class="fl">20.07</span>,<span class="fl">20.10</span>)
+            )
+<span class="kw">print</span>(ct)</code></pre></div>
+<pre><code>##    sample treatment gene01 gene02    HK
+## 1       1   Control  23.22  29.08 19.68
+## 2       1   Control  23.34  29.04 19.69
+## 3       1   Control  23.12  29.39 19.80
+## 4       2   Control  24.06  28.23 19.95
+## 5       2   Control  24.15  28.01 19.93
+## 6       2   Control  24.15  28.12 19.97
+## 7       3   Control  23.18  28.79 19.93
+## 8       3   Control  23.13  28.43 20.02
+## 9       3   Control  23.10  28.49 20.27
+## 10      4   Control  24.78  31.37 19.93
+## 11      4   Control  24.45  30.74 19.88
+## 12      4   Control  24.67  31.09 19.90
+## 13      1   Treated  23.11  27.11 20.61
+## 14      1   Treated  22.99  27.24 19.98
+## 15      1   Treated  23.10  27.37 20.57
+## 16      2   Treated  22.77  25.52 19.68
+## 17      2   Treated  22.99  25.72 19.95
+## 18      2   Treated  23.06  25.52 19.85
+## 19      3   Treated  23.73  27.43 20.27
+## 20      3   Treated  24.01  26.73 20.08
+## 21      3   Treated  23.80  26.65 20.07
+## 22      4   Treated  23.73  27.96 20.10
+## 23      4   Treated  23.83  27.84 20.07
+## 24      4   Treated  23.73  27.98 20.10</code></pre>
+</div>
+<div id="data-clean" class="section level3">
+<h3><span class="header-section-number">11.1.2</span> Data clean</h3>
+<p>每个sample，测了三次技术重复，我们使用平均值来提高精度。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(plyr)
+ct &lt;-<span class="st"> </span><span class="kw">ddply</span>(ct, .(sample, treatment), function(x) <span class="kw">data.frame</span>(<span class="dt">gene01=</span><span class="kw">mean</span>(x$gene01), <span class="dt">gene02=</span><span class="kw">mean</span>(x$gene02), <span class="dt">HK=</span><span class="kw">mean</span>(x$HK)))
+<span class="kw">print</span>(ct)</code></pre></div>
+<pre><code>##   sample treatment   gene01   gene02       HK
+## 1      1   Control 23.22667 29.17000 19.72333
+## 2      1   Treated 23.06667 27.24000 20.38667
+## 3      2   Control 24.12000 28.12000 19.95000
+## 4      2   Treated 22.94000 25.58667 19.82667
+## 5      3   Control 23.13667 28.57000 20.07333
+## 6      3   Treated 23.84667 26.93667 20.14000
+## 7      4   Control 24.63333 31.06667 19.90333
+## 8      4   Treated 23.76333 27.92667 20.09000</code></pre>
+</div>
+<div id="calculate-statistical-metric" class="section level3">
+<h3><span class="header-section-number">11.1.3</span> Calculate statistical metric</h3>
+<p>按照<span class="math inline">\(\Delta\Delta{Ct}\)</span> 模型，我们先计算<span class="math inline">\(\Delta{Ct}\)</span> ，然后计算<span class="math inline">\(\Delta\Delta{Ct}\)</span> ，最终计算出Ratio。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">delta.ct &lt;-<span class="st"> </span><span class="kw">ddply</span>(ct, .(sample, treatment), function(x) <span class="kw">data.frame</span>(<span class="dt">gene01=</span>x$gene01-x$HK, <span class="dt">gene02=</span>x$gene02-x$HK))
+<span class="kw">print</span>(delta.ct)</code></pre></div>
+<pre><code>##   sample treatment   gene01    gene02
+## 1      1   Control 3.503333  9.446667
+## 2      1   Treated 2.680000  6.853333
+## 3      2   Control 4.170000  8.170000
+## 4      2   Treated 3.113333  5.760000
+## 5      3   Control 3.063333  8.496667
+## 6      3   Treated 3.706667  6.796667
+## 7      4   Control 4.730000 11.163333
+## 8      4   Treated 3.673333  7.836667</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Delta Delta Ct
+dd.ct &lt;-<span class="st"> </span><span class="kw">subset</span>(delta.ct, treatment==<span class="st">&quot;Treated&quot;</span>, <span class="dt">select=</span><span class="kw">c</span>(gene01, gene02)) -<span class="st"> </span><span class="kw">subset</span>(delta.ct, treatment==<span class="st">&quot;Control&quot;</span>, <span class="dt">select=</span><span class="kw">c</span>(gene01, gene02))
+<span class="kw">print</span>(dd.ct)</code></pre></div>
+<pre><code>##       gene01    gene02
+## 2 -0.8233333 -2.593333
+## 4 -1.0566667 -2.410000
+## 6  0.6433333 -1.700000
+## 8 -1.0566667 -3.326667</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ratio &lt;-<span class="st"> </span><span class="dv">2</span>^(-<span class="dv">1</span>*dd.ct)
+<span class="kw">print</span>(ratio)</code></pre></div>
+<pre><code>##     gene01    gene02
+## 2 1.769490  6.034915
+## 4 2.080120  5.314743
+## 6 0.640232  3.249010
+## 8 2.080120 10.032899</code></pre>
+<p>这个ratio值计算出，经过扩增后，目的基因在处理组中的产量是对照组的多少倍。</p>
+</div>
+<div id="statistical-analysis" class="section level3">
+<h3><span class="header-section-number">11.1.4</span> Statistical Analysis</h3>
+<p>计算出ratio后，很多人就拿它来做t检验。这种做法是不对的，因为ratio的分布明显是右偏的。从理论上看，PCR的扩增可以分成以下三个阶段，指数扩增、线性扩增、平台期。</p>
+<div class="figure">
+<img src="figure/Rt_qPCR.png" alt="theoretical plot" />
+<p class="caption">theoretical plot</p>
+</div>
+<p>当试剂量足够的时候，就处于指数扩增阶段，只有当PCR试剂不足时，才进入线性扩增期，最后当试剂被耗尽时，产物不增长，位于平台期。</p>
+<div class="figure">
+<img src="figure/log_Rt_qPCR.png" alt="theoretical plot" />
+<p class="caption">theoretical plot</p>
+</div>
+<p>在我们的实验中，通常PCR反应是处于指数增长期。我们将其进行对数处理，指数增长就会变成线性增长，这样数据的右偏现象就会有明显减弱，当然我不敢说对数转换后，它就能呈正态分布，但起码对数处理后数据的分布比原始ratio数据更接近正态了。</p>
+<div id="t-test" class="section level4">
+<h4><span class="header-section-number">11.1.4.1</span> T Test</h4>
+<p>只有偏态不明显的情况下，才可以用t检验进行分析。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## T test for gene01
+<span class="kw">t.test</span>(<span class="kw">log</span>(ratio[,<span class="dv">1</span>], <span class="dt">base=</span><span class="dv">2</span>), <span class="dt">mu =</span> <span class="dv">0</span>)</code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  log(ratio[, 1], base = 2)
+## t = 1.4009, df = 3, p-value = 0.2558
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  -0.729139  1.875806
+## sample estimates:
+## mean of x 
+## 0.5733333</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## T test for gene02
+<span class="kw">t.test</span>(<span class="kw">log</span>(ratio[,<span class="dv">2</span>], <span class="dt">base=</span><span class="dv">2</span>), <span class="dt">mu =</span> <span class="dv">0</span>)</code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  log(ratio[, 2], base = 2)
+## t = 7.5039, df = 3, p-value = 0.004904
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  1.44405 3.57095
+## sample estimates:
+## mean of x 
+##    2.5075</code></pre>
+<div id="use--deltadeltact-directly" class="section level5">
+<h5><span class="header-section-number">11.1.4.1.1</span> Use <span class="math inline">\(-\Delta\Delta{Ct}\)</span> directly</h5>
+<p>如果我们要使用T检验，就得做对数处理，细心的人应该会发现ratio的计算就是指数运算，ratio取对数之后，就是<span class="math inline">\(-\Delta\Delta{Ct}\)</span> ，所以我们可以直接使用它来做检验。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## T test for gene02
+<span class="kw">t.test</span>(-dd.ct[,<span class="dv">2</span>])</code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  -dd.ct[, 2]
+## t = 7.5039, df = 3, p-value = 0.004904
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  1.44405 3.57095
+## sample estimates:
+## mean of x 
+##    2.5075</code></pre>
+</div>
+</div>
+<div id="anova-1" class="section level4">
+<h4><span class="header-section-number">11.1.4.2</span> ANOVA</h4>
+<p>另一种方法，使用ANOVA进行统计，这也是参数统计方法，在我们这种小样本的情况下，同样对数据分布有严格的要求，我们不能基于ratio做统计，要基于<span class="math inline">\(\Delta{Ct}\)</span> 值。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(delta.ct)</code></pre></div>
+<pre><code>##   sample treatment   gene01    gene02
+## 1      1   Control 3.503333  9.446667
+## 2      1   Treated 2.680000  6.853333
+## 3      2   Control 4.170000  8.170000
+## 4      2   Treated 3.113333  5.760000
+## 5      3   Control 3.063333  8.496667
+## 6      3   Treated 3.706667  6.796667
+## 7      4   Control 4.730000 11.163333
+## 8      4   Treated 3.673333  7.836667</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">aov</span>(gene01 ~<span class="st"> </span>treatment, <span class="dt">data=</span>delta.ct))</code></pre></div>
+<pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)
+## treatment    1 0.6574  0.6574   1.687  0.242
+## Residuals    6 2.3385  0.3898</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">aov</span>(gene02 ~<span class="st"> </span>treatment, <span class="dt">data=</span>delta.ct))</code></pre></div>
+<pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)  
+## treatment    1 12.575  12.575   9.963 0.0197 *
+## Residuals    6  7.573   1.262                 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>ANOVA也是比较常用的，而且可以应用于多组实验和多个因素中。但是如果按照上面的代码来做，还不如用T test，因为实验是成对（tretated vs control）进行的，而这个信息在上面的ANOVA分析中，被扔了。</p>
+<p>实际上 <span class="math inline">\(-\Delta\Delta{Ct}\)</span> 的单样本T检验，相当于<span class="math inline">\(\Delta{Ct}\)</span> 的双样本T检验。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(gene02 ~<span class="st"> </span>treatment, delta.ct, <span class="dt">paired=</span>T)</code></pre></div>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  gene02 by treatment
+## t = 7.5039, df = 3, p-value = 0.004904
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  1.44405 3.57095
+## sample estimates:
+## mean of the differences 
+##                  2.5075</code></pre>
+<p>而这里用ANOVA，没有用到成对的信息，计算出来的p值和unpaired T test就基本相等。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(gene01 ~<span class="st"> </span>treatment, delta.ct, <span class="dt">paired=</span>F)</code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  gene01 by treatment
+## t = 1.2988, df = 5.2396, p-value = 0.2482
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.5460188  1.6926855
+## sample estimates:
+## mean in group Control mean in group Treated 
+##              3.866667              3.293333</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(gene02 ~<span class="st"> </span>treatment, delta.ct, <span class="dt">paired=</span>F)</code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  gene02 by treatment
+## t = 3.1565, df = 5.064, p-value = 0.02476
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  0.473167 4.541833
+## sample estimates:
+## mean in group Control mean in group Treated 
+##              9.319167              6.811667</code></pre>
+<p>做为成对T检验的扩展，使用方差分析进行多组实验的比较，需要用到的是重复测量方差分析（repeated-measures ANOVA）。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">delta.ct[,<span class="dv">1</span>] =<span class="st"> </span><span class="kw">factor</span>(delta.ct[,<span class="dv">1</span>])
+delta.ct[,<span class="dv">2</span>] =<span class="st"> </span><span class="kw">factor</span>(delta.ct[,<span class="dv">2</span>])
+<span class="kw">summary</span>(<span class="kw">aov</span>(gene01 ~<span class="st"> </span>treatment+<span class="kw">Error</span>(sample/treatment), <span class="dt">data=</span>delta.ct))</code></pre></div>
+<pre><code>## 
+## Error: sample
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Residuals  3  1.333  0.4445               
+## 
+## Error: sample:treatment
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)
+## treatment  1 0.6574  0.6574   1.962  0.256
+## Residuals  3 1.0050  0.3350</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">aov</span>(gene02 ~<span class="st"> </span>treatment+<span class="kw">Error</span>(sample/treatment), <span class="dt">data=</span>delta.ct))</code></pre></div>
+<pre><code>## 
+## Error: sample
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Residuals  3  6.903   2.301               
+## 
+## Error: sample:treatment
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)   
+## treatment  1  12.57  12.575   56.31 0.0049 **
+## Residuals  3   0.67   0.223                  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>这样算出来的p值就和成对T检验几乎一样。</p>
+</div>
+<div id="wilcoxon-rank-sum-test" class="section level4">
+<h4><span class="header-section-number">11.1.4.3</span> Wilcoxon Rank Sum Test</h4>
+<p>我们计算出来的ratio，是经过PCR扩增之后产物的比值，这是经过指数扩增的，而如果我们取对数，相当于消除了指数增长的效果，<span class="math inline">\(-\Delta\Delta{Ct}\)</span> 其实就是原始量的差值。</p>
+<p>所以ratio的比较，相当于是扩增后的比较，而<span class="math inline">\(\log_2 {ratio}\)</span> 的比较，则相当于是扩增之前的比较。这两种数据当然都是可以拿来做统计分析的，只不过T test等参数检验方法对数据分布有要求，不适合于ratio值的统计分析而已。如果我们使用非参数检验，则不管是ratio值也好，<span class="math inline">\(\log_2 {ratio}\)</span> 值也好，结果都是一样的。非参数检验并不使用数据的原始值，而是使用其排序值来做检验，我们并不能确定对数处理后的数据就呈正态分布，还有就是通常我们的实验重复次数是非常少的，在这种情况下，使用非参数检验，其实也是一种保守的、不容易犯错的方法。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Wilcoxon Rank Sum test for gene02, original data
+<span class="kw">wilcox.test</span>( ratio[,<span class="dv">2</span>], <span class="dt">mu=</span><span class="dv">1</span>)</code></pre></div>
+<pre><code>## 
+##  Wilcoxon signed rank test
+## 
+## data:  ratio[, 2]
+## V = 10, p-value = 0.125
+## alternative hypothesis: true location is not equal to 1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Wilcoxon Rank Sum test for gene02, log2 transformed data
+<span class="kw">wilcox.test</span>( <span class="kw">log</span>(ratio[,<span class="dv">2</span>], <span class="dt">base=</span><span class="dv">2</span>), <span class="dt">mu=</span><span class="dv">0</span>)</code></pre></div>
+<pre><code>## 
+##  Wilcoxon signed rank test
+## 
+## data:  log(ratio[, 2], base = 2)
+## V = 10, p-value = 0.125
+## alternative hypothesis: true location is not equal to 0</code></pre>
+<p>说它不容易犯错，是因为它对数据分布没要求；说它保守，是因为在计算p-value上，灵敏度没有T test这么高，p-value会大一些。</p>
+</div>
+<div id="permutation-test" class="section level4">
+<h4><span class="header-section-number">11.1.4.4</span> Permutation Test</h4>
+<p>生物学的数据通常比较messy，non-normal，重复次数又少。在我们不能确定数据分布是否正态的情况下，使用参数检验，很可能结果bias太大，使用非参数检验，又觉得power不够大，那么我们可以使用permutation test。这不失为一种好方法，通过随机变换两组数据的标签，观察它们的均值差，我们将得到均值差的分布，将我们实际的测量值对比于随机得到的差值分布，算出随机得到的差值大于实际的测量值的概率。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">perm.test &lt;-<span class="st"> </span>function(d1, d2, <span class="dt">nIter=</span><span class="dv">10000</span>) {
+    if (<span class="kw">length</span>(d2) ==<span class="st"> </span><span class="dv">1</span>)
+        d2 &lt;-<span class="st"> </span><span class="kw">rep</span>(d2, <span class="kw">length</span>(d1))
+    m &lt;-<span class="st"> </span><span class="kw">mean</span>(d2-d1)
+    pooledData &lt;-<span class="st"> </span><span class="kw">c</span>(d1, d2)
+    n &lt;-<span class="st"> </span><span class="kw">length</span>(d1)
+    meanDiff &lt;-<span class="st"> </span><span class="kw">numeric</span>(nIter)
+    for (i in <span class="dv">1</span>:nIter) {
+        idx &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:<span class="kw">length</span>(pooledData), n, <span class="dt">replace=</span><span class="ot">FALSE</span>)
+        d1 &lt;-<span class="st"> </span>pooledData[idx]
+        d2 &lt;-<span class="st"> </span>pooledData[-idx]
+        meanDiff[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(d2) -<span class="st"> </span><span class="kw">mean</span>(d1)
+    }
+    p &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">abs</span>(meanDiff) &gt;=<span class="st"> </span><span class="kw">abs</span>(m))
+    <span class="kw">return</span>(p)
+}
+
+<span class="kw">perm.test</span>(ratio[,<span class="dv">1</span>],<span class="dv">1</span>)</code></pre></div>
+<pre><code>## [1] 0.1443</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">perm.test</span>(-dd.ct[,<span class="dv">1</span>], <span class="dv">0</span>)</code></pre></div>
+<pre><code>## [1] 0.1414</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">perm.test</span>(ratio[,<span class="dv">2</span>],<span class="dv">1</span>)</code></pre></div>
+<pre><code>## [1] 0.0286</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">perm.test</span>(-dd.ct[,<span class="dv">2</span>], <span class="dv">0</span>)</code></pre></div>
+<pre><code>## [1] 0.0285</code></pre>
+<p>从结果上看，用ratio还是用<span class="math inline">\(-\Delta\Delta{Ct}\)</span> 差不多，这表明原始数据的分布完全不关事。</p>
+<pre><code>
+没有吃没有穿
+自有那敌人送上前
+没有枪没有炮
+敌人给我们造
+
+                    ----游击队之歌</code></pre>
+<p>这个方法的奇妙之处，就在于通过bootstrap，产生针对我们统计量的一个背景分布，再由这个背景分布计算出p-value。</p>
+</div>
+</div>
+<div id="plot" class="section level3">
+<h3><span class="header-section-number">11.1.5</span> Plot</h3>
+<p>至于画图，我推荐使用<span class="math inline">\(-\Delta\Delta{Ct}\)</span> 来画，这个CONTROL是0，不用画。如果要用ratio来画，你觉得CONTROL每次都是画一个mean=1，sd=0的柱子，有意义吗？ anyway，我下面的画图代码，同样也适用于拿来画ratio值。</p>
+<p>BTW：这里图中标的p值，使用的是T检验算出来的p值。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(reshape2)
+dd.ctm &lt;-<span class="st"> </span><span class="kw">melt</span>(-dd.ct)</code></pre></div>
+<pre><code>## No id variables; using all as measure variables</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(dd.ctm)</code></pre></div>
+<pre><code>##   variable      value
+## 1   gene01  0.8233333
+## 2   gene01  1.0566667
+## 3   gene01 -0.6433333
+## 4   gene01  1.0566667
+## 5   gene02  2.5933333
+## 6   gene02  2.4100000
+## 7   gene02  1.7000000
+## 8   gene02  3.3266667</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dd.cts &lt;-<span class="st"> </span><span class="kw">ddply</span>(dd.ctm, .(variable), function(x) <span class="kw">data.frame</span>(<span class="dt">mean=</span><span class="kw">mean</span>(x$value), <span class="dt">sd=</span><span class="kw">sd</span>(x$value)))
+<span class="kw">print</span>(dd.cts)</code></pre></div>
+<pre><code>##   variable      mean        sd
+## 1   gene01 0.5733333 0.8185353
+## 2   gene02 2.5075000 0.6683222</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(ggplot2)
+p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dd.cts, <span class="kw">aes</span>(variable, mean, <span class="dt">fill=</span>variable, <span class="dt">width=</span>.<span class="dv">5</span>))+<span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="dt">width=</span>.<span class="dv">8</span>), <span class="dt">colour=</span><span class="st">&quot;black&quot;</span>)+<span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>mean-sd, <span class="dt">ymax=</span>mean+sd), <span class="dt">width=</span>.<span class="dv">2</span>, <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="dt">width=</span>.<span class="dv">8</span>))
+p &lt;-<span class="st"> </span>p+<span class="kw">scale_fill_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;grey80&quot;</span>))
+p &lt;-<span class="st"> </span>p+<span class="kw">theme_bw</span>()+<span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>) +<span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>)+<span class="kw">ylab</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;-&quot;</span>, Delta, Delta, <span class="st">&quot;Ct&quot;</span>)))
+p &lt;-<span class="st"> </span>p+<span class="kw">theme</span>(<span class="dt">axis.text.x=</span><span class="kw">element_text</span>(<span class="dt">face=</span><span class="st">&quot;bold&quot;</span>, <span class="dt">size=</span><span class="dv">14</span>), <span class="dt">axis.text.y=</span><span class="kw">element_text</span>(<span class="dt">face=</span><span class="st">&quot;bold&quot;</span>, <span class="dt">size=</span><span class="dv">14</span>), <span class="dt">axis.title.y=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">18</span>, <span class="dt">face=</span><span class="st">&quot;bold&quot;</span>))
+p &lt;-<span class="st"> </span>p+<span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x=</span><span class="dv">2</span>,<span class="dt">y=</span><span class="fl">3.5</span>, <span class="dt">label=</span><span class="st">&quot;p &lt; 0.005</span><span class="ch">\n</span><span class="st">**&quot;</span>, <span class="dt">size=</span><span class="dv">4</span>)
+<span class="kw">print</span>(p)</code></pre></div>
+<p><img src="_main_files/figure-html/rt-qpcr.fig1-1.png" /><!-- --> 再来一个箱式图，我其实觉得箱式图比柱状图要好一些，这里我除了用箱式图画数据分布之后，把原始的数据点也给画了。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dd.ctm, <span class="kw">aes</span>(variable, value, <span class="dt">fill=</span>variable, <span class="dt">colour=</span>variable))
+p2 &lt;-<span class="st"> </span>p2+<span class="kw">geom_boxplot</span>(<span class="dt">alpha=</span>.<span class="dv">3</span>, <span class="dt">width=</span>.<span class="dv">5</span>)+<span class="kw">geom_dotplot</span>(<span class="dt">binaxis=</span><span class="st">&#39;y&#39;</span>, <span class="dt">stackdir=</span><span class="st">&#39;center&#39;</span>, <span class="dt">dotsize=</span>.<span class="dv">5</span>)
+p2 &lt;-<span class="st"> </span>p2+<span class="kw">theme_bw</span>()+<span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>) +<span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>)+<span class="kw">ylab</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;-&quot;</span>, Delta, Delta, <span class="st">&quot;Ct&quot;</span>)))
+p2 &lt;-<span class="st"> </span>p2+<span class="kw">theme</span>(<span class="dt">axis.text.x=</span><span class="kw">element_text</span>(<span class="dt">face=</span><span class="st">&quot;bold&quot;</span>, <span class="dt">size=</span><span class="dv">14</span>), <span class="dt">axis.text.y=</span><span class="kw">element_text</span>(<span class="dt">face=</span><span class="st">&quot;bold&quot;</span>, <span class="dt">size=</span><span class="dv">14</span>), <span class="dt">axis.title.y=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">18</span>, <span class="dt">face=</span><span class="st">&quot;bold&quot;</span>))
+p2 &lt;-<span class="st"> </span>p2+<span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x=</span><span class="dv">2</span>,<span class="dt">y=</span><span class="fl">3.5</span>, <span class="dt">label=</span><span class="st">&quot;p &lt; 0.005</span><span class="ch">\n</span><span class="st">**&quot;</span>, <span class="dt">size=</span><span class="dv">4</span>)
+<span class="kw">print</span>(p2)</code></pre></div>
+<pre><code>## `stat_bindot()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="_main_files/figure-html/rt-qpcr.fig2-1.png" /><!-- --></p>
+</div>
+<div id="summary" class="section level3">
+<h3><span class="header-section-number">11.1.6</span> Summary</h3>
+<p>据我的观察，生物坑里大家对T检验特别有爱，我甚至看到用T检验去分析免疫组化数据的，而且还发在Nature子刊上，我都吐槽无力了。如果你喜欢T检验，你要注意数据分布，那么在分析RT-PCR数据上，请用<span class="math inline">\(-\Delta\Delta{Ct}\)</span> 作为统计量，或者将你算完的ratio值取对数也是一样的。用ANOVA时，也必须同样注意。</p>
+<p>在这个重复次数少，数据又非常messy的生物世界里，保守点的做法是使用非参数统计，即使你使用ratio这种严重右偏的数据，你的统计分析照样没问题，多学点总是好的，凡事不能太依赖于T检验，因为在很多其它的场景里，正如这里的ratio值，你不能简单套用T检验。</p>
+<p>Permutation test其实才是工具箱里不可或缺的一件，应用场景和非参一样广，同时灵敏度又比非参高，你值得拥有。</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="logistic-regression.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+
+<script src="libs/gitbook-2.6.7/js/app.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

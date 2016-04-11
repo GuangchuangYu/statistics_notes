@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>统计笔记</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="YGC的统计学笔记">
+  <meta name="generator" content="bookdown 0.0.63 and GitBook 2.6.7">
+
+  <meta property="og:title" content="统计笔记" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="YGC的统计学笔记" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="统计笔记" />
+  
+  <meta name="twitter:description" content="YGC的统计学笔记" />
+  
+
+<meta name="author" content="余光创">
+
+<meta name="date" content="2016-04-11">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="ggplot2.html">
+<link rel="next" href="t.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> 前言</a></li>
+<li class="chapter" data-level="2" data-path="r.html"><a href="r.html"><i class="fa fa-check"></i><b>2</b> R语言简介</a><ul>
+<li class="chapter" data-level="2.1" data-path="r.html"><a href="r.html#-flow-control"><i class="fa fa-check"></i><b>2.1</b> 控制流 （Flow Control)</a></li>
+<li class="chapter" data-level="2.2" data-path="r.html"><a href="r.html#-looping"><i class="fa fa-check"></i><b>2.2</b> 循环 (Looping)</a></li>
+<li class="chapter" data-level="2.3" data-path="r.html"><a href="r.html#covariancecorrelation"><i class="fa fa-check"></i><b>2.3</b> 协方差（covariance）和相关性（correlation）</a></li>
+<li class="chapter" data-level="2.4" data-path="r.html"><a href="r.html#section-2.4"><i class="fa fa-check"></i><b>2.4</b> 对称性度量</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>3</b> 使用ggplot2画图</a><ul>
+<li class="chapter" data-level="3.1" data-path="ggplot2.html"><a href="ggplot2.html#why-use-ggplot2"><i class="fa fa-check"></i><b>3.1</b> Why use ggplot2</a></li>
+<li class="chapter" data-level="3.2" data-path="ggplot2.html"><a href="ggplot2.html#ggplot2"><i class="fa fa-check"></i><b>3.2</b> ggplot2基本要素</a></li>
+<li class="chapter" data-level="3.3" data-path="ggplot2.html"><a href="ggplot2.html#datamapping"><i class="fa fa-check"></i><b>3.3</b> 数据（Data）和映射（Mapping)</a></li>
+<li class="chapter" data-level="3.4" data-path="ggplot2.html"><a href="ggplot2.html#geometric"><i class="fa fa-check"></i><b>3.4</b> 几何对象（Geometric）</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="ggplot2.html"><a href="ggplot2.html#section-3.4.1"><i class="fa fa-check"></i><b>3.4.1</b> 直方图</a></li>
+<li class="chapter" data-level="3.4.2" data-path="ggplot2.html"><a href="ggplot2.html#section-3.4.2"><i class="fa fa-check"></i><b>3.4.2</b> 密度函数图</a></li>
+<li class="chapter" data-level="3.4.3" data-path="ggplot2.html"><a href="ggplot2.html#section-3.4.3"><i class="fa fa-check"></i><b>3.4.3</b> 箱式图</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="ggplot2.html"><a href="ggplot2.html#scale"><i class="fa fa-check"></i><b>3.5</b> 标尺（Scale）</a></li>
+<li class="chapter" data-level="3.6" data-path="ggplot2.html"><a href="ggplot2.html#statistics"><i class="fa fa-check"></i><b>3.6</b> 统计变换（Statistics）</a></li>
+<li class="chapter" data-level="3.7" data-path="ggplot2.html"><a href="ggplot2.html#coordinante"><i class="fa fa-check"></i><b>3.7</b> 坐标系统（Coordinante）</a></li>
+<li class="chapter" data-level="3.8" data-path="ggplot2.html"><a href="ggplot2.html#layer"><i class="fa fa-check"></i><b>3.8</b> 图层（Layer）</a></li>
+<li class="chapter" data-level="3.9" data-path="ggplot2.html"><a href="ggplot2.html#facet"><i class="fa fa-check"></i><b>3.9</b> 分面（Facet）</a></li>
+<li class="chapter" data-level="3.10" data-path="ggplot2.html"><a href="ggplot2.html#theme"><i class="fa fa-check"></i><b>3.10</b> 主题（Theme）</a></li>
+<li class="chapter" data-level="3.11" data-path="ggplot2.html"><a href="ggplot2.html#section-3.11"><i class="fa fa-check"></i><b>3.11</b> 二维密度图</a></li>
+<li class="chapter" data-level="3.12" data-path="ggplot2.html"><a href="ggplot2.html#ggplot2"><i class="fa fa-check"></i><b>3.12</b> ggplot2实战</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="section-4.html"><a href="section-4.html"><i class="fa fa-check"></i><b>4</b> 统计检验基础</a><ul>
+<li class="chapter" data-level="4.1" data-path="section-4.html"><a href="section-4.html#section-4.1"><i class="fa fa-check"></i><b>4.1</b> 概率分布</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="section-4.html"><a href="section-4.html#section-4.1.1"><i class="fa fa-check"></i><b>4.1.1</b> 均值与方差</a></li>
+<li class="chapter" data-level="4.1.2" data-path="section-4.html"><a href="section-4.html#section-4.1.2"><i class="fa fa-check"></i><b>4.1.2</b> 二项式分布</a></li>
+<li class="chapter" data-level="4.1.3" data-path="section-4.html"><a href="section-4.html#poisson"><i class="fa fa-check"></i><b>4.1.3</b> Poisson分布</a></li>
+<li class="chapter" data-level="4.1.4" data-path="section-4.html"><a href="section-4.html#section-4.1.4"><i class="fa fa-check"></i><b>4.1.4</b> 正态分布</a></li>
+<li class="chapter" data-level="4.1.5" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>4.1.5</b> t分布</a></li>
+<li class="chapter" data-level="4.1.6" data-path="section-4.html"><a href="section-4.html#section-4.1.6"><i class="fa fa-check"></i><b>4.1.6</b> 卡方分布</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="section-4.html"><a href="section-4.html#p"><i class="fa fa-check"></i><b>4.2</b> 统计检验与p值</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="section-4.html"><a href="section-4.html#section-4.2.1"><i class="fa fa-check"></i><b>4.2.1</b> 零假设</a></li>
+<li class="chapter" data-level="4.2.2" data-path="section-4.html"><a href="section-4.html#p"><i class="fa fa-check"></i><b>4.2.2</b> P值</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="section-4.html"><a href="section-4.html#confidence-intervals"><i class="fa fa-check"></i><b>4.3</b> Confidence Intervals</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="section-4.html"><a href="section-4.html#section-4.3.1"><i class="fa fa-check"></i><b>4.3.1</b> 均值置信区间</a></li>
+<li class="chapter" data-level="4.3.2" data-path="section-4.html"><a href="section-4.html#section-4.3.2"><i class="fa fa-check"></i><b>4.3.2</b> 比例的置信区间</a></li>
+<li class="chapter" data-level="4.3.3" data-path="section-4.html"><a href="section-4.html#section-4.3.3"><i class="fa fa-check"></i><b>4.3.3</b> 方差和标准差的置信区间</a></li>
+<li class="chapter" data-level="4.3.4" data-path="section-4.html"><a href="section-4.html#section-4.3.4"><i class="fa fa-check"></i><b>4.3.4</b> 均值差的置信区间</a></li>
+<li class="chapter" data-level="4.3.5" data-path="section-4.html"><a href="section-4.html#section-4.3.5"><i class="fa fa-check"></i><b>4.3.5</b> 相关性置信区间</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>5</b> T检验</a><ul>
+<li class="chapter" data-level="5.1" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>5.1</b> 单样本T检验</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="t.html"><a href="t.html"><i class="fa fa-check"></i><b>5.1.1</b> 前提条件</a></li>
+<li class="chapter" data-level="5.1.2" data-path="t.html"><a href="t.html#section-5.1.2"><i class="fa fa-check"></i><b>5.1.2</b> 数据标准化</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="t.html"><a href="t.html#z"><i class="fa fa-check"></i><b>5.2</b> Z检验</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="t.html"><a href="t.html#t-1"><i class="fa fa-check"></i><b>5.2.1</b> t检验</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>5.3</b> 两样本T检验</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>5.3.1</b> 成对T检验</a></li>
+<li class="chapter" data-level="5.3.2" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>5.3.2</b> 方差相同的两样本T检验</a></li>
+<li class="chapter" data-level="5.3.3" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>5.3.3</b> 方差不同的两样本T检验</a></li>
+<li class="chapter" data-level="5.3.4" data-path="t.html"><a href="t.html#rt"><i class="fa fa-check"></i><b>5.3.4</b> 使用R进行T检验</a></li>
+<li class="chapter" data-level="5.3.5" data-path="t.html"><a href="t.html#section-5.3.5"><i class="fa fa-check"></i><b>5.3.5</b> 结论</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="section-6.html"><a href="section-6.html"><i class="fa fa-check"></i><b>6</b> 方差分析</a><ul>
+<li class="chapter" data-level="6.1" data-path="section-6.html"><a href="section-6.html#one-way-anova"><i class="fa fa-check"></i><b>6.1</b> One-Way ANOVA</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="section-6.html"><a href="section-6.html#section-6.1.1"><i class="fa fa-check"></i><b>6.1.1</b> 单向方差分析</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="section-6.html"><a href="section-6.html#tukeyhsd---tukey-honestly-significant-difference"><i class="fa fa-check"></i><b>6.2</b> TukeyHSD - Tukey honestly significant difference</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>6.2.1</b> 两两T检验</a></li>
+<li class="chapter" data-level="6.2.2" data-path="section-6.html"><a href="section-6.html#section-6.2.2"><i class="fa fa-check"></i><b>6.2.2</b> 如何理解方差分析</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="section-6.html"><a href="section-6.html#two-way-anova"><i class="fa fa-check"></i><b>6.3</b> Two-Way ANOVA</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="section-6.html"><a href="section-6.html#-1"><i class="fa fa-check"></i><b>6.3.1</b> 前提条件</a></li>
+<li class="chapter" data-level="6.3.2" data-path="section-6.html"><a href="section-6.html#-1"><i class="fa fa-check"></i><b>6.3.2</b> 零假设</a></li>
+<li class="chapter" data-level="6.3.3" data-path="section-6.html"><a href="section-6.html#section-6.3.3"><i class="fa fa-check"></i><b>6.3.3</b> 方差计算</a></li>
+<li class="chapter" data-level="6.3.4" data-path="section-4.html"><a href="section-4.html#p"><i class="fa fa-check"></i><b>6.3.4</b> p值计算</a></li>
+<li class="chapter" data-level="6.3.5" data-path="section-6.html"><a href="section-6.html#anova-using-r"><i class="fa fa-check"></i><b>6.3.5</b> ANOVA using R</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="section-6.html"><a href="section-6.html#advanced-anova"><i class="fa fa-check"></i><b>6.4</b> Advanced ANOVA</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="section-6.html"><a href="section-6.html#repeated-measures-anova"><i class="fa fa-check"></i><b>6.4.1</b> Repeated-Measures ANOVA</a></li>
+<li class="chapter" data-level="6.4.2" data-path="section-6.html"><a href="section-6.html#mixed-factorial-anova"><i class="fa fa-check"></i><b>6.4.2</b> Mixed-Factorial ANOVA</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="correlation.html"><a href="correlation.html"><i class="fa fa-check"></i><b>7</b> Correlation</a><ul>
+<li class="chapter" data-level="7.1" data-path="correlation.html"><a href="correlation.html#-covariance"><i class="fa fa-check"></i><b>7.1</b> 协方差 (Covariance)</a></li>
+<li class="chapter" data-level="7.2" data-path="correlation.html"><a href="correlation.html#-correlation"><i class="fa fa-check"></i><b>7.2</b> 相关性 (Correlation)</a></li>
+<li class="chapter" data-level="7.3" data-path="correlation.html"><a href="correlation.html#section-7.3"><i class="fa fa-check"></i><b>7.3</b> 相关性统计检验</a></li>
+<li class="chapter" data-level="7.4" data-path="correlation.html"><a href="correlation.html#section-7.4"><i class="fa fa-check"></i><b>7.4</b> 置信区间</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="section-8.html"><a href="section-8.html"><i class="fa fa-check"></i><b>8</b> 线性回归</a><ul>
+<li class="chapter" data-level="8.1" data-path="section-8.html"><a href="section-8.html#simple-linear-regression"><i class="fa fa-check"></i><b>8.1</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="section-8.html"><a href="section-8.html#section-8.1.1"><i class="fa fa-check"></i><b>8.1.1</b> 评估参数准确性</a></li>
+<li class="chapter" data-level="8.1.2" data-path="section-8.html"><a href="section-8.html#section-8.1.2"><i class="fa fa-check"></i><b>8.1.2</b> 评估模型准确性</a></li>
+<li class="chapter" data-level="8.1.3" data-path="section-6.html"><a href="section-6.html#-1"><i class="fa fa-check"></i><b>8.1.3</b> 方差分析</a></li>
+<li class="chapter" data-level="8.1.4" data-path="section-8.html"><a href="section-8.html#section-8.1.4"><i class="fa fa-check"></i><b>8.1.4</b> 可视化辅助诊断模型</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="section-8.html"><a href="section-8.html#multiple-linear-regression"><i class="fa fa-check"></i><b>8.2</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="section-8.html"><a href="section-8.html#section-8.2.1"><i class="fa fa-check"></i><b>8.2.1</b> 相关问题</a></li>
+<li class="chapter" data-level="8.2.2" data-path="section-8.html"><a href="section-8.html#section-8.2.2"><i class="fa fa-check"></i><b>8.2.2</b> 数值运算</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="general-linear-model.html"><a href="general-linear-model.html"><i class="fa fa-check"></i><b>9</b> General Linear Model</a><ul>
+<li class="chapter" data-level="9.1" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>9.1</b> T检验是回归的特例</a></li>
+<li class="chapter" data-level="9.2" data-path="section-4.html"><a href="section-4.html#t"><i class="fa fa-check"></i><b>9.2</b> T检验是方差分析的特例</a></li>
+<li class="chapter" data-level="9.3" data-path="general-linear-model.html"><a href="general-linear-model.html#anova"><i class="fa fa-check"></i><b>9.3</b> ANOVA是多重回归的特例</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a></li>
+<li class="chapter" data-level="11" data-path="section-11.html"><a href="section-11.html"><i class="fa fa-check"></i><b>11</b> 生物实验统计分析</a><ul>
+<li class="chapter" data-level="11.1" data-path="section-11.html"><a href="section-11.html#rt-pcr"><i class="fa fa-check"></i><b>11.1</b> RT-PCR</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="section-11.html"><a href="section-11.html#data"><i class="fa fa-check"></i><b>11.1.1</b> Data</a></li>
+<li class="chapter" data-level="11.1.2" data-path="section-11.html"><a href="section-11.html#data-clean"><i class="fa fa-check"></i><b>11.1.2</b> Data clean</a></li>
+<li class="chapter" data-level="11.1.3" data-path="section-11.html"><a href="section-11.html#calculate-statistical-metric"><i class="fa fa-check"></i><b>11.1.3</b> Calculate statistical metric</a></li>
+<li class="chapter" data-level="11.1.4" data-path="section-11.html"><a href="section-11.html#statistical-analysis"><i class="fa fa-check"></i><b>11.1.4</b> Statistical Analysis</a></li>
+<li class="chapter" data-level="11.1.5" data-path="section-11.html"><a href="section-11.html#plot"><i class="fa fa-check"></i><b>11.1.5</b> Plot</a></li>
+<li class="chapter" data-level="11.1.6" data-path="section-11.html"><a href="section-11.html#summary"><i class="fa fa-check"></i><b>11.1.6</b> Summary</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">统计笔记</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="section-4" class="section level1">
+<h1><span class="header-section-number">4</span> 统计检验基础</h1>
+<div id="section-4.1" class="section level2">
+<h2><span class="header-section-number">4.1</span> 概率分布</h2>
+<div id="section-4.1.1" class="section level3">
+<h3><span class="header-section-number">4.1.1</span> 均值与方差</h3>
+<p>所有离散分布的均值和方差都可以用以下公式计算： <span class="math display">\[\mu=\sum[xP(x)]\]</span> <span class="math display">\[\sigma^2=\sum[(x-\mu)^2P(x)]\]</span></p>
+</div>
+<div id="section-4.1.2" class="section level3">
+<h3><span class="header-section-number">4.1.2</span> 二项式分布</h3>
+<p>二项式分布非常简单，形象点说白球和黑球有放回抽样。</p>
+<p><span class="math display">\[ P(X=r) = {n \choose r} p^r (1-p)^{n-r}\]</span></p>
+<p>二项式分布的均值： <span class="math display">\[ \mu = np \]</span> 方差： <span class="math display">\[ \sigma^2 = np(1-p)\]</span></p>
+<p>n越大，二项式分布越接近于正态分布：</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bnd &lt;-<span class="st"> </span>function(n, <span class="dt">p=</span><span class="fl">0.5</span>) {
+    x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, n)
+    prob &lt;-<span class="st"> </span><span class="kw">dbinom</span>(x, n, p)
+    df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x=</span>x, <span class="dt">prob=</span>prob, <span class="dt">n=</span>n)
+    <span class="kw">return</span>(df)
+}
+<span class="kw">require</span>(plyr)</code></pre></div>
+<pre><code>## Loading required package: plyr</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bn.df &lt;-<span class="st"> </span><span class="kw">mdply</span>(<span class="kw">data.frame</span>(<span class="dt">n=</span><span class="kw">seq</span>(<span class="dv">10</span>,<span class="dv">30</span>, <span class="dv">5</span>)), bnd)
+<span class="kw">ggplot</span>(bn.df, <span class="kw">aes</span>(x, prob, <span class="dt">group=</span>n, <span class="dt">color=</span><span class="kw">factor</span>(n)))+<span class="kw">geom_point</span>(<span class="dt">shape=</span><span class="dv">1</span>)+<span class="kw">geom_line</span>()</code></pre></div>
+<p><img src="_main_files/figure-html/pd.fig1-1.png" /><!-- --></p>
+</div>
+<div id="poisson" class="section level3">
+<h3><span class="header-section-number">4.1.3</span> Poisson分布</h3>
+<p><a href="http://episte.math.ntu.edu.tw/articles/sm/sm_16_07_1/">Poisson分布是二项式分布的极限形式</a>,用于描述单位时间或空间里随机事件发生的次数，参数 <span class="math inline">\(\mu\)</span> 表示单位时间或空间里某事件平均发生的次数。</p>
+<p><span class="math display">\[P(X=x) = \frac{e^{-\lambda}\lambda^x}{x!}\]</span></p>
+<p>Poisson分布的均值和方差相等： <span class="math inline">\(\mu = \sigma^2 = \lambda\)</span> .</p>
+<p>Poisson分布是右偏分布，均值越大时，其对称性越好：</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pd &lt;-<span class="st"> </span>function(<span class="dt">x=</span><span class="dv">100</span>, lambda) {
+    x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, x)
+    prob &lt;-<span class="st"> </span><span class="kw">dpois</span>(x, lambda)
+    df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x=</span>x, <span class="dt">prob=</span>prob, <span class="dt">lambda=</span>lambda)
+    <span class="kw">return</span>(df)
+}
+p.df &lt;-<span class="st"> </span><span class="kw">mdply</span>(<span class="kw">data.frame</span>(<span class="dt">lambda=</span><span class="kw">seq</span>(<span class="dv">10</span>,<span class="dv">60</span>, <span class="dv">10</span>)), pd)
+<span class="kw">ggplot</span>(p.df, <span class="kw">aes</span>(x, prob, <span class="dt">group=</span>lambda, <span class="dt">color=</span><span class="kw">factor</span>(lambda)))+<span class="kw">geom_point</span>(<span class="dt">shape=</span><span class="dv">1</span>)+<span class="kw">geom_line</span>()+<span class="kw">facet_wrap</span>(~lambda)+<span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/pd.fig2-1.png" /><!-- --></p>
+</div>
+<div id="section-4.1.4" class="section level3">
+<h3><span class="header-section-number">4.1.4</span> 正态分布</h3>
+<p>正态分布是边续型分布，我们关心的不是某个值的概率，而是概率密度函数下的面积，它的概率密度函数是： <span class="math display">\[ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-(x-\mu)^2/2\sigma^2}\]</span> 所有的正态分布，都可以标准化为均值为0，标准误为1的标准正态分布： <span class="math display">\[ f(z) = \frac{1}{\sqrt{2\pi}} e^{-z^2/2}\]</span> 其中 <span class="math inline">\(z=\frac{x-\mu}{\sigma}\)</span> .</p>
+</div>
+<div id="t" class="section level3">
+<h3><span class="header-section-number">4.1.5</span> t分布</h3>
+<p>如果总体是正态分布，那么样本均值的分布也呈正态，William S. Gosset发现了t分布，它在参数估计和统计检验上，比正态分布要好，在大样本上做的和正态分布一样好，而在小样本上，比正态分布好很多。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(plyr)
+x &lt;-<span class="st"> </span><span class="kw">seq</span>(-<span class="dv">3</span>, <span class="dv">3</span>, <span class="dt">length=</span><span class="dv">100</span>)
+pn &lt;-<span class="st"> </span><span class="kw">dnorm</span>(x)
+pn.df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x=</span>x, <span class="dt">prob=</span>pn)
+
+get.pt &lt;-<span class="st"> </span>function(x, df) {
+    prob &lt;-<span class="st"> </span><span class="kw">dt</span>(x, <span class="dt">df=</span>df)
+    dd &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x=</span>x, <span class="dt">prob=</span>prob, <span class="dt">df=</span>df)
+    <span class="kw">return</span>(dd)
+}
+para &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x=</span><span class="kw">rep</span>(x, <span class="dv">4</span>), <span class="dt">df=</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">30</span>), <span class="dt">each=</span><span class="kw">length</span>(x)))
+pt.df &lt;-<span class="st"> </span><span class="kw">mdply</span>(para, get.pt)
+<span class="kw">require</span>(ggplot2)
+<span class="kw">ggplot</span>(pt.df, <span class="kw">aes</span>(x, prob))+<span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">group=</span>df, <span class="dt">color=</span><span class="kw">factor</span>(df)))+<span class="kw">geom_line</span>(<span class="dt">data=</span>pn.df)</code></pre></div>
+<p><img src="_main_files/figure-html/pd.fig3-1.png" /><!-- --> 上图画了自由度为3，5，15和30的t分布，以及正态分布，随着自由度的增加，t分布越来越接近于正态分布，很多时候，我们只有小样本，那么可以说t分布是正态分布的保守版本.从图中可以观察到，t分布中心比较平，而尾巴比较”胖“，特别是自由度较小的时候，t分布的尾巴会比正态分布长，那么同样一个值，t分布计算出来的p-value会比正态分布大一点。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dnorm</span>(<span class="dv">2</span>)</code></pre></div>
+<pre><code>## [1] 0.05399097</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dt</span>(<span class="dv">2</span>, <span class="dt">df=</span><span class="dv">5</span>)</code></pre></div>
+<pre><code>## [1] 0.06509031</code></pre>
+</div>
+<div id="section-4.1.6" class="section level3">
+<h3><span class="header-section-number">4.1.6</span> 卡方分布</h3>
+<p>k个独立的标准正态分布变量的平方和服从自由度为k的 <span class="math inline">\(\chi^2\)</span> 分布，卡方分布常用于假设检验和置信区间的计算。</p>
+<p>卡方分布被用于计算拟合优度，于观察到的分布和假设成立的分布之间；<a href="confidence_interval.html">估算总体标准偏差(population standard deviation)和样本标准偏差(sample standard deviation)的区间</a>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pc &lt;-<span class="st"> </span>function(<span class="dt">x=</span><span class="dv">50</span>, df) {
+    x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, x)
+    prob &lt;-<span class="st"> </span><span class="kw">dchisq</span>(x, df)
+    pc.df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x=</span>x, <span class="dt">prob=</span>prob, <span class="dt">df=</span>df)
+    <span class="kw">return</span>(pc.df)
+}
+pc.df &lt;-<span class="st"> </span><span class="kw">mdply</span>(<span class="kw">data.frame</span>(<span class="dt">df=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">9</span>,<span class="dv">18</span>)), pc)
+<span class="kw">ggplot</span>(pc.df, <span class="kw">aes</span>(x, prob, <span class="dt">group=</span>df, <span class="dt">color=</span><span class="kw">factor</span>(df)))+<span class="kw">geom_point</span>(<span class="dt">shape=</span><span class="dv">1</span>)+<span class="kw">geom_line</span>()+<span class="kw">ggtitle</span>(<span class="st">&quot;Chi-Square Distribution&quot;</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/pd.fig4-1.png" /><!-- --> ### F分布 F分布也是基于自由度，所以也是一个分布家族，它的自由度有两个，分别对应于分子项和分母项，因为F值是方差的比值，所以只有正值，函数峰在1左右（1代表两个方差是相等的），非对称分布，呈现右偏。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pff &lt;-<span class="st"> </span>function(<span class="dt">x=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">6</span>,<span class="fl">0.1</span>), df1, df2) {
+    y &lt;-<span class="st"> </span><span class="kw">df</span>(x, df1, df2)
+    pf.df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x=</span>x, <span class="dt">prob=</span>y, <span class="dt">df1=</span>df1, <span class="dt">df2=</span>df2)
+    <span class="kw">return</span>(pf.df)
+}
+
+pf.df &lt;-<span class="st"> </span><span class="kw">mdply</span>(<span class="kw">data.frame</span>(<span class="dt">df1=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">10</span>), <span class="dt">df2=</span><span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">29</span>)), pff)
+<span class="kw">ggplot</span>(pf.df, <span class="kw">aes</span>(x, prob, <span class="dt">group=</span><span class="kw">interaction</span>(df1,df2), <span class="dt">color=</span><span class="kw">interaction</span>(df1, df2)))+<span class="kw">geom_line</span>()+<span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="dv">1</span>, <span class="dt">linetype=</span><span class="st">&quot;dashed&quot;</span>) +<span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="kw">c</span>(.<span class="dv">8</span>, .<span class="dv">8</span>))</code></pre></div>
+<p><img src="_main_files/figure-html/pd.fig5-1.png" /><!-- --> 如果F值小于1，使用左尾巴进行p值计算，大于1则右尾巴进行p值计算，很多人抛弃使用左尾巴进行p值计算，只需要把分子分母倒过来就行，当然自由度也要跟着倒过来。</p>
+<p>虽然使用单侧来计算，但p值的计算通常是two-tailed，因为F值是两个方差的比值，不管两个均值的差是正的还是负的，方差都是正的。从这个角度上看，计算出来的单侧p值要乘以2，要把正和负的均值差都考虑在内，这是双侧检验。 假如F值为4.5，自由度为10和15，p值应该这样算：</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span>*(<span class="dv">1</span>-<span class="kw">pf</span>(<span class="fl">4.5</span>, <span class="dv">10</span>, <span class="dv">15</span>))</code></pre></div>
+<pre><code>## [1] 0.00921466</code></pre>
+</div>
+</div>
+<div id="p" class="section level2">
+<h2><span class="header-section-number">4.2</span> 统计检验与p值</h2>
+<div id="section-4.2.1" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> 零假设</h3>
+<pre><code>一切都是偶然的，真理只存在于概率分布中
+                    ---《女士品茶》</code></pre>
+<p>统计分析无法证明一个假设的真实性，它所提供的是假设存在的可能性，可能性（概率）是我们选择支持或反对假设的证据。</p>
+<p>要证明一个假设是比较困难的，比如想证明“暨大图书馆前面的广场上有鸟”，一只鸟都没有看到，是不够的，它有可能就藏在某个树丛中。相反要推翻一个假设，却是相对要容易些，要推翻“暨大图书馆前面的广场上没有鸟”，我们没找到鸟，当然没有足够的证据去推翻它，但是但凡发现有一只鸟，这个假设就可以被推翻。</p>
+<p>所以在统计学上，假设都是以“无罪假设”出现，称之为零假设(null hypothesis)，假设是关于总体参数的论断，而零假设总是“无罪“论断，如没有差别，没有效果，没有变化，没有关系等，而备择假设总是”有罪“论断。</p>
+<p>我们以零假设为基础，计算概率(p值)，做出统计推断。如果p值小于阈值，则拒绝零假设，接受备择假设。</p>
+<p>有时候会有学生找我说，帮忙算个p值，我就会问，你的零假设是什么？这句话等同于问“你想干嘛？”，神奇的是，有些时候有些人就真的不知道自己想干嘛！</p>
+</div>
+<div id="p" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> P值</h3>
+<div id="section-4.2.2.1" class="section level4">
+<h4><span class="header-section-number">4.2.2.1</span> 概率密度函数</h4>
+<p>假设不知道概率分布，我们收集了很多数据，那么这个数据可以用直方图表示出来，如果是离散型的数据，我们可以计算每个取值的概率值，比如二项式分布：</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbinom</span>(<span class="dv">3</span>, <span class="dv">10</span>, <span class="fl">0.2</span>)</code></pre></div>
+<pre><code>## [1] 0.2013266</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">choose</span>(<span class="dv">10</span>,<span class="dv">3</span>)*<span class="fl">0.2</span>^<span class="dv">3</span>*<span class="fl">0.8</span>^<span class="dv">7</span></code></pre></div>
+<pre><code>## [1] 0.2013266</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">dbinom</span>(<span class="dv">0</span>:<span class="dv">10</span>, <span class="dv">10</span>, .<span class="dv">2</span>)
+<span class="kw">print</span>(p)</code></pre></div>
+<pre><code>##  [1] 0.1073741824 0.2684354560 0.3019898880 0.2013265920 0.0880803840
+##  [6] 0.0264241152 0.0055050240 0.0007864320 0.0000737280 0.0000040960
+## [11] 0.0000001024</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(p)</code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>如果数据是连续型的，就比较不好办了，它有无数个可能的取值，每一个精确的取值，概率都是0。我们只能计算某个区间的概率。我们把连续型的数据用直方图表示，把它当成离散型，就可以计算每个区间(bin)的概率，我们可以这样做处理，不断细化直方图的区间，当bin趋于0的时候，就可以得到每一取值的概率。事实上当bin趋于0的时候，直方图就变得光滑了，形状如果density curve。而density的计算，正是bin的概率除以bin的宽度，所以对于连续型函数，概率分布用的就是概率密度函数。</p>
+</div>
+<div id="p-value" class="section level4">
+<h4><span class="header-section-number">4.2.2.2</span> p value</h4>
+<p>我们有了概率密度函数，假设我们的数据来自标准正态分布，而观察值是3，那就可以计算出p值了，p值计算的是随机观察到如此极限的值（2）以及更极限的值（&gt;2）的概率。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x=<span class="kw">seq</span>(-<span class="dv">4</span>, <span class="dv">4</span>, <span class="dt">length=</span><span class="dv">500</span>)
+d &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x=</span>x, <span class="dt">prob=</span><span class="kw">dnorm</span>(x))
+<span class="kw">ggplot</span>(d, <span class="kw">aes</span>(x, prob, <span class="dt">fill=</span>x&gt;=<span class="dv">2</span>))+<span class="kw">geom_area</span>()+<span class="kw">scale_fill_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;FALSE&quot;</span>=<span class="st">&quot;steelblue&quot;</span>, <span class="st">&quot;TRUE&quot;</span>=<span class="st">&quot;red&quot;</span>))+<span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/p.fig1-1.png" /><!-- --> 也就是图中红色部分的面积。通常以一个阈值（比如0.05）来区分是否具有统计学显著性，这是以前查表时代的东西，现在统计学软件的大量使用，直接报p值比较好。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pnorm</span>(<span class="dv">2</span>, <span class="dt">lower.tail=</span>F)</code></pre></div>
+<pre><code>## [1] 0.02275013</code></pre>
+<p>上面红色部分算出来的p值是0.02275，我们可以拒绝总体是标准正态分布的零假设，这样的观察值来自于标准正态分布的概率是0.02275，也就是有0.02275的可能性零假设是对的，这就是我们拒绝零假设所犯错的可能性，称之为I类错误。</p>
+<p>另外如果p值比较大于阈值，没有足够的证据拒绝零假设，有可能比如样本量太少等各种原因造成的，无法拒绝错误的零假设称之为II类错误。</p>
+<div class="figure">
+<img src="figure/p.error.png" alt="I类和II类错误" />
+<p class="caption">I类和II类错误</p>
+</div>
+<p>广为接受的 <span class="math inline">\(\alpha\)</span> 水平是0.05，而power水平是0.80。</p>
+</div>
+</div>
+</div>
+<div id="confidence-intervals" class="section level2">
+<h2><span class="header-section-number">4.3</span> Confidence Intervals</h2>
+<div id="section-4.3.1" class="section level3">
+<h3><span class="header-section-number">4.3.1</span> 均值置信区间</h3>
+<p>使用样本均值估计总体均值很容易，但要给出一个置信区间，相对就要困难些，因为这取决于数据的分布，如果数据是正态分布的，或者是大样本，那也比较容易，如果 <span class="math inline">\(\sigma\)</span> 已知，使用正态分布，如果未知，使用t分布。</p>
+<p>但是如果数据不呈正态，样本量又比较小（n &lt; 30)的情况下，那只能使用非参或bootstrapping的方法了，相对就复杂点。</p>
+<div id="section-4.3.1.1" class="section level4">
+<h4><span class="header-section-number">4.3.1.1</span> 中心极限定理</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">get_sample_mean &lt;-<span class="st"> </span>function(size, population, <span class="dt">n=</span><span class="dv">1000</span>) {
+    <span class="kw">sapply</span>(<span class="dv">1</span>:n, function(i) {
+        x &lt;-<span class="st"> </span><span class="kw">sample</span>(population, size)
+        <span class="kw">mean</span>(x)
+    })
+}
+pp &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rnorm</span>(<span class="dv">1000</span>, <span class="dv">0</span>, <span class="dv">1</span>), <span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">1</span>))
+lsm &lt;-<span class="st"> </span><span class="kw">get_sample_mean</span>(<span class="dv">50</span>, pp)
+ssm &lt;-<span class="st"> </span><span class="kw">get_sample_mean</span>(<span class="dv">10</span>, pp)
+y &lt;-<span class="st"> </span><span class="kw">get_sample_mean</span>(<span class="dv">5</span>, <span class="kw">rnorm</span>(<span class="dv">1000</span>))
+<span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))
+<span class="kw">hist</span>(ssm, <span class="dt">breaks=</span><span class="dv">30</span>, <span class="dt">main=</span><span class="st">&quot;sample means distribution</span><span class="ch">\n</span><span class="st">from non-Normal distribution</span><span class="ch">\n</span><span class="st">(sample size = 10)&quot;</span>)
+<span class="kw">hist</span>(lsm, <span class="dt">breaks=</span><span class="dv">30</span>, <span class="dt">main=</span><span class="st">&quot;sample means distribution</span><span class="ch">\n</span><span class="st">from non-Normal distribution</span><span class="ch">\n</span><span class="st">(sample size = 50)&quot;</span>)
+<span class="kw">hist</span>(y, <span class="dt">breaks=</span><span class="dv">30</span>, <span class="dt">main=</span><span class="st">&quot;sample means distribution</span><span class="ch">\n</span><span class="st">from Normal distribution</span><span class="ch">\n</span><span class="st">(sample size = 5)&quot;</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/ci.fig1-1.png" /><!-- --></p>
+<p>只要样本量足够大，均值的分布都将呈现正态分布，不管样本来源于什么样的数据分布中，这就是中心极限定理，这也是为什么正态分布令人着迷之处。</p>
+<p>从上面的图中，我们可以看到，如果样本量足够大，即使总体不呈正态，样本均值分布符合中心极限定理，也呈正态分布；如果样本量不够大，则数据来源必须是正态分布，均值的分布才是呈正态分布的。</p>
+</div>
+<div id="section-4.3.1.2" class="section level4">
+<h4><span class="header-section-number">4.3.1.2</span> 样本均值标准误</h4>
+<p>从总体抽出一个样本，可以计算样本均值，我们通常使用样本均值来估计总体均值，反复抽样，每次得到的样本均值肯定是稍有不同的，我们需要用方差来量化这种不确定性，如果总体本身是正态分布，或者样本足够大，那么均值呈正态分布，均值为总体均值，而标准误差是我们需要估计的，有了标准误差，就可以通过正态分布，给出置信区间。</p>
+<p>对于标准误差，有一词叫标准差（standard deviation, SD）还有一词叫标准误（standard error, SE），很容易混淆，我们拿到一个样本，对样本观察值离散程度的量化是SD: <span class="math inline">\(sd(x)\)</span> ，而我们可以从很多个样本中得到很多个均值，这些均值的离散度用SE来量化， 也就是 <span class="math inline">\(SE=sd(\bar{x})\)</span> 。Campbell和Machin在他们的著作《Medical Statistics: a Commonsense Approach》中有一句话，值得铭记于心：</p>
+<pre><code>If the purpose is Descriptive use standard Deviation; if the purpose is Estimation use standard Error.</code></pre>
+<p>对于均值的SE，通常称之为SEM（standard error of the means）。SEM显然和总体方差 <span class="math inline">\(\sigma^2\)</span> 以及样本量n有关，总体离散度高，SEM也会大一些；另一方面，样本量越大，对总体的估计就越好，SEM就会越小，这个还是很好理解的。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x1 &lt;-<span class="st"> </span><span class="kw">get_sample_mean</span>(<span class="dv">20</span>, <span class="kw">rnorm</span>(<span class="dv">1000</span>, <span class="dt">sd=</span><span class="dv">1</span>))
+x2 &lt;-<span class="st"> </span><span class="kw">get_sample_mean</span>(<span class="dv">20</span>, <span class="kw">rnorm</span>(<span class="dv">1000</span>, <span class="dt">sd=</span><span class="dv">3</span>))
+x3 &lt;-<span class="st"> </span><span class="kw">get_sample_mean</span>(<span class="dv">50</span>, <span class="kw">rnorm</span>(<span class="dv">1000</span>, <span class="dt">sd=</span><span class="dv">3</span>))
+<span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))
+<span class="kw">hist</span>(x2, <span class="dt">breaks=</span><span class="dv">30</span>, <span class="dt">col=</span><span class="st">&quot;green&quot;</span>, <span class="dt">main=</span><span class="st">&quot;sample means distribution&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Means&quot;</span>)
+<span class="kw">hist</span>(x1, <span class="dt">breaks=</span><span class="dv">30</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">add=</span><span class="ot">TRUE</span>)
+<span class="kw">legend</span>(<span class="dt">legend=</span><span class="kw">c</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(sigma==<span class="dv">1</span>)), <span class="kw">expression</span>(<span class="kw">paste</span>(sigma==<span class="dv">3</span>))), <span class="dt">fill=</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>), <span class="st">&quot;topright&quot;</span>)
+<span class="kw">hist</span>(x2, <span class="dt">breaks=</span><span class="dv">30</span>, <span class="dt">col=</span><span class="st">&quot;green&quot;</span>, <span class="dt">main=</span><span class="st">&quot;sample means distribution&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Means&quot;</span>)
+<span class="kw">hist</span>(x3, <span class="dt">breaks=</span><span class="dv">30</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">add=</span><span class="ot">TRUE</span>)
+<span class="kw">legend</span>(<span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;n=10&quot;</span>, <span class="st">&quot;n=50&quot;</span>), <span class="dt">fill=</span><span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;red&quot;</span>), <span class="st">&quot;topright&quot;</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/ci.fig2-1.png" /><!-- --> 从上面的仿真抽样可以看到，SEM和 <span class="math inline">\(\sigma\)</span> 呈正相关，<span class="math inline">\(\sigma\)</span> 越大，SEM越大；而和sample size呈负相关，sample size越大，SEM越小。 实际上： <span class="math display">\[\sigma_{\bar{x}}^2=\frac{\sigma^2}{n}\]</span> 也就是： <span class="math display">\[\sigma_{\bar{x}}=\sqrt{\frac{\sigma^2}{n}} = \frac{\sigma}{\sqrt{n}}\]</span> 通常情况下，总体 <span class="math inline">\(\sigma\)</span> 是未知的，使用样本sd来估计，那么SEM为： <span class="math display">\[s_{\bar{x}} = \frac{s}{\sqrt{n}}\]</span></p>
+<p>我们可以通过仿真抽样进行验证：</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## generate 1000 sample with sample size 100
+a =<span class="st"> </span><span class="kw">sapply</span>(<span class="kw">rep</span>(<span class="dv">100</span>, <span class="dv">1000</span>), rnorm)
+a.mean =<span class="st"> </span><span class="kw">colMeans</span>(a)
+## estimate SEM by simulation
+<span class="kw">sd</span>(a.mean)</code></pre></div>
+<pre><code>## [1] 0.1003199</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## estimate SEM by sigma/sqrt(n), sigma = 1
+<span class="dv">1</span>/<span class="kw">sqrt</span>(<span class="dv">100</span>)</code></pre></div>
+<pre><code>## [1] 0.1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## estimate SEM by sample 1
+<span class="kw">sd</span>(a[, <span class="dv">1</span>])/<span class="kw">sqrt</span>(<span class="dv">100</span>)</code></pre></div>
+<pre><code>## [1] 0.09954846</code></pre>
+</div>
+<div id="section-4.3.1.3" class="section level4">
+<h4><span class="header-section-number">4.3.1.3</span> 使用正态分布估计置信区间</h4>
+<p>样本均值呈正态分布的情况下，可以使用正态分布和t分布来估计置信区间，用那种方法，取决于总体参数 <span class="math inline">\(\sigma\)</span> 是否已知。</p>
+<p>知道 <span class="math inline">\(\sigma\)</span> 的情况下，使用正态分布。 <span class="math display">\[ (\bar{x}-z_{\alpha/2}SEM) &lt; \mu &lt; (\bar{x}+z_{\alpha/2}SEM)\]</span> 也就是： <span class="math display">\[ (\bar{x}-z_{\alpha/2}\frac{\sigma}{\sqrt{n}}) &lt; \mu &lt; (\bar{x}+z_{\alpha/2}\frac{\sigma}{\sqrt{n}})\]</span> 这里从 <span class="math inline">\(\mu=1, \sigma=3\)</span> 的总体中随机抽一个样本，计算95%的置信区间：</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">123</span>)
+n &lt;-<span class="st"> </span><span class="dv">100</span>
+sigma &lt;-<span class="st"> </span><span class="dv">3</span>
+alpha &lt;-<span class="st"> </span><span class="fl">0.05</span>
+x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n, <span class="dt">mean=</span><span class="dv">1</span>, <span class="dt">sd=</span>sigma)
+m &lt;-<span class="st"> </span><span class="kw">mean</span>(x)
+sem &lt;-<span class="st"> </span>sigma/<span class="kw">sqrt</span>(n)
+<span class="co">#margin of error</span>
+me &lt;-<span class="st"> </span><span class="kw">qnorm</span>(<span class="dv">1</span>-alpha/<span class="dv">2</span>)*sem
+msg &lt;-<span class="st"> </span><span class="kw">paste</span>((<span class="dv">1</span>-alpha)*<span class="dv">100</span>,<span class="st">&quot;% &quot;</span>, <span class="st">&quot;Confidence Interval: [&quot;</span>, <span class="kw">round</span>(<span class="kw">mean</span>(x)-me, <span class="dv">3</span>), <span class="st">&quot;, &quot;</span>, <span class="kw">round</span>(<span class="kw">mean</span>(x)+me,<span class="dv">3</span>), <span class="st">&quot;]&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>)
+<span class="kw">print</span>(msg)</code></pre></div>
+<pre><code>## [1] &quot;95% Confidence Interval: [0.683, 1.859]&quot;</code></pre>
+</div>
+<div id="t" class="section level4">
+<h4><span class="header-section-number">4.3.1.4</span> 使用t分布估计置信区间</h4>
+<p>在很多情况下 <span class="math inline">\(\sigma\)</span> 是未知的，那么就得使用t分布来进行置信区间估计， 形式和正态分布是一样的，只不过用t值替代了z值，因为t分布的尾巴比正态长，所以置信区间的宽度会大一些，特别是在自由度小的时候。 <span class="math display">\[ (\bar{x}-t_{\alpha/2}SEM) &lt; \mu &lt; (\bar{x}+t_{\alpha/2}SEM)\]</span> 在未知 <span class="math inline">\(\sigma\)</span> 的情况下，使用sd来估计 <span class="math inline">\(\sigma\)</span> ，最终公式为： <span class="math display">\[ (\bar{x}-t_{\alpha/2}\frac{s}{\sqrt{n}}) &lt; \mu &lt; (\bar{x}+t_{\alpha/2}\frac{s}{\sqrt{n}})\]</span></p>
+<p>t.test()函数进行t检验时，会计算出置信区间:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(<span class="kw">rnorm</span>(<span class="dv">100</span>))</code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  rnorm(100)
+## t = -1.1122, df = 99, p-value = 0.2688
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  -0.29941792  0.08432432
+## sample estimates:
+##  mean of x 
+## -0.1075468</code></pre>
+</div>
+<div id="section-4.3.1.5" class="section level4">
+<h4><span class="header-section-number">4.3.1.5</span> 误差幅度</h4>
+<p>置信区间的估计，就是 <span class="math inline">\(\bar{x}\)</span> <span class="math inline">\(\pm\)</span> <span class="math inline">\(z_{\alpha/2}\sigma_{\bar{x}}\)</span> ，<span class="math inline">\(z_{\alpha/2}\sigma_{\bar{x}}\)</span>这个量被称之为误差幅度（margin of error）: <span class="math display">\[E=z_{\alpha/2}\sigma_{\bar{x}}\]</span> 很容易可以推导出： <span class="math display">\[ n=(\frac{z_{\alpha/2}\sigma_{\bar{x}}}{E})^2\]</span></p>
+<p>E是n的函数，样本量n越大，E就越小；反过来，n也是E的函数，如果我们想要把误差幅度限制在一个比较小的范围，那么就要加大样本量，上面的公式就给出了对于样本量的估计。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">estimateSampleSize &lt;-<span class="st"> </span>function(E, sigma, <span class="dt">alpha=</span><span class="fl">0.05</span>) {
+    ## E is the margin of error
+    n &lt;-<span class="st"> </span>((<span class="kw">qnorm</span>(alpha/<span class="dv">2</span>)*sigma)/E)^<span class="dv">2</span>
+    <span class="kw">ceiling</span>(n)
+}
+
+<span class="kw">estimateSampleSize</span>(<span class="dv">3</span>, <span class="dv">10</span>)</code></pre></div>
+<pre><code>## [1] 43</code></pre>
+</div>
+</div>
+<div id="section-4.3.2" class="section level3">
+<h3><span class="header-section-number">4.3.2</span> 比例的置信区间</h3>
+<p>很多数据会以比例的形式出现，比如对某事件进行调查，会报道出支持和反对的比例；生物苦逼娃可能会计算不同形态的细胞比例。 比例的置信区间，由以下公式给出： <span class="math display">\[ (\hat{p} - E) &lt; p &lt; (\hat{p} + E)\]</span></p>
+<p>其中E是误差幅度， <span class="math inline">\(\hat{p}\)</span> 是样本计算出来的比例，而p是总体比例。 E通过以下公式计算： <span class="math display">\[ E = z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}\]</span> 这种情况符合二项式分布，而n又比较大，所以可以用正态分布来估计，那么这公式就很好理解了，和均值的误差幅度估计是一样的，都是 <span class="math inline">\(z_{\alpha/2}SE\)</span> ，而SE是 <span class="math inline">\(\sigma/\sqrt{n}\)</span> 。我们知道<a href="probability_distributions.html">二项式分布</a> <span class="math inline">\(\sigma^2 = np(1-p)\)</span> ，这里p是未知的，使用样本统计量 <span class="math inline">\(\hat{p}\)</span> 来估计，就可以推出E的计算公式。</p>
+<p>假设数了1000个细胞，700个是梭形的，我们想估计梭形细胞所点比例的95%置信区间，就可以通过以上公式计算： <span class="math display">\[ E = 1.96\sqrt{\frac{(0.7)(0.3)}{1000}} = 1.96\sqrt{\frac{0.21}{1000}} = 1.96\sqrt{0.00021} = 0.0284\]</span></p>
+<p>(0.7 - 0.0284) &lt; p &lt; (0.7 + 0.0284)</p>
+<p>95%置信区间为 [0.6716, 0.7284]</p>
+</div>
+<div id="section-4.3.3" class="section level3">
+<h3><span class="header-section-number">4.3.3</span> 方差和标准差的置信区间</h3>
+<p>通常拿样本SD来估计总体SD，要给出包含总体SD的置信区间，需要用到<a href="probability_distributions.html">卡方分布</a>。</p>
+<p>假设我们从正态分布的总体中抽出样本量为n的样本，总体的方差为 <span class="math inline">\(\sigma^2\)</span> ，那么样本方差为 <span class="math inline">\(s^2\)</span> 的函数符合卡方分布： <span class="math display">\[ \chi^2 = \frac{(n-1)s^2}{\sigma^2}\]</span> 卡方是不对称分布，所以置信区间也是不对称的，需要分别找出左侧和右侧的临界值（critical value）。</p>
+<p>假设n是100，那么自由度是99，我们要计算95%的置信区间，需要分别计算左侧0.025和右侧0.025的临界值：</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qchisq</span>(<span class="fl">0.025</span>, <span class="dv">99</span>, <span class="dt">lower.tail=</span><span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## [1] 73.36108</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qchisq</span>(<span class="fl">0.025</span>, <span class="dv">99</span>, <span class="dt">lower.tail=</span><span class="ot">FALSE</span>)</code></pre></div>
+<pre><code>## [1] 128.422</code></pre>
+<p>这两个数称之为卡方左右值 <span class="math inline">\(\chi_{L}^2\)</span> 和 <span class="math inline">\(\chi_{R}^2\)</span> ，那么标准差的置信区间为： <span class="math display">\[\sqrt{\frac{(n-1)s^2}{\chi_{R}^2}} &lt; \sigma &lt; \sqrt{\frac{(n-1)s^2}{\chi_{L}^2}}\]</span></p>
+</div>
+<div id="section-4.3.4" class="section level3">
+<h3><span class="header-section-number">4.3.4</span> 均值差的置信区间</h3>
+<p>我们记两组数据为 <span class="math inline">\(x_1, x_2\)</span> ，其均值分别为 <span class="math inline">\(\bar{x_1}, \bar{x_2}\)</span> ，总体均值为 <span class="math inline">\(\mu_1, \mu_2\)</span> ，总体均值差为 <span class="math inline">\(\mu_d = \mu_1 - \mu_2\)</span> 。 ### 成对数据均值差的置信区间 假设想检验某药对某病是否有用，我们观察一群病人，用药前和用药后的指标，这样的数据就是成对数据，用药前和用药后的数据是相关的。 假设 <span class="math inline">\(d_i\)</span> 是第i个病人用药前后的差值： <span class="math display">\[ d_i = x_{1i} -x_{2i} \]</span></p>
+<p>那么统计量 <span class="math inline">\(\bar{x_1}, \bar{x_2} = \bar{d}\)</span> 。</p>
+<p>成对数据均值差 <span class="math inline">\(\bar{x_1}, \bar{x_2}\)</span> 的分布就变成了差值均值 <span class="math inline">\(\bar{d}\)</span> 的分布，问题就变成了均值置信区间的估计，可以直接套用t分布的估计公式： <span class="math display">\[ (\bar{d}-t_{\alpha/2}SEM) &lt; \mu_d &lt; (\bar{x}+t_{\alpha/2}SEM)\]</span></p>
+<p>问题在于估计标准误SEM，样本均值的标准误前面已经讲过 <span class="math inline">\(SEM=\frac{s}{\sqrt{n}}\)</span> ，这里的观察值为 <span class="math inline">\(d_i\)</span> ，于是： <span class="math display">\[ SE_\bar{d} = \frac{s_d}{\sqrt{n}}\]</span></p>
+<p>所以成对数据均值差 <span class="math inline">\(\mu_d\)</span> 的置信区间为： <span class="math display">\[ (\bar{d}-t_{\alpha/2}\frac{s_d}{\sqrt{n}}) &lt; \mu_d &lt; (\bar{d}+t_{\alpha/2}\frac{s_d}{\sqrt{n}})\]</span></p>
+<div id="section-4.3.4.1" class="section level4">
+<h4><span class="header-section-number">4.3.4.1</span> 两样本均值差的置信区间</h4>
+<p>如果两组数据是独立的，那么情况要复杂一些，但原理还是一样，只要是正态分布或者样本量足够大，那么均值差的分布就呈现正态分布，依然是使用t分布来做参数估计： <span class="math display">\[ ((\bar{x_1} - \bar{x_2})-t_{\alpha/2}SEDM) &lt; \mu_1 - \mu_2 &lt; ((\bar{x_1} - \bar{x_2})+t_{\alpha/2}SEDM)\]</span> 其中SEDM，代表standard error of difference of means。</p>
+<div id="section-4.3.4.1.1" class="section level5">
+<h5><span class="header-section-number">4.3.4.1.1</span> 方差相同</h5>
+<p>方差相同的情况下，对SEDM的估计就比较容易，把两个样本的方差合并(pool)，合并方差(pooled variance)： <span class="math display">\[s_p^2=\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}\]</span> 继而SEDM由以下公式计算： <span class="math display">\[SEDM = \sqrt{\frac{s_p^2}{n_1}\frac{s_p^2}{n_2}}\]</span></p>
+<p>自由度为 <span class="math inline">\(n_1+n_2-2\)</span> .</p>
+</div>
+<div id="section-4.3.4.1.2" class="section level5">
+<h5><span class="header-section-number">4.3.4.1.2</span> 方差不同</h5>
+<p>方差不同使用Welch方法，不对方差进行合并。 <span class="math display">\[SEDM = \sqrt{\frac{s_1^2}{n_1}\frac{s_2^2}{n_2}}\]</span></p>
+<p>自由度通过Welch-Satterhwaite公式计算： <span class="math display">\[ df = \frac{(s_1^2/n_1+s_2^2/n2)^2}{\frac{(s_1^2/n_1)^2}{n_1-1}+\frac{(s_2^2/n_2)^2}{n_2-1}}\]</span></p>
+</div>
+</div>
+</div>
+<div id="section-4.3.5" class="section level3">
+<h3><span class="header-section-number">4.3.5</span> 相关性置信区间</h3>
+<p>Pearson correlation coefficient的置信区间，参考<a href="http://ygc.name/stats/correlation.html">相关性</a>一节。</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ggplot2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="t.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

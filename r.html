@@ -38,8 +38,8 @@ MathJax.Hub.Config({
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="section-4.html">
-<link rel="next" href="section-6.html">
+<link rel="prev" href="index.html">
+<link rel="next" href="ggplot2.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -238,129 +238,62 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="t" class="section level1">
-<h1><span class="header-section-number">5</span> T检验</h1>
-<div id="t" class="section level2">
-<h2><span class="header-section-number">5.1</span> 单样本T检验</h2>
-<div id="section-5.1.1" class="section level3">
-<h3><span class="header-section-number">5.1.1</span> 前提条件</h3>
-<p>使用T检验，前提条件必须是满足正态分布，如果样本量足够多的时候，根据<a href="confidence_interval.html">中心极限定理</a>，数据分布不呈正态也是没问题的。</p>
+<div id="r" class="section level1">
+<h1><span class="header-section-number">2</span> R语言简介</h1>
+<p>关于编程，Jeremy Penzer写了一个guidlines，将其摘录如下： &gt; - <strong>Problem specification</strong>. This is the starting point for any program. Just as you would develop an objective and make an outline if you had to write a paper or report, rather than simply start writing, you should specify the problem as clearly as possible. Particularly important is determining what inputs your program needs and what outputs it should produce. It is also important to consider the problem and its solution from the perspective of those who will use the program and those who will benefit from the solution.</p>
+<blockquote>
+<ul>
+<li><strong>Code planning</strong>. Contrary to what may be your notion of where to start, it is best not to start writing code, but rather to sketch out a rough version of the program with a pen and paper (or on a computer screen). If you know how to make a flow chart, that is a great idea too. Plan the code by making a nontechnical program prototype. Mock up the desired format of the output.</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>Identify constants</strong>. If you plan to use a constant or a variable, it is good to give that value an identifier at the beginning of the program. The advantage is obvious. If you assign a value to an argument or a constant, you can change that value once, and update all instances throughout the program.</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>Program documentation</strong>. Good programs are self-documenting. Lay out the code logically and clearly. Use spacing and indentation to make the code readable, and use comments to describe the complicated parts of your program. This helps you and others. When you comment the more complicated parts of your code, you will not have to remember weeks later what was very simple and obvious to you at the time, and you can sometimes spend hours deciphering your own “once-obvious” code. This is the voice of experience speaking here.</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>Solve runtime problems</strong>. Although books on programming are usually linear and straightforward, programming in real life is not like that at all. You may break your problem down into several steps, and work on them at different times. You will almost always find that your code does not produce the expected or desired results when you first execute it. You may or may not get much feedback about what went wrong.</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>Verify your program</strong>. As we are not developing large or sophisticated programs or functions, we are usually satisfied simply when we use some test cases for which we know the correct answers. More advanced forms of program verification are not needed in this case.</li>
+</ul>
+</blockquote>
+<div id="-flow-control" class="section level2">
+<h2><span class="header-section-number">2.1</span> 控制流 （Flow Control)</h2>
 </div>
-<div id="section-5.1.2" class="section level3">
-<h3><span class="header-section-number">5.1.2</span> 数据标准化</h3>
-<p>在满足前提条件的基础上，我们假定均值的分布是呈正态的。</p>
-<p>简单点说，我们的任务是看样本均值偏离总体均值有多远，越远则p值越小，这是绝对正相关的。那么直接计算 <span class="math inline">\(| \bar{x} - \mu |\)</span> 行不行？显然可以，但是it depends。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m1 &lt;-<span class="st"> </span><span class="kw">get_sample_mean</span>(<span class="dv">5</span>, <span class="kw">rnorm</span>(<span class="dv">1000</span>))
-m2 &lt;-<span class="st"> </span><span class="kw">get_sample_mean</span>(<span class="dv">5</span>, <span class="kw">rnorm</span>(<span class="dv">1000</span>, <span class="dt">sd=</span><span class="dv">3</span>))
-
-<span class="kw">hist</span>(m2, <span class="dt">col=</span><span class="st">&quot;green&quot;</span>, <span class="dt">main=</span><span class="st">&quot;Histogram of sample means&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Means&quot;</span>, <span class="dt">breaks=</span><span class="dv">30</span>)
-<span class="kw">hist</span>(m1, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">add=</span>T, <span class="dt">breaks=</span><span class="dv">30</span>)
-<span class="kw">legend</span>(<span class="dt">legend=</span><span class="kw">c</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(sigma==<span class="dv">1</span>)), <span class="kw">expression</span>(<span class="kw">paste</span>(sigma==<span class="dv">3</span>))), <span class="dt">fill=</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>), <span class="st">&quot;topright&quot;</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/t.fig1-1.png" /><!-- --></p>
-<p>我们知道正态分布由两个参数决定，均值和方差，所以 <span class="math inline">\(| \bar{x} - \mu |\)</span> 的大小，不能直接对应到p值，从上图绿色中抽到一个<span class="math inline">\(| \bar{x} - \mu | = 3\)</span> 的样本，概率并不低，但从红色分布中得到这样一个样本，几乎是不可能的。</p>
-<p>拿 <span class="math inline">\(| \bar{x} - \mu |\)</span> 来度量的话，你必须提供 <span class="math inline">\(sd(\bar{x})\)</span> ，<span class="math inline">\(| \bar{x} - \mu |\)</span> 不能直接比较。</p>
-<p>如果<span class="math inline">\(sd(\bar{x})\)</span> 相同的话，<span class="math inline">\(| \bar{x} - \mu |\)</span> 就是很好的度量方法，它是可比较的，值越大，p值越小。那么我们需要做的，就是把数据压缩到同一个scale上，既然均值分布呈正态分布，而所有的正态分布都可以scale到标准正态分布上，显然我们可以用相同的方法来处理，把数据统一scale到 <span class="math inline">\(SEM = 1\)</span> ，于是差值 <span class="math inline">\(| scale(\bar{x}) - \mu |\)</span> 就完全可以拿来比较，年纪大点的人，上学时候p值是通过查表获得的，查表用的值就是 <span class="math inline">\(| scale(\bar{x}) - \mu |\)</span> 。</p>
+<div id="-looping" class="section level2">
+<h2><span class="header-section-number">2.2</span> 循环 (Looping)</h2>
 </div>
-</div>
-<div id="z" class="section level2">
-<h2><span class="header-section-number">5.2</span> Z检验</h2>
-<p>在讲T检验前，先回顾一下Z检验，标准正态分布称之为Z分布，根据Z分布来做统计检验，便是Z检验。 我们把一个正态分布scale到标准正态分布上，通过: <span class="math display">\[ \frac{x-\mu}{sd}\]</span></p>
-<p>在这里检验的统计量是均值 <span class="math inline">\(\bar{x}\)</span> ，均值的sd，也就是SEM， <span class="math inline">\(SEM=\frac{\sigma}{\sqrt{n}}\)</span> ，通过 <span class="math inline">\(\frac{sd(x)}{\sqrt{n}}\)</span> 估计，具体参考<a href="confidence_interval.html">置信区间一节</a>，</p>
-<p>所以我们使用以下公式，把均值分布scale到z分布上： <span class="math display">\[z= \frac{\bar{x}-\mu}{sd(x)/\sqrt{n}}\]</span></p>
-<p>那么通过z值在z分布上的位置，就可以算出p值，进行z检验。</p>
-<div id="t-1" class="section level3">
-<h3><span class="header-section-number">5.2.1</span> t检验</h3>
-<pre><code>
-In theory, there is no difference between theory and practice. But, in practice, there is.
-
-                                                        -- Jan L.A. van de Snepscheut </code></pre>
-<p>虽然可以直接利用正态分布来计算p值，然而理想状态很丰满，现实却很骨感，如果样本量n较大时，不单t分布逼近正态分布， <span class="math inline">\(\chi^2_{(n)}\)</span> ,Poisson( <span class="math inline">\(lambda\)</span> ),和二项分布B(n,p)都逼近正态，然而我们没有那么大的样本量，所以在不理想的现实中，有各种各样的检验来应对各种情景和现实条件。</p>
-<p>我们要通过样本参数来估计总体参数，特别是对于小样本来说，非常不靠谱。可以说正态是理想状态，而T分布是其现实版本。<a href="probability_distributions.html">T分布</a>中心比正态分布平，尾巴比正态分布长，特别是在自由度较小的情况下，所以T检验计算出来的p值比Z检验要保守些。</p>
-<p>相应的，t值的计算和z值的计算是一样的。 <span class="math display">\[t=\frac{\bar{x}-\mu}{sd(x)/\sqrt{n}}\]</span></p>
-<p>使用R进行单样本的T检验，是一件非常容易的事情。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:<span class="dv">100</span>, <span class="dv">10</span>)
-<span class="kw">print</span>(x)</code></pre></div>
-<pre><code>##  [1] 83 73 63 46 56 92 32 10 12  8</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(x, <span class="dt">mu=</span><span class="dv">20</span>)</code></pre></div>
-<pre><code>## 
-##  One Sample t-test
-## 
-## data:  x
-## t = 2.8014, df = 9, p-value = 0.02066
-## alternative hypothesis: true mean is not equal to 20
-## 95 percent confidence interval:
-##  25.29383 69.70617
-## sample estimates:
-## mean of x 
-##      47.5</code></pre>
-</div>
-</div>
-<div id="t" class="section level2">
-<h2><span class="header-section-number">5.3</span> 两样本T检验</h2>
-<p>和<a href="one_sample_t.test.html">单样本T检验</a>一样，前提条件是数据来自于正态分布，或者是样本量足够大，在这种情况下，两样本均值差的分布是呈现正态的，便可以应用T分布来计算<a href="pvalue.html">p值</a>。</p>
-<p>在理解了正态分布、T分布以及p值的计算之后，我们应该很清楚，T检验就是通过计算t值来计算显著性： <span class="math display">\[t = \frac{X-\mu}{SE}\]</span></p>
-<p>这里的X是我们的统计量，如单样本的 <span class="math inline">\(\bar{x}\)</span> ,而这里两样本，则为 <span class="math inline">\(\bar{x_1}-\bar{x_2}\)</span> ，而SE是统计量X的标准误，单样本T检验我们使用SEM来表示均值的标准误(standard error of the means)，相应的两样本T检验，我们使用SEDM来代表均值差的标准误（standard error of difference of means）。</p>
-<p>两样本t检验的通用形式为： <span class="math display">\[ t = \frac{(x_1-x_2)-(\mu_1-\mu_2)}{SEDM}\]</span></p>
-<p>由于零假设是均值没有差别，所以 <span class="math inline">\(\mu_1-\mu_2\)</span> 会被假定为0.</p>
-<p>T检验的问题就在于如何计算SE，在这里要做两样本T检验，问题就成了如何计算SEDM。</p>
-<p>在<a href="confidence_interval.html">置信区间</a>一节里，已经介绍了如何估计SEDM。</p>
-<div id="t" class="section level3">
-<h3><span class="header-section-number">5.3.1</span> 成对T检验</h3>
-<p>成对数据的 <span class="math inline">\(SEDM = = \frac{s_d}{\sqrt{n}}\)</span> 。 成对T检验本质上和单样本T检验是一样的，通过计算 <span class="math inline">\(d_i = x_{1i} -x_{2i}\)</span> ，对d值进行单样本t检验。</p>
+<div id="covariancecorrelation" class="section level2">
+<h2><span class="header-section-number">2.3</span> 协方差（covariance）和相关性（correlation）</h2>
+<p>我们想看两组数据是否独立，或者说想看两组数据是否相关。我们可以使用协方差:</p>
+<p><span class="math inline">\(s_{xy}=\frac{\sum{(x-\bar{x})(y-\bar{y})}}{n-1}\)</span></p>
+<p>协方差的取值可以是正、0和负，如果值是正的，表明x和y的趋势一致，即x上升的话，y也是上升的。协方差的值受到x和y单位的影响，为了消除这一影响，将协方差除以x和y的标准差，我们得到的是相关系数。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(iris)
-<span class="kw">attach</span>(iris)</code></pre></div>
-<pre><code>## The following objects are masked from iris (pos = 8):
-## 
-##     Petal.Length, Petal.Width, Sepal.Length, Sepal.Width, Species</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(Sepal.Length, Petal.Length, <span class="dt">paired=</span><span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## 
-##  Paired t-test
-## 
-## data:  Sepal.Length and Petal.Length
-## t = 22.813, df = 149, p-value &lt; 2.2e-16
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  1.904708 2.265959
-## sample estimates:
-## mean of the differences 
-##                2.085333</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d =<span class="st"> </span>Sepal.Length -<span class="st"> </span>Petal.Length
-<span class="kw">t.test</span>(d)</code></pre></div>
-<pre><code>## 
-##  One Sample t-test
-## 
-## data:  d
-## t = 22.813, df = 149, p-value &lt; 2.2e-16
-## alternative hypothesis: true mean is not equal to 0
-## 95 percent confidence interval:
-##  1.904708 2.265959
-## sample estimates:
-## mean of x 
-##  2.085333</code></pre>
+<span class="kw">attach</span>(iris)
+<span class="kw">cov</span>(Sepal.Length, Sepal.Width)</code></pre></div>
+<pre><code>## [1] -0.042434</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cov</span>(Sepal.Length, Sepal.Width)/(<span class="kw">sd</span>(Sepal.Length) *<span class="st"> </span><span class="kw">sd</span>(Sepal.Width))</code></pre></div>
+<pre><code>## [1] -0.1175698</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(Sepal.Length, Sepal.Width)</code></pre></div>
+<pre><code>## [1] -0.1175698</code></pre>
 </div>
-<div id="t" class="section level3">
-<h3><span class="header-section-number">5.3.2</span> 方差相同的两样本T检验</h3>
-<p>这种情况下 <span class="math inline">\(SEDM = = \sqrt{\frac{s_p^2}{n_1}+\frac{s_p^2}{n_2}}\)</span> , 自由度是 <span class="math inline">\(n_1+n_2-2\)</span> 。 其中 <span class="math inline">\(s_p^2\)</span> 是合并方差： <span class="math inline">\(s_p^2=\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}\)</span></p>
-<p>很多教科书所说的两独立样本T检验就是指这种情况。记得以前老师讲过说T检验必须满足两个条件，一是正态，二是方差齐性，说的就是这个。</p>
-<p>当然T检验只需满足一个条件，那就是正态，方差不齐的情况下面会讲到。</p>
-<p>方差是否相同，可以计算两个样本的方差比值，方差相同，则比值应该在1左右，而方差不同，则比值会偏离1，这个比值称为F ratio，可以使用F检验来计算方差齐性的显著性。在方差齐性的前提条件下，我们使用上面的公式进行T检验。</p>
-</div>
-<div id="t" class="section level3">
-<h3><span class="header-section-number">5.3.3</span> 方差不同的两样本T检验</h3>
-<p>如果F检验把方差齐性的零假设给reject了，那么就得用Welch t检验。 <span class="math display">\[SEDM = \sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}\]</span> 自由度通过Welch-Satterhwaite公式计算： <span class="math display">\[ df = \frac{(s_1^2/n_1+s_2^2/n2)^2}{\frac{(s_1^2/n_1)^2}{n_1-1}+\frac{(s_2^2/n_2)^2}{n_2-1}}\]</span></p>
-</div>
-<div id="rt" class="section level3">
-<h3><span class="header-section-number">5.3.4</span> 使用R进行T检验</h3>
-<p>R的stats包提供了t.test函数，可以用于各种T检验，如果只提供一组数据，则进行单样本T检验，如果提供两组数据，则进行两样本T检验，主要的参数，无非是paired，TRUE则进行成对t检验，var.equal指定方差是否齐性，TRUE则进行经典方法，FALSE则进行Welch T检验。 使用实例可参考<a href="http://ygc.name/stats/RT_PCR.html">RT-PCR</a>一节。</p>
-</div>
-<div id="section-5.3.5" class="section level3">
-<h3><span class="header-section-number">5.3.5</span> 结论</h3>
-<p>成对数据我们可以把成对的信息扔了，混在一起做两独立样本T检验，方差齐了，我们也可以把它当做不齐，用Welch方法。所以如果稀里糊涂的情况下，就用Welch T检验。</p>
-<p>如果是成对数据，当然还是成对T检验好，比如病人在使用某药物前后的指标，如果不用成对，则病人之间的variance也混进去，方差估计会大一些，T检验的power也会减弱。</p>
-<p>Welch T检验的自由度会比方差齐性的经典方法要小，根据<a href="probability_distributions.html">T分布</a>，自由度越小，中心越平，而尾巴越长，也就是说，观察到同样一个t值，自由度小的分布计算出来的p值会更大，换句话说，自由度越小，T检验就越保守。</p>
-<p>这也是t.test函数默认使用Welch T test的原因，Welch T test较为保守，如果方差齐性，用经典方法可以检验出更小的差别。</p>
+<div id="section-2.4" class="section level2">
+<h2><span class="header-section-number">2.4</span> 对称性度量</h2>
+<p>在使用参数检验之前需要度量我们的数据是否是对称分布的，通常使用偏度系数（skewness coefficient）和峰度系数（kurtosis coefficient)。根据定义，正态分布的偏度和峰度都为0。偏度系数计算的是三阶中心矩，而峰度系数计算的是四阶中心矩。</p>
+<p>R并不提供函数度量偏度和峰度，这里使用<em>psych</em>包里的skew()和kurtosi()函数。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(psych)
+<span class="kw">skew</span>(Sepal.Length)</code></pre></div>
+<pre><code>## [1] 0.3086407</code></pre>
 
-</div>
 </div>
 </div>
             </section>
@@ -368,8 +301,8 @@ In theory, there is no difference between theory and practice. But, in practice,
           </div>
         </div>
       </div>
-<a href="section-4.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="section-6.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ggplot2.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
