@@ -1,0 +1,55 @@
+
+# General Linear Model
+
+## T检验是回归的特例
+```{r}
+data(iris)
+tt <- iris[, c("Petal.Length", "Sepal.Length")]
+t.test(Petal.Length, Sepal.Length, data=tt, var.equal=TRUE)
+```
+我们取iris的Petal.Length和Sepal.Length做两样本T检验，因为方差分析和回归分析都假定齐方差，所以这里以齐方差方式进行T检验。
+
+数据可以转换成以下分组形式：
+```{r}
+require(reshape2)
+tt2 <- melt(tt)
+head(tt2)
+t.test(value ~ variable, data=tt2, var.equal=TRUE)
+```
+分成两组，按分组变量进行T检验，结果是一样的。
+
+对分组数据进行回归分析：
+```{r}
+lm.fit  <- lm(value ~ variable, data=tt2)
+summary(lm.fit)
+```
+回归分析完全包含了T检验，并且给出更丰富的信息。
+
+Intercept相当于Petal.Length的均值，Slope则是均值差，slope的T检验结果和上面两样本均值差T检验是一样的。
+而F值是T检验结果的平方：
+```{r}
+13.10^2
+```
+
+## T检验是方差分析的特例
+```{r}
+res <- aov(value ~ variable, data=tt2)
+summary(res)
+```
+one way ANOVA进行两组分析和T检验是一样一样的，F值是t值的平方。
+
+我们常说T检验和ANOVA是用来做组间比较的，而相关性和回归是用来度量相互关系的，实际上，他们是没有差别的。
+
+
+## ANOVA是多重回归的特例
+这里使用[two way ANOVA](two_way_anova.html)一节中使用的数据：
+```{r}
+data <- read.table("data/gender_dose.tsv", header=TRUE)
+summary(with(data, aov(Alertness~Gender+Dosage)))
+summary(lm(Alertness~Gender+Dosage, data=data))
+```
+上面的例子中假设Gender和Dosage是完全无关的，如果把两因素的互作考虑在内，则：
+```{r}
+summary(with(data, aov(Alertness~Gender*Dosage)))
+summary(lm(Alertness~Gender+Dosage+Gender*Dosage, data=data))
+```

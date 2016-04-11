@@ -1,0 +1,58 @@
+# Logistic Regression
+
+线性回归是从X预测出Y，Y是数值型；而逻辑回归也是从X预测Y，但Y是二分变量。[Fisher线性区分法](http://compbio.soe.ucsc.edu/genex/genexTR2html/node12.html)通过寻找预测值的线性组合使得两组间的差异最大化，以此来预测分组的归属问题。这个方法要求预测变量必须是连续型，逻辑回归做为一个superior alternative，允许二分预测变量。
+
+Y值是二分变量，以(0,1)表示，我们可以把它当成是二项式过程，p是1的比例，q=1-p是0的比例，1代表成功而0代表失败，逻辑曲线，预测值总是0,1之间。
+
+首先把比例转换成odds，如果p是成功概率，那么支持成功的odds是：
+$$ odds=\frac{p}{q}=\frac{p}{1-p}$$
+
+在逻辑回归中，我们使用的统计量叫分对数(logit)，它是odds的自然对数。
+$$ logit = ln(odds) = b_0+b_1x_1+b_2x_2+...+b_kx_k$$
+使用线性回归对logit进行预测，
+
+```{r}
+data(iris)
+dd=iris[iris$Species != "setosa",]
+dd$Species=as.numeric(dd$Species)-2
+res=glm(Species ~ Sepal.Length+ Sepal.Width+ Petal.Length + Petal.Width, data=dd, family="binomial")
+summary(res)
+```
+结果使用的是Wald z statistic，分析显示只有Petal.Length是显著的。
+```{r}
+res2=glm(Species ~ Petal.Length, data=dd, family="binomial")
+summary(res2)
+```
+AIC(Akaike information criterion)用来度量模型拟合，它度量使用模型来描述Y变量信息损失的相对量，值越小，模型越好。
+AIC可以用来做模型选择。像上面res和res2分别使用多个变量和单一变量来做拟合，AIC分别为21.9和37.43，显然第一个模型，使用多个变量来做拟合效果要好。
+
+模型拟合可以使用卡方检验来检验拟合得好不好，检验的是null deviance (the null model)和fitted model的差别。
+```{r}
+with(res, pchisq(null.deviance-deviance, df.null-df.residual, lower.tail=FALSE))
+```
+p值很小，证明模型是非常好的。
+
+
+```{r glm.fig1, fig.width=6, fig.height=6}
+par(mfrow=c(2,2))
+plot(res)
+```
+同样可以用plot画出各种图，来辅助诊断。
+
+
+```{r glm.fig2, fig.width=6, fig.height=6}
+logit=log(res$fitted.values/(1-res$fitted.values))
+plot(logit, res$fitted.values)
+```
+
+```{r}
+mean(round(res$fitted.values) == dd$Species)
+```
+从数值上看，98%的数据归类是正确的。当然这个也可以使用卡方检验来检验：
+
+```{r}
+dd$fitted=round(res$fitted.values)
+chisq.test(with(dd, table(fitted, Species)))
+```
+
+逻辑回归也有很多alternative的方法，比如 $Hotelling's\; T^2$ 和Probit regression.

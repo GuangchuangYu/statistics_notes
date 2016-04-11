@@ -1,0 +1,290 @@
+# 线性回归
+
+## Simple Linear Regression
+
+>Many shall be restored that now are fallen;
+
+>Many shall be fallen that now are in honor.
+
+[相关性](correlation.html)是简单线性回归它爹，回归的概念来自于Francis Galton，他发现高个子男人生出来的儿子会比自己矮，而矮个子男人生出来的儿子会比自己高，并称这种现象为[回归平庸(regression toward mediocrity)](http://www.biostat.washington.edu/~bsweir/BIOST551/Galton1886.pdf)，现在被称之为回归均值(regression to the mean)，Galton有个学生叫Karl Pearson，他给出了相关性和回归的数学公式，这也是相关系数被命名为Pearson相关系数的原因，而相关系数的符号r则取自于回归(regression)一词。
+
+简单线性回归名副其实，非常简单，在假定X和Y是线性关系，使用单变量X来预测Y。
+
+$$ Y \approx \beta_0 + \beta_1 X $$
+
+假设我们要用花萼长度来预测花瓣长度，
+```{r lm.fig1, fig.width=6, fig.height=6}
+require(ggplot2)
+data(iris)
+attach(iris)
+p <- ggplot(iris, aes(Sepal.Length, Petal.Length))+
+		geom_point(shape=1, color="red")
+print(p)
+```
+我们需要拟合：
+$$ Petal \approx \beta_0 + \beta_1 Sepal $$
+
+$\beta_0$ 和 $\beta_1$ 代表线性模型的截距和斜率，这两个模型参数是未知的，需要通过训练数据估计 $\hat{\beta_0}$ 和 $\hat{\beta_1}$ 。
+
+使得直线
+$$ \hat{y} = \hat{\beta_0} + \hat{\beta_1} x $$
+与数据集中的点最接近，有多种方法来来计算"接近度“，最常用的是最小二乘法(least squares)。
+
+最小二乘法通过计算残差平方和（RSS, residual sum of squares）
+	$$ RSS = {e_1}^2 + {e_2}^2 + … + {e_n}^2 $$
+其中 $e_i = y_i - \hat{y_i}$ .
+问题转换为找出 $\hat{\beta_0}$ 和 $\hat{\beta_1}$ 使得RSS的值最小。
+通过计算，可以得到：
+$$ \hat{\beta_1} = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^n (x_i - \bar{x})^2} = r_{xy} (\frac{s_y}{s_x})$$
+$$ \hat{\beta_0} = \bar{y} - \hat{\beta_1}\bar{x} $$
+
+```{r}
+b1 <- sum((Petal.Length-mean(Petal.Length)) * (Sepal.Length-mean(Sepal.Length)))/sum((Sepal.Length-mean(Sepal.Length))^2)
+b0 <- mean(Petal.Length) - b1 * mean(Sepal.Length)
+cat("Intersect:\t", b0, "\n", "Slope:\t", b1, "\n")
+```
+
+stats包中的lm()函数，用于拟合线性模型。
+```{r}
+model <- lm(Petal.Length ~ Sepal.Length, data=iris)
+model
+```
+
+### 评估参数准确性
+打个比方，我们使用样本均值 $\hat{\mu}$ 来估计总体均值 $\mu$ ，对于任意一个样本的 $\hat{\mu}$ 值，有可能会高估 $\mu$ ，也有可能会低估，需要量化到底 $\hat{\mu}$ 偏离 $\mu$ 有多远，这个问题通过计算standard error of $\hat{\mu}$ 来解决。
+
+同样地，我们估计出来的参数 $\hat{\beta_0}$ 和 $\hat{\beta_1}$ 和真实的参数到底偏离多远，需要通过计算参数的standard error来估计。
+$$ SE(\hat{\beta_0})^2 = \sigma^2 [\frac{1}{n} + \frac{\bar{x}^2}{\sum_{i=1}^n (x_i-\bar{x})^2}] $$
+$$ SE(\hat{\beta_1})^2 = \frac{\sigma^2}{\sum_{i=1}^n (x_i-\bar{x})^2} $$
+
+其中 $\sigma^2 = Var(\epsilon)$ ，通常情况下是未知的，使用残差标准误 $RSE=\sqrt{RSS/(n-2)}$ 来估计。
+
+
+```{r lm.fig2, fig.width=6, fig.height=6}
+p+geom_smooth(method="lm", se=TRUE, level=0.95)
+```
+上图中，阴影部分就是参数的95%置信区间。
+
+有了标准误，还可以用统计检验来检测X和Y是否具有相关性。
+在这里，可以使用t检验，计算t统计量：
+$$ t = \frac{\hat{\beta_1} - 0}{SE(\hat{\beta_1})} $$
+
+这些统计量，lm()函数都会计算。
+```{r}
+summary(model)
+```
+
+### 评估模型准确性
+#### 残差标准误(RSE, residual standard error)
+```{r lm.fig3, fig.width=6, fig.height=6}
+iris$fitted <- predict(model)
+p %+% iris +  aes(x=fitted, y=Petal.Length-fitted) + geom_linerange(aes(ymin = 0, ymax = Petal.Length - fitted), colour = "purple") + geom_hline(aes(yintercept = 0)) + ggtitle("Residual Distribution")+ylab("Residual")
+```
+
+RSE是Y值和回归直线偏离值均值：
+$$ RSE = \sqrt{\frac{RSS}{n-2}} = \sqrt{\frac{\sum_{i=1}^n (y_i-\hat{y_i})^2}{n-2}} $$
+
+```{r}
+rse <- with(iris, sqrt(sum((fitted - Petal.Length)^2)/(length(Petal.Length)-2)))
+print(rse)
+```
+通过RSE，可以计算模型预测值和真实值平均水平偏离多少。偏离量大不大，可以用 $RSE/\bar{y}$ 来估计。
+```{r}
+with(iris, rse/mean(Petal.Length))
+```
+RSE度量的是失拟（lack of fit），如果RSE很小，则 $\hat{y_i}$ 和 $y_i$ 很接近，模型对数据的拟合非常好，如果RSE很大，则表明模型对数据的拟合很差。
+
+#### $R^2$ 统计量
+RSE是绝对值，不够清晰，用 $RSE/\bar{y}$ 相对值会好一些。 $R^2$ 提供另外一种度量方式:
+$$ R^2 = \frac{TSS - RSS}{TSS} = 1 - \frac{RSS}{TSS}$$
+
+其中 $TSS=\sum(y_i - \bar{y})^2$ ,TSS度量Y的方差，也就是拟合前总的方差；而RSS度量的是残差的方差，也就是拟合后无法解释的方差；TSS-RSS度量的是能够由拟合模型解释的方差；继而， $R^2$ 统计量度量的是Y的方差能由X来解释的比例。
+
+ $R^2$ 接近1，表明回归能解释Y的方差，回归模型拟合得好。而接近0的话，则表明无法解释Y的大部分方差，拟合模型很差，甚至可能是错的。
+ 
+```{r}
+tss <- with(iris, sum((Petal.Length - mean(Petal.Length))^2))
+rss <- with(iris, sum((fitted-Petal.Length)^2))
+rr <- 1 - rss/tss
+rr
+```
+ $R^2$ 统计量度量的是X和Y的线性相关性，我们知道相关系数r定义为：
+ $$ Cor(X, Y) = \frac{\sum_{i=1}^n (x_i - \bar{x}) (y_i - \bar{y})}{\sqrt{\sum_{i=1}^n (x_i - \bar{x})^2)}\sqrt{\sum_{i=1}^n (y_i - \bar{y})^2)}}$$
+
+同样我们可以用相关系数r来评估模型，事实上 $R^2 = r^2$ ，可以说 $R^2$ 是 $r^2$ 的通用形式，相关系数只能用于单变量，如果要用多变量做线性回归的话，就没法用，从这个角度来看，也可以说 $R^2$ 是 $r^2$ 的扩展形式。
+
+### 方差分析
+如前所述，Y的方差TSS，由两部分组成，残差方差(RSS)和回归方差(TSS-RSS)，继而我们可以进行方差分析，TSS的自由度是n-1, 回归方差是1(简单线性回归是单变量),残差方差的自由度是n-2 （TSS的df - 回归方差df），将方差除以自由度，得到平均方差。
+
+如果不存在线性关系，那么回归平均方差和残差平均方差大致相等。可以使用F统计量来检验是否存在线性关系。
+$$ F = \frac{regression\; mean\; square}{residual\; mean\; square} = \frac{TSS-RSS}{RSS/(n-2)}$$
+
+F统计量服从1和n-2自由度的F分析，继而可以计算出p值，当然可以直接扔给anova函数，进行统计计算。
+```{r}
+n <- nrow(iris)
+fstat <- (tss-rss)/(rss/(n-2))
+print(fstat)
+pf(fstat, 1, n-2, lower.tail=F)
+anova(model)
+```
+
+### 可视化辅助诊断模型
+评估模型最重要的指标是残差，R提供了函数可视化残差，残差 vs 拟合值, 残差开方 vs 拟合值, 残差的QQ图，标准化残差 vs Leverage, [leverage度量的是数据点对回归线的影响](http://onlinestatbook.com/2/regression/influential.html)。
+
+```{r lm.fig4, fig.width=6, fig.height=6}
+par(mfrow=c(2,2))
+plot(model)
+```
+
+## Multiple Linear Regression
+
+在简[单线性回归](simple_linear_regression.html)中，我们使用花萼长度来预测花瓣长度，在iris数据集里，还有花萼宽度、花瓣宽度的数据，如果我们想探索花萼宽度和花瓣宽度与花瓣长度的关系，可以分别做简单线性回归，这样子每一个简单线性回归，都忽略了其它两个因素的影响。事实上，一个现象常常与多个因素相联系，由多个变量组合共同来预测因变量，会更加有效。
+
+多元线性回归模型和简单线性回归一样，每个变量需要一个斜率参数：
+$$ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdot\cdot\cdot + \beta_p X_p + \epsilon $$
+
+假设这里有p个变量， $X_j$ 代表第j个变量， $\beta_j$ 代表 $X_j$ 每升高一个单位对Y的平均影响。
+
+真实的参数是未知的，我们需要估计 $\hat{\beta}_0,\hat{\beta}_1,...,\hat{\beta}_p$ 来估计回归参数 $\beta_0,\beta_1,...,\beta_p$ ，于是回归模型就变成：
+
+$$ \hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x_1 + \hat{\beta}_2 x_2 + \cdot\cdot\cdot + \hat{\beta}_p x_p$$
+
+参数估计依然使用最小二乘法，找出参数 $\hat{\beta}_0,\hat{\beta}_1,...,\hat{\beta}_p$ 使得RSS最小。
+$$ RSS= \sum_{i=1}^n (y_i - \hat{y}_i)^2 \\
+= \sum_{i=1}^n (y_i - \hat{\beta}_0 - \hat{\beta}_1 x_1 - \hat{\beta}_2 x_2 - \cdot\cdot\cdot - \hat{\beta}_p x_p)^2 $$
+
+从数值计算上看，这是个优化问题，使用矩阵运算还是比较容易的，[具体请戳这里](http://ygc.name/2011/03/29/machine-learning-ex3-multivariate-linear-regression/)。
+
+在R里，依然可以使用lm函数来做多元线性回归：
+```{r}
+data(iris)
+lm.fit <- lm(Petal.Length ~ Petal.Width+Sepal.Length+Sepal.Width, data=iris)
+lm.fit
+```
+
+### 相关问题
+进行多元线性回归，我们需要回答以下一些重要的问题：
++ X和Y是否存在关系?
++ 所有自变量都有助于解释Y吗？或者说是否只有一部分自变量对Y的预测是有用的？
++ 模型对数据的拟合有多好？
++ 预测的准确性有多好？
+
+#### X和Y是否存在关系?
+对于这个问题，可以使用在[简单线性回归](simple_linear_regression.html)中提到的RSE和 $R^2$ 来评估。
+```{r}
+## TSS
+tss <- with(iris, sum((Petal.Length - mean(Petal.Length))^2))
+```
+```
+## if calculate prediction values manually, use the following command:
+## b <- lm.fit$coefficients
+## iris$"(Intercept)" <- 1
+## d <- as.matrix(iris[, names(b)])
+## iris$fitted <- d %*% as.matrix(b, ncol=1)
+```
+```{r}
+## RSS
+iris$fitted <- predict(lm.fit)
+rss <- with(iris, sum((fitted-Petal.Length)^2))
+b <- lm.fit$coefficients
+p <- length(b) - 1
+n <- nrow(iris)
+df <- n - p -1
+
+## RSE
+rse <- sqrt( rss/df )
+print(rse)
+## R-squared
+rr <- 1 - rss/tss
+print(rr)
+```
+ $R^2$ 是很高的，证明X和Y确实是存在关系的。
+另一方面，可以做统计检验，如果X和Y没有关系，那么参数 $\beta_1 = \beta_2 = \cdot\cdot\cdot = \beta_p = 0$ ，我们可以检验零假设：
+$$ H_{0}: \beta_1 = \beta_2 =... = \beta_p = 0$$
+$$H_{a}: at\; least\; one\; \beta_j\; is\; non-zero.$$
+
+这个假设检验通过计算F统计量：
+$$ F = \frac{(TSS-RSS)/p}{RSS/(n-p-1)}$$
+
+其中 $TSS=\sum(y_i - \bar{y})^2$ 而 $RSS=\sum(y_i - \hat{y}_i)^2$ ，如果线性模型是正确的，那么：
+$$E\{RSS/(n-p-1)\} = \sigma^2$$
+如果 $H_0$ 是对的，则
+$$E\{(TSS - RSS)/p\} = \sigma^2$$
+
+因此如果 $H_0$ 是对的，那么F统计量的值因为接近于1，如果 $H_a$ 是对的，则 $E\{(TSS - RSS)/p\} > \sigma^2$ ，F统计量要大于1。
+
+```{r}
+## F-statistic
+fstat <- ((tss-rss)/p) / (rss/df)
+print(fstat)
+```
+F统计量服从F分布，可以根据F分布来计算p值，以决定是否reject  $H_0$ 。
+```{r}
+pf(fstat, p, n-p-1, lower.tail=F)
+```
+
+上面计算的这些统计量，lm函数都有计算。
+```{r}
+summary(lm.fit)
+```
+而且还对每个变量计算了p值，这些p值给出了每一个 $x_j$ 和y是否相关的信息。
+
+
+#### 变量选择
+通过上面输出中每个参数的p值，可以看出每个变量对y的贡献是不一样的，很多情况下，y只和其中某一部分 $x_j$ 有关，这就涉及到变量选择问题。
+
+针对这个问题有三种方法：
++ Forward selection：从空模型（只包含截距）开始，对p个变量分别做简单线性回归，对产生最小RSS的变量加入到模型中，继而做两变量拟合，把产生最小RSS的第二个变量，再加入到模型中，不断迭代直到停止条件产生。
++ Backward selection：所有变量一起拟合，然后移除p值最大的变量，再对(p-1)个变量重新拟合，再移除最大p值的变量，不断迭代，直到停止条件出现。
++ Mixed selection：这是Forward和Backward selection的组合，从空模型开始，按照Forward selection来做，变量一个个地加入，在这个过程中，某些变量的p值是有可能升高的，如果p值高于某个阈值，移除这个变量。不断地进行forward和backward步骤，直到模型中的所有变量p值都足够小，而模型外的变量，如果加入到模型中，会产生比较大的p值。
+
+Backward selection不能应用于 p > n的情况下，而Forward selection则可以，Forward selection是贪婪方法，开始加入的变量到了后面可能变成冗余，而Mixed selection可以弥补这一点。
+
+#### 模型拟合
+模型对数据的拟合度有多好，可以使用之前计算过的RSE和 $R^2$ 来评估。
+[简单线性回归](simple_linear_regression.html)给出的RSE公式，是针对简单线性回归的简化形式，其通过形式为：
+$$ RSE = \sqrt{\frac{RSS}{n-p-1}} $$
+
+在简单线性回归中 $R^2$ 是X和Y的相关系数的平方，在多元线性回归中，它等于Y和 $\hat(Y)$ 的相关系数的平方。事实上拟合后的模型，除了RSS最小之外， $R^2$ 是最大的。
+```{r}
+with(iris, cor(fitted, Petal.Length)^2)
+```
+按相关系数计算的 $R^2$ 和之前使用 $1 - \frac{RSS}{TSS}$ 计算的是一样的。
+
+#### 模型预测
+参数预测本身是有误差的，即使我们知道真实的参数，也不可能完美地预测数据，因为模型中包含有随机误差 $\epsilon$ ，在预测的时候，最好使用置信区间，这样把uncertainty的信息也包括在内。
+
+```{r}
+xx <- predict(lm.fit, se.fit=TRUE, interval="confidence", level=0.95)
+xx <- as.data.frame(xx$fit)
+xx$y <- iris$Petal.Length
+head(xx)
+mean(with(xx, y> lwr & y < upr))
+```
+这个模型的 $R^2$ 是0.968，拟合得如此好的模型，预测起来，偏差还是有那么些，真实值落在预测的95%置信区间里，只占了35%不到。
+```{r}
+yy <- predict(lm.fit, se.fit=TRUE, interval="prediction", level=0.95)$fit
+colnames(yy) <- c("fitpred", "lwrpred", "uprpred")
+xx <- cbind(xx, yy)
+head(xx)
+mean(with(xx, y> lwrpred & y < uprpred))
+```
+显然用prediction方法，给出的预测值置信区间要靠谱得多。
+```{r mlm.fig1, fig.width=6, fig.height=6}
+ggplot(xx, aes(fit, y))+geom_point() + geom_line(aes(y=fit)) + geom_line(aes(y=lwr), color="red") +  geom_line(aes(y=upr), color="red") +  geom_line(aes(y=lwrpred), color="blue") +  geom_line(aes(y=uprpred), color="blue")
+```
+
+### 数值运算
+参考[以前的博文](http://guangchuangyu.github.io/2011/03/machine-learning-ex3-multivariate-linear-regression/)
+$$ B = (X^TX)^{-1}(X^TY)$$
+
+```{r}
+X=iris[,c("Petal.Width", "Sepal.Length", "Sepal.Width")]
+X=as.matrix(X)
+X=cbind(x0=1, X)
+Y=as.matrix(iris[, "Petal.Length"])
+solve(t(X) %*% X) %*% t(X) %*% Y
+lm.fit
+```
+按照公式计算出来，和lm.fit的结果是一样的。
+

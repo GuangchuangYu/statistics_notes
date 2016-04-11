@@ -12,7 +12,8 @@ install:
   - Rscript -e "if (!require('bookdown')) devtools::install_github('rstudio/bookdown')"
   - Rscript -e "if (!require('ggplot2')) install.packages('ggplot2')"
   - Rscript -e "if (!require('ggthemes')) install.packages('ggthemes')"  
-
+  - Rscript -e "if (!require('psych')) install.packages('psych')"
+  
 before_script:
   - chmod +x ./_build.sh
   - chmod +x ./_deploy.sh
