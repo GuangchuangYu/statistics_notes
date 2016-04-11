@@ -175,19 +175,19 @@ In theory, there is no difference between theory and practice. But, in practice,
 <p>使用R进行单样本的T检验，是一件非常容易的事情。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:<span class="dv">100</span>, <span class="dv">10</span>)
 <span class="kw">print</span>(x)</code></pre></div>
-<pre><code>##  [1] 74 29 23 85 46 79 65  8  6 54</code></pre>
+<pre><code>##  [1] 10  3 11 74 23 49 32 61 52 71</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(x, <span class="dt">mu=</span><span class="dv">20</span>)</code></pre></div>
 <pre><code>## 
 ##  One Sample t-test
 ## 
 ## data:  x
-## t = 2.9134, df = 9, p-value = 0.01722
+## t = 2.2362, df = 9, p-value = 0.05216
 ## alternative hypothesis: true mean is not equal to 20
 ## 95 percent confidence interval:
-##  26.01275 67.78725
+##  19.78432 57.41568
 ## sample estimates:
 ## mean of x 
-##      46.9</code></pre>
+##      38.6</code></pre>
 <pre><code>2013-03-26</code></pre>
 
 </div>
