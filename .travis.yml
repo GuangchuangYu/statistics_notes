@@ -1,11 +1,18 @@
-# clone the repository to the book-output directory
+language: r
 
-git clone -b gh-pages \
-  https://GuangchuangYu@github.com/statistics_notes.git \
-    book-output
-    cd book-output
-    cp -r ../_book/* ./
-    rm -rf _bookdown_files
-    git add *
-    git commit -m"Update the book"
-    git push origin gh-pages
+env:
+  global:
+      - secure: A_LONG_ENCRYPTED_STRING
+
+r_github_packages:
+  - rstudio/bookdown
+
+install: true
+
+before_script:
+  - chmod +x ./_build.sh
+  - chmod +x ./_deploy.sh
+
+script:
+  - ./build.sh
+  - ./deploy.sh
