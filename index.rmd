@@ -4,12 +4,7 @@ author: "余光创"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output:
-  bookdown::gitbook:
-    config:
-      sharing:
-        facebook: yes
-	    twitter: yes
-	    weibo: yes
+  bookdown::gitbook
 documentclass: book
 biblio-style: apalike
 link-citations: yes
