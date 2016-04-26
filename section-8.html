@@ -8,7 +8,7 @@
   <title>统计笔记</title>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="YGC的统计学笔记">
-  <meta name="generator" content="bookdown 0.0.63 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.0.67 and GitBook 2.6.7">
 
   <meta property="og:title" content="统计笔记" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 
 <meta name="author" content="余光创">
 
-<meta name="date" content="2016-04-11">
+<meta name="date" content="2016-04-26">
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -109,8 +109,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2" data-path="r.html"><a href="r.html"><i class="fa fa-check"></i><b>2</b> R语言简介</a><ul>
 <li class="chapter" data-level="2.1" data-path="r.html"><a href="r.html#-flow-control"><i class="fa fa-check"></i><b>2.1</b> 控制流 （Flow Control)</a></li>
 <li class="chapter" data-level="2.2" data-path="r.html"><a href="r.html#-looping"><i class="fa fa-check"></i><b>2.2</b> 循环 (Looping)</a></li>
-<li class="chapter" data-level="2.3" data-path="r.html"><a href="r.html#covariancecorrelation"><i class="fa fa-check"></i><b>2.3</b> 协方差（covariance）和相关性（correlation）</a></li>
-<li class="chapter" data-level="2.4" data-path="r.html"><a href="r.html#section-2.4"><i class="fa fa-check"></i><b>2.4</b> 对称性度量</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>3</b> 使用ggplot2画图</a><ul>
 <li class="chapter" data-level="3.1" data-path="ggplot2.html"><a href="ggplot2.html#why-use-ggplot2"><i class="fa fa-check"></i><b>3.1</b> Why use ggplot2</a></li>
@@ -258,13 +256,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## The following objects are masked from iris (pos = 3):
 ## 
 ##     Petal.Length, Petal.Width, Sepal.Length, Sepal.Width, Species</code></pre>
-<pre><code>## The following objects are masked from iris (pos = 9):
-## 
-##     Petal.Length, Petal.Width, Sepal.Length, Sepal.Width, Species</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(Sepal.Length, Petal.Length))+
 <span class="st">        </span><span class="kw">geom_point</span>(<span class="dt">shape=</span><span class="dv">1</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>)
 <span class="kw">print</span>(p)</code></pre></div>
-<p><img src="_main_files/figure-html/lm.fig1-1.png" /><!-- --> 我们需要拟合： <span class="math display">\[ Petal \approx \beta_0 + \beta_1 Sepal \]</span></p>
+<p><img src="_main_files/figure-html/lm.fig1-1.png" width="576" /> 我们需要拟合： <span class="math display">\[ Petal \approx \beta_0 + \beta_1 Sepal \]</span></p>
 <p><span class="math inline">\(\beta_0\)</span> 和 <span class="math inline">\(\beta_1\)</span> 代表线性模型的截距和斜率，这两个模型参数是未知的，需要通过训练数据估计 <span class="math inline">\(\hat{\beta_0}\)</span> 和 <span class="math inline">\(\hat{\beta_1}\)</span> 。</p>
 <p>使得直线 <span class="math display">\[ \hat{y} = \hat{\beta_0} + \hat{\beta_1} x \]</span> 与数据集中的点最接近，有多种方法来来计算“接近度“，最常用的是最小二乘法(least squares)。</p>
 <p>最小二乘法通过计算残差平方和（RSS, residual sum of squares） <span class="math display">\[ RSS = {e_1}^2 + {e_2}^2 + … + {e_n}^2 \]</span> 其中 <span class="math inline">\(e_i = y_i - \hat{y_i}\)</span> . 问题转换为找出 <span class="math inline">\(\hat{\beta_0}\)</span> 和 <span class="math inline">\(\hat{\beta_1}\)</span> 使得RSS的值最小。 通过计算，可以得到： <span class="math display">\[ \hat{\beta_1} = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^n (x_i - \bar{x})^2} = r_{xy} (\frac{s_y}{s_x})\]</span> <span class="math display">\[ \hat{\beta_0} = \bar{y} - \hat{\beta_1}\bar{x} \]</span></p>
@@ -289,7 +284,7 @@ model</code></pre></div>
 <p>同样地，我们估计出来的参数 <span class="math inline">\(\hat{\beta_0}\)</span> 和 <span class="math inline">\(\hat{\beta_1}\)</span> 和真实的参数到底偏离多远，需要通过计算参数的standard error来估计。 <span class="math display">\[ SE(\hat{\beta_0})^2 = \sigma^2 [\frac{1}{n} + \frac{\bar{x}^2}{\sum_{i=1}^n (x_i-\bar{x})^2}] \]</span> <span class="math display">\[ SE(\hat{\beta_1})^2 = \frac{\sigma^2}{\sum_{i=1}^n (x_i-\bar{x})^2} \]</span></p>
 <p>其中 <span class="math inline">\(\sigma^2 = Var(\epsilon)\)</span> ，通常情况下是未知的，使用残差标准误 <span class="math inline">\(RSE=\sqrt{RSS/(n-2)}\)</span> 来估计。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p+<span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">TRUE</span>, <span class="dt">level=</span><span class="fl">0.95</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/lm.fig2-1.png" /><!-- --> 上图中，阴影部分就是参数的95%置信区间。</p>
+<p><img src="_main_files/figure-html/lm.fig2-1.png" width="576" /> 上图中，阴影部分就是参数的95%置信区间。</p>
 <p>有了标准误，还可以用统计检验来检测X和Y是否具有相关性。 在这里，可以使用t检验，计算t统计量： <span class="math display">\[ t = \frac{\hat{\beta_1} - 0}{SE(\hat{\beta_1})} \]</span></p>
 <p>这些统计量，lm()函数都会计算。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(model)</code></pre></div>
@@ -318,7 +313,7 @@ model</code></pre></div>
 <h4><span class="header-section-number">8.1.2.1</span> 残差标准误(RSE, residual standard error)</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris$fitted &lt;-<span class="st"> </span><span class="kw">predict</span>(model)
 p %+%<span class="st"> </span>iris +<span class="st">  </span><span class="kw">aes</span>(<span class="dt">x=</span>fitted, <span class="dt">y=</span>Petal.Length-fitted) +<span class="st"> </span><span class="kw">geom_linerange</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> <span class="dv">0</span>, <span class="dt">ymax =</span> Petal.Length -<span class="st"> </span>fitted), <span class="dt">colour =</span> <span class="st">&quot;purple&quot;</span>) +<span class="st"> </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>)) +<span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual Distribution&quot;</span>)+<span class="kw">ylab</span>(<span class="st">&quot;Residual&quot;</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/lm.fig3-1.png" /><!-- --></p>
+<p><img src="_main_files/figure-html/lm.fig3-1.png" width="576" /></p>
 <p>RSE是Y值和回归直线偏离值均值： <span class="math display">\[ RSE = \sqrt{\frac{RSS}{n-2}} = \sqrt{\frac{\sum_{i=1}^n (y_i-\hat{y_i})^2}{n-2}} \]</span></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rse &lt;-<span class="st"> </span><span class="kw">with</span>(iris, <span class="kw">sqrt</span>(<span class="kw">sum</span>((fitted -<span class="st"> </span>Petal.Length)^<span class="dv">2</span>)/(<span class="kw">length</span>(Petal.Length)-<span class="dv">2</span>)))
 <span class="kw">print</span>(rse)</code></pre></div>
@@ -368,7 +363,7 @@ fstat &lt;-<span class="st"> </span>(tss-rss)/(rss/(n<span class="dv">-2</span>)
 <p>评估模型最重要的指标是残差，R提供了函数可视化残差，残差 vs 拟合值, 残差开方 vs 拟合值, 残差的QQ图，标准化残差 vs Leverage, <a href="http://onlinestatbook.com/2/regression/influential.html">leverage度量的是数据点对回归线的影响</a>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))
 <span class="kw">plot</span>(model)</code></pre></div>
-<p><img src="_main_files/figure-html/lm.fig4-1.png" /><!-- --></p>
+<p><img src="_main_files/figure-html/lm.fig4-1.png" width="576" /></p>
 </div>
 </div>
 <div id="multiple-linear-regression" class="section level2">
@@ -505,7 +500,7 @@ xx &lt;-<span class="st"> </span><span class="kw">cbind</span>(xx, yy)
 <pre><code>## [1] 0.9733333</code></pre>
 <p>显然用prediction方法，给出的预测值置信区间要靠谱得多。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(xx, <span class="kw">aes</span>(fit, y))+<span class="kw">geom_point</span>() +<span class="st"> </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>fit)) +<span class="st"> </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>lwr), <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) +<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>upr), <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) +<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>lwrpred), <span class="dt">color=</span><span class="st">&quot;blue&quot;</span>) +<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>uprpred), <span class="dt">color=</span><span class="st">&quot;blue&quot;</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/mlm.fig1-1.png" /><!-- --></p>
+<p><img src="_main_files/figure-html/mlm.fig1-1.png" width="576" /></p>
 </div>
 </div>
 <div id="section-8.2.2" class="section level3">
@@ -543,7 +538,7 @@ Y=<span class="kw">as.matrix</span>(iris[, <span class="st">&quot;Petal.Length&q
 <a href="correlation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="general-linear-model.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
-<script src="libs/gitbook-2.6.7/js/app.js"></script>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>

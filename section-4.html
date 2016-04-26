@@ -8,7 +8,7 @@
   <title>统计笔记</title>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="YGC的统计学笔记">
-  <meta name="generator" content="bookdown 0.0.63 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.0.67 and GitBook 2.6.7">
 
   <meta property="og:title" content="统计笔记" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 
 <meta name="author" content="余光创">
 
-<meta name="date" content="2016-04-11">
+<meta name="date" content="2016-04-26">
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -109,8 +109,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2" data-path="r.html"><a href="r.html"><i class="fa fa-check"></i><b>2</b> R语言简介</a><ul>
 <li class="chapter" data-level="2.1" data-path="r.html"><a href="r.html#-flow-control"><i class="fa fa-check"></i><b>2.1</b> 控制流 （Flow Control)</a></li>
 <li class="chapter" data-level="2.2" data-path="r.html"><a href="r.html#-looping"><i class="fa fa-check"></i><b>2.2</b> 循环 (Looping)</a></li>
-<li class="chapter" data-level="2.3" data-path="r.html"><a href="r.html#covariancecorrelation"><i class="fa fa-check"></i><b>2.3</b> 协方差（covariance）和相关性（correlation）</a></li>
-<li class="chapter" data-level="2.4" data-path="r.html"><a href="r.html#section-2.4"><i class="fa fa-check"></i><b>2.4</b> 对称性度量</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>3</b> 使用ggplot2画图</a><ul>
 <li class="chapter" data-level="3.1" data-path="ggplot2.html"><a href="ggplot2.html#why-use-ggplot2"><i class="fa fa-check"></i><b>3.1</b> Why use ggplot2</a></li>
@@ -262,7 +260,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## Loading required package: plyr</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bn.df &lt;-<span class="st"> </span><span class="kw">mdply</span>(<span class="kw">data.frame</span>(<span class="dt">n=</span><span class="kw">seq</span>(<span class="dv">10</span>,<span class="dv">30</span>, <span class="dv">5</span>)), bnd)
 <span class="kw">ggplot</span>(bn.df, <span class="kw">aes</span>(x, prob, <span class="dt">group=</span>n, <span class="dt">color=</span><span class="kw">factor</span>(n)))+<span class="kw">geom_point</span>(<span class="dt">shape=</span><span class="dv">1</span>)+<span class="kw">geom_line</span>()</code></pre></div>
-<p><img src="_main_files/figure-html/pd.fig1-1.png" /><!-- --></p>
+<p><img src="_main_files/figure-html/pd.fig1-1.png" width="672" /></p>
 </div>
 <div id="poisson" class="section level3">
 <h3><span class="header-section-number">4.1.3</span> Poisson分布</h3>
@@ -278,7 +276,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 }
 p.df &lt;-<span class="st"> </span><span class="kw">mdply</span>(<span class="kw">data.frame</span>(<span class="dt">lambda=</span><span class="kw">seq</span>(<span class="dv">10</span>,<span class="dv">60</span>, <span class="dv">10</span>)), pd)
 <span class="kw">ggplot</span>(p.df, <span class="kw">aes</span>(x, prob, <span class="dt">group=</span>lambda, <span class="dt">color=</span><span class="kw">factor</span>(lambda)))+<span class="kw">geom_point</span>(<span class="dt">shape=</span><span class="dv">1</span>)+<span class="kw">geom_line</span>()+<span class="kw">facet_wrap</span>(~lambda)+<span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/pd.fig2-1.png" /><!-- --></p>
+<p><img src="_main_files/figure-html/pd.fig2-1.png" width="672" /></p>
 </div>
 <div id="section-4.1.4" class="section level3">
 <h3><span class="header-section-number">4.1.4</span> 正态分布</h3>
@@ -301,7 +299,7 @@ para &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span clas
 pt.df &lt;-<span class="st"> </span><span class="kw">mdply</span>(para, get.pt)
 <span class="kw">require</span>(ggplot2)
 <span class="kw">ggplot</span>(pt.df, <span class="kw">aes</span>(x, prob))+<span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">group=</span>df, <span class="dt">color=</span><span class="kw">factor</span>(df)))+<span class="kw">geom_line</span>(<span class="dt">data=</span>pn.df)</code></pre></div>
-<p><img src="_main_files/figure-html/pd.fig3-1.png" /><!-- --> 上图画了自由度为3，5，15和30的t分布，以及正态分布，随着自由度的增加，t分布越来越接近于正态分布，很多时候，我们只有小样本，那么可以说t分布是正态分布的保守版本.从图中可以观察到，t分布中心比较平，而尾巴比较”胖“，特别是自由度较小的时候，t分布的尾巴会比正态分布长，那么同样一个值，t分布计算出来的p-value会比正态分布大一点。</p>
+<p><img src="_main_files/figure-html/pd.fig3-1.png" width="672" /> 上图画了自由度为3，5，15和30的t分布，以及正态分布，随着自由度的增加，t分布越来越接近于正态分布，很多时候，我们只有小样本，那么可以说t分布是正态分布的保守版本.从图中可以观察到，t分布中心比较平，而尾巴比较”胖“，特别是自由度较小的时候，t分布的尾巴会比正态分布长，那么同样一个值，t分布计算出来的p-value会比正态分布大一点。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dnorm</span>(<span class="dv">2</span>)</code></pre></div>
 <pre><code>## [1] 0.05399097</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dt</span>(<span class="dv">2</span>, <span class="dt">df=</span><span class="dv">5</span>)</code></pre></div>
@@ -319,7 +317,7 @@ pt.df &lt;-<span class="st"> </span><span class="kw">mdply</span>(para, get.pt)
 }
 pc.df &lt;-<span class="st"> </span><span class="kw">mdply</span>(<span class="kw">data.frame</span>(<span class="dt">df=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">9</span>,<span class="dv">18</span>)), pc)
 <span class="kw">ggplot</span>(pc.df, <span class="kw">aes</span>(x, prob, <span class="dt">group=</span>df, <span class="dt">color=</span><span class="kw">factor</span>(df)))+<span class="kw">geom_point</span>(<span class="dt">shape=</span><span class="dv">1</span>)+<span class="kw">geom_line</span>()+<span class="kw">ggtitle</span>(<span class="st">&quot;Chi-Square Distribution&quot;</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/pd.fig4-1.png" /><!-- --> ### F分布 F分布也是基于自由度，所以也是一个分布家族，它的自由度有两个，分别对应于分子项和分母项，因为F值是方差的比值，所以只有正值，函数峰在1左右（1代表两个方差是相等的），非对称分布，呈现右偏。</p>
+<p><img src="_main_files/figure-html/pd.fig4-1.png" width="672" /> ### F分布 F分布也是基于自由度，所以也是一个分布家族，它的自由度有两个，分别对应于分子项和分母项，因为F值是方差的比值，所以只有正值，函数峰在1左右（1代表两个方差是相等的），非对称分布，呈现右偏。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pff &lt;-<span class="st"> </span>function(<span class="dt">x=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">6</span>,<span class="fl">0.1</span>), df1, df2) {
     y &lt;-<span class="st"> </span><span class="kw">df</span>(x, df1, df2)
     pf.df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x=</span>x, <span class="dt">prob=</span>y, <span class="dt">df1=</span>df1, <span class="dt">df2=</span>df2)
@@ -328,7 +326,7 @@ pc.df &lt;-<span class="st"> </span><span class="kw">mdply</span>(<span class="k
 
 pf.df &lt;-<span class="st"> </span><span class="kw">mdply</span>(<span class="kw">data.frame</span>(<span class="dt">df1=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">10</span>), <span class="dt">df2=</span><span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">29</span>)), pff)
 <span class="kw">ggplot</span>(pf.df, <span class="kw">aes</span>(x, prob, <span class="dt">group=</span><span class="kw">interaction</span>(df1,df2), <span class="dt">color=</span><span class="kw">interaction</span>(df1, df2)))+<span class="kw">geom_line</span>()+<span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="dv">1</span>, <span class="dt">linetype=</span><span class="st">&quot;dashed&quot;</span>) +<span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="kw">c</span>(.<span class="dv">8</span>, .<span class="dv">8</span>))</code></pre></div>
-<p><img src="_main_files/figure-html/pd.fig5-1.png" /><!-- --> 如果F值小于1，使用左尾巴进行p值计算，大于1则右尾巴进行p值计算，很多人抛弃使用左尾巴进行p值计算，只需要把分子分母倒过来就行，当然自由度也要跟着倒过来。</p>
+<p><img src="_main_files/figure-html/pd.fig5-1.png" width="672" /> 如果F值小于1，使用左尾巴进行p值计算，大于1则右尾巴进行p值计算，很多人抛弃使用左尾巴进行p值计算，只需要把分子分母倒过来就行，当然自由度也要跟着倒过来。</p>
 <p>虽然使用单侧来计算，但p值的计算通常是two-tailed，因为F值是两个方差的比值，不管两个均值的差是正的还是负的，方差都是正的。从这个角度上看，计算出来的单侧p值要乘以2，要把正和负的均值差都考虑在内，这是双侧检验。 假如F值为4.5，自由度为10和15，p值应该这样算：</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span>*(<span class="dv">1</span>-<span class="kw">pf</span>(<span class="fl">4.5</span>, <span class="dv">10</span>, <span class="dv">15</span>))</code></pre></div>
 <pre><code>## [1] 0.00921466</code></pre>
@@ -370,7 +368,7 @@ pf.df &lt;-<span class="st"> </span><span class="kw">mdply</span>(<span class="k
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x=<span class="kw">seq</span>(-<span class="dv">4</span>, <span class="dv">4</span>, <span class="dt">length=</span><span class="dv">500</span>)
 d &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x=</span>x, <span class="dt">prob=</span><span class="kw">dnorm</span>(x))
 <span class="kw">ggplot</span>(d, <span class="kw">aes</span>(x, prob, <span class="dt">fill=</span>x&gt;=<span class="dv">2</span>))+<span class="kw">geom_area</span>()+<span class="kw">scale_fill_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;FALSE&quot;</span>=<span class="st">&quot;steelblue&quot;</span>, <span class="st">&quot;TRUE&quot;</span>=<span class="st">&quot;red&quot;</span>))+<span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/p.fig1-1.png" /><!-- --> 也就是图中红色部分的面积。通常以一个阈值（比如0.05）来区分是否具有统计学显著性，这是以前查表时代的东西，现在统计学软件的大量使用，直接报p值比较好。</p>
+<p><img src="_main_files/figure-html/p.fig1-1.png" width="672" /> 也就是图中红色部分的面积。通常以一个阈值（比如0.05）来区分是否具有统计学显著性，这是以前查表时代的东西，现在统计学软件的大量使用，直接报p值比较好。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pnorm</span>(<span class="dv">2</span>, <span class="dt">lower.tail=</span>F)</code></pre></div>
 <pre><code>## [1] 0.02275013</code></pre>
 <p>上面红色部分算出来的p值是0.02275，我们可以拒绝总体是标准正态分布的零假设，这样的观察值来自于标准正态分布的概率是0.02275，也就是有0.02275的可能性零假设是对的，这就是我们拒绝零假设所犯错的可能性，称之为I类错误。</p>
@@ -405,7 +403,7 @@ y &lt;-<span class="st"> </span><span class="kw">get_sample_mean</span>(<span cl
 <span class="kw">hist</span>(ssm, <span class="dt">breaks=</span><span class="dv">30</span>, <span class="dt">main=</span><span class="st">&quot;sample means distribution</span><span class="ch">\n</span><span class="st">from non-Normal distribution</span><span class="ch">\n</span><span class="st">(sample size = 10)&quot;</span>)
 <span class="kw">hist</span>(lsm, <span class="dt">breaks=</span><span class="dv">30</span>, <span class="dt">main=</span><span class="st">&quot;sample means distribution</span><span class="ch">\n</span><span class="st">from non-Normal distribution</span><span class="ch">\n</span><span class="st">(sample size = 50)&quot;</span>)
 <span class="kw">hist</span>(y, <span class="dt">breaks=</span><span class="dv">30</span>, <span class="dt">main=</span><span class="st">&quot;sample means distribution</span><span class="ch">\n</span><span class="st">from Normal distribution</span><span class="ch">\n</span><span class="st">(sample size = 5)&quot;</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/ci.fig1-1.png" /><!-- --></p>
+<p><img src="_main_files/figure-html/ci.fig1-1.png" width="960" /></p>
 <p>只要样本量足够大，均值的分布都将呈现正态分布，不管样本来源于什么样的数据分布中，这就是中心极限定理，这也是为什么正态分布令人着迷之处。</p>
 <p>从上面的图中，我们可以看到，如果样本量足够大，即使总体不呈正态，样本均值分布符合中心极限定理，也呈正态分布；如果样本量不够大，则数据来源必须是正态分布，均值的分布才是呈正态分布的。</p>
 </div>
@@ -425,7 +423,7 @@ x3 &lt;-<span class="st"> </span><span class="kw">get_sample_mean</span>(<span c
 <span class="kw">hist</span>(x2, <span class="dt">breaks=</span><span class="dv">30</span>, <span class="dt">col=</span><span class="st">&quot;green&quot;</span>, <span class="dt">main=</span><span class="st">&quot;sample means distribution&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Means&quot;</span>)
 <span class="kw">hist</span>(x3, <span class="dt">breaks=</span><span class="dv">30</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">add=</span><span class="ot">TRUE</span>)
 <span class="kw">legend</span>(<span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;n=10&quot;</span>, <span class="st">&quot;n=50&quot;</span>), <span class="dt">fill=</span><span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;red&quot;</span>), <span class="st">&quot;topright&quot;</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/ci.fig2-1.png" /><!-- --> 从上面的仿真抽样可以看到，SEM和 <span class="math inline">\(\sigma\)</span> 呈正相关，<span class="math inline">\(\sigma\)</span> 越大，SEM越大；而和sample size呈负相关，sample size越大，SEM越小。 实际上： <span class="math display">\[\sigma_{\bar{x}}^2=\frac{\sigma^2}{n}\]</span> 也就是： <span class="math display">\[\sigma_{\bar{x}}=\sqrt{\frac{\sigma^2}{n}} = \frac{\sigma}{\sqrt{n}}\]</span> 通常情况下，总体 <span class="math inline">\(\sigma\)</span> 是未知的，使用样本sd来估计，那么SEM为： <span class="math display">\[s_{\bar{x}} = \frac{s}{\sqrt{n}}\]</span></p>
+<p><img src="_main_files/figure-html/ci.fig2-1.png" width="960" /> 从上面的仿真抽样可以看到，SEM和 <span class="math inline">\(\sigma\)</span> 呈正相关，<span class="math inline">\(\sigma\)</span> 越大，SEM越大；而和sample size呈负相关，sample size越大，SEM越小。 实际上： <span class="math display">\[\sigma_{\bar{x}}^2=\frac{\sigma^2}{n}\]</span> 也就是： <span class="math display">\[\sigma_{\bar{x}}=\sqrt{\frac{\sigma^2}{n}} = \frac{\sigma}{\sqrt{n}}\]</span> 通常情况下，总体 <span class="math inline">\(\sigma\)</span> 是未知的，使用样本sd来估计，那么SEM为： <span class="math display">\[s_{\bar{x}} = \frac{s}{\sqrt{n}}\]</span></p>
 <p>我们可以通过仿真抽样进行验证：</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## generate 1000 sample with sample size 100
 a =<span class="st"> </span><span class="kw">sapply</span>(<span class="kw">rep</span>(<span class="dv">100</span>, <span class="dv">1000</span>), rnorm)
@@ -544,7 +542,7 @@ msg &lt;-<span class="st"> </span><span class="kw">paste</span>((<span class="dv
 <a href="ggplot2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="t.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
-<script src="libs/gitbook-2.6.7/js/app.js"></script>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>

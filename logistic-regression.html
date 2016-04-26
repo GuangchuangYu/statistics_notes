@@ -8,7 +8,7 @@
   <title>统计笔记</title>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="YGC的统计学笔记">
-  <meta name="generator" content="bookdown 0.0.63 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.0.67 and GitBook 2.6.7">
 
   <meta property="og:title" content="统计笔记" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 
 <meta name="author" content="余光创">
 
-<meta name="date" content="2016-04-11">
+<meta name="date" content="2016-04-26">
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -109,8 +109,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2" data-path="r.html"><a href="r.html"><i class="fa fa-check"></i><b>2</b> R语言简介</a><ul>
 <li class="chapter" data-level="2.1" data-path="r.html"><a href="r.html#-flow-control"><i class="fa fa-check"></i><b>2.1</b> 控制流 （Flow Control)</a></li>
 <li class="chapter" data-level="2.2" data-path="r.html"><a href="r.html#-looping"><i class="fa fa-check"></i><b>2.2</b> 循环 (Looping)</a></li>
-<li class="chapter" data-level="2.3" data-path="r.html"><a href="r.html#covariancecorrelation"><i class="fa fa-check"></i><b>2.3</b> 协方差（covariance）和相关性（correlation）</a></li>
-<li class="chapter" data-level="2.4" data-path="r.html"><a href="r.html#section-2.4"><i class="fa fa-check"></i><b>2.4</b> 对称性度量</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>3</b> 使用ggplot2画图</a><ul>
 <li class="chapter" data-level="3.1" data-path="ggplot2.html"><a href="ggplot2.html#why-use-ggplot2"><i class="fa fa-check"></i><b>3.1</b> Why use ggplot2</a></li>
@@ -307,10 +305,10 @@ res=<span class="kw">glm</span>(Species ~<span class="st"> </span>Sepal.Length+<
 <p>p值很小，证明模型是非常好的。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))
 <span class="kw">plot</span>(res)</code></pre></div>
-<p><img src="_main_files/figure-html/glm.fig1-1.png" /><!-- --> 同样可以用plot画出各种图，来辅助诊断。</p>
+<p><img src="_main_files/figure-html/glm.fig1-1.png" width="576" /> 同样可以用plot画出各种图，来辅助诊断。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">logit=<span class="kw">log</span>(res$fitted.values/(<span class="dv">1</span>-res$fitted.values))
 <span class="kw">plot</span>(logit, res$fitted.values)</code></pre></div>
-<p><img src="_main_files/figure-html/glm.fig2-1.png" /><!-- --></p>
+<p><img src="_main_files/figure-html/glm.fig2-1.png" width="576" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(<span class="kw">round</span>(res$fitted.values) ==<span class="st"> </span>dd$Species)</code></pre></div>
 <pre><code>## [1] 0.98</code></pre>
 <p>从数值上看，98%的数据归类是正确的。当然这个也可以使用卡方检验来检验：</p>
@@ -332,7 +330,7 @@ res=<span class="kw">glm</span>(Species ~<span class="st"> </span>Sepal.Length+<
 <a href="general-linear-model.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="section-11.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
-<script src="libs/gitbook-2.6.7/js/app.js"></script>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>

@@ -8,7 +8,7 @@
   <title>统计笔记</title>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="YGC的统计学笔记">
-  <meta name="generator" content="bookdown 0.0.63 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.0.67 and GitBook 2.6.7">
 
   <meta property="og:title" content="统计笔记" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 
 <meta name="author" content="余光创">
 
-<meta name="date" content="2016-04-11">
+<meta name="date" content="2016-04-26">
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -109,8 +109,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2" data-path="r.html"><a href="r.html"><i class="fa fa-check"></i><b>2</b> R语言简介</a><ul>
 <li class="chapter" data-level="2.1" data-path="r.html"><a href="r.html#-flow-control"><i class="fa fa-check"></i><b>2.1</b> 控制流 （Flow Control)</a></li>
 <li class="chapter" data-level="2.2" data-path="r.html"><a href="r.html#-looping"><i class="fa fa-check"></i><b>2.2</b> 循环 (Looping)</a></li>
-<li class="chapter" data-level="2.3" data-path="r.html"><a href="r.html#covariancecorrelation"><i class="fa fa-check"></i><b>2.3</b> 协方差（covariance）和相关性（correlation）</a></li>
-<li class="chapter" data-level="2.4" data-path="r.html"><a href="r.html#section-2.4"><i class="fa fa-check"></i><b>2.4</b> 对称性度量</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>3</b> 使用ggplot2画图</a><ul>
 <li class="chapter" data-level="3.1" data-path="ggplot2.html"><a href="ggplot2.html#why-use-ggplot2"><i class="fa fa-check"></i><b>3.1</b> Why use ggplot2</a></li>
@@ -271,28 +269,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="-looping" class="section level2">
 <h2><span class="header-section-number">2.2</span> 循环 (Looping)</h2>
-</div>
-<div id="covariancecorrelation" class="section level2">
-<h2><span class="header-section-number">2.3</span> 协方差（covariance）和相关性（correlation）</h2>
-<p>我们想看两组数据是否独立，或者说想看两组数据是否相关。我们可以使用协方差:</p>
-<p><span class="math inline">\(s_{xy}=\frac{\sum{(x-\bar{x})(y-\bar{y})}}{n-1}\)</span></p>
-<p>协方差的取值可以是正、0和负，如果值是正的，表明x和y的趋势一致，即x上升的话，y也是上升的。协方差的值受到x和y单位的影响，为了消除这一影响，将协方差除以x和y的标准差，我们得到的是相关系数。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(iris)
-<span class="kw">attach</span>(iris)
-<span class="kw">cov</span>(Sepal.Length, Sepal.Width)</code></pre></div>
-<pre><code>## [1] -0.042434</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cov</span>(Sepal.Length, Sepal.Width)/(<span class="kw">sd</span>(Sepal.Length) *<span class="st"> </span><span class="kw">sd</span>(Sepal.Width))</code></pre></div>
-<pre><code>## [1] -0.1175698</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(Sepal.Length, Sepal.Width)</code></pre></div>
-<pre><code>## [1] -0.1175698</code></pre>
-</div>
-<div id="section-2.4" class="section level2">
-<h2><span class="header-section-number">2.4</span> 对称性度量</h2>
-<p>在使用参数检验之前需要度量我们的数据是否是对称分布的，通常使用偏度系数（skewness coefficient）和峰度系数（kurtosis coefficient)。根据定义，正态分布的偏度和峰度都为0。偏度系数计算的是三阶中心矩，而峰度系数计算的是四阶中心矩。</p>
-<p>R并不提供函数度量偏度和峰度，这里使用<em>psych</em>包里的skew()和kurtosi()函数。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(psych)
-<span class="kw">skew</span>(Sepal.Length)</code></pre></div>
-<pre><code>## [1] 0.3086407</code></pre>
 
 </div>
 </div>
@@ -304,7 +280,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="ggplot2.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
-<script src="libs/gitbook-2.6.7/js/app.js"></script>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>

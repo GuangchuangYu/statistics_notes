@@ -8,7 +8,7 @@
   <title>统计笔记</title>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="YGC的统计学笔记">
-  <meta name="generator" content="bookdown 0.0.63 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.0.67 and GitBook 2.6.7">
 
   <meta property="og:title" content="统计笔记" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 
 <meta name="author" content="余光创">
 
-<meta name="date" content="2016-04-11">
+<meta name="date" content="2016-04-26">
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -109,8 +109,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2" data-path="r.html"><a href="r.html"><i class="fa fa-check"></i><b>2</b> R语言简介</a><ul>
 <li class="chapter" data-level="2.1" data-path="r.html"><a href="r.html#-flow-control"><i class="fa fa-check"></i><b>2.1</b> 控制流 （Flow Control)</a></li>
 <li class="chapter" data-level="2.2" data-path="r.html"><a href="r.html#-looping"><i class="fa fa-check"></i><b>2.2</b> 循环 (Looping)</a></li>
-<li class="chapter" data-level="2.3" data-path="r.html"><a href="r.html#covariancecorrelation"><i class="fa fa-check"></i><b>2.3</b> 协方差（covariance）和相关性（correlation）</a></li>
-<li class="chapter" data-level="2.4" data-path="r.html"><a href="r.html#section-2.4"><i class="fa fa-check"></i><b>2.4</b> 对称性度量</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>3</b> 使用ggplot2画图</a><ul>
 <li class="chapter" data-level="3.1" data-path="ggplot2.html"><a href="ggplot2.html#why-use-ggplot2"><i class="fa fa-check"></i><b>3.1</b> Why use ggplot2</a></li>
@@ -256,7 +254,7 @@ m2 &lt;-<span class="st"> </span><span class="kw">get_sample_mean</span>(<span c
 <span class="kw">hist</span>(m2, <span class="dt">col=</span><span class="st">&quot;green&quot;</span>, <span class="dt">main=</span><span class="st">&quot;Histogram of sample means&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Means&quot;</span>, <span class="dt">breaks=</span><span class="dv">30</span>)
 <span class="kw">hist</span>(m1, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">add=</span>T, <span class="dt">breaks=</span><span class="dv">30</span>)
 <span class="kw">legend</span>(<span class="dt">legend=</span><span class="kw">c</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(sigma==<span class="dv">1</span>)), <span class="kw">expression</span>(<span class="kw">paste</span>(sigma==<span class="dv">3</span>))), <span class="dt">fill=</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>), <span class="st">&quot;topright&quot;</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/t.fig1-1.png" /><!-- --></p>
+<p><img src="_main_files/figure-html/t.fig1-1.png" width="576" /></p>
 <p>我们知道正态分布由两个参数决定，均值和方差，所以 <span class="math inline">\(| \bar{x} - \mu |\)</span> 的大小，不能直接对应到p值，从上图绿色中抽到一个<span class="math inline">\(| \bar{x} - \mu | = 3\)</span> 的样本，概率并不低，但从红色分布中得到这样一个样本，几乎是不可能的。</p>
 <p>拿 <span class="math inline">\(| \bar{x} - \mu |\)</span> 来度量的话，你必须提供 <span class="math inline">\(sd(\bar{x})\)</span> ，<span class="math inline">\(| \bar{x} - \mu |\)</span> 不能直接比较。</p>
 <p>如果<span class="math inline">\(sd(\bar{x})\)</span> 相同的话，<span class="math inline">\(| \bar{x} - \mu |\)</span> 就是很好的度量方法，它是可比较的，值越大，p值越小。那么我们需要做的，就是把数据压缩到同一个scale上，既然均值分布呈正态分布，而所有的正态分布都可以scale到标准正态分布上，显然我们可以用相同的方法来处理，把数据统一scale到 <span class="math inline">\(SEM = 1\)</span> ，于是差值 <span class="math inline">\(| scale(\bar{x}) - \mu |\)</span> 就完全可以拿来比较，年纪大点的人，上学时候p值是通过查表获得的，查表用的值就是 <span class="math inline">\(| scale(\bar{x}) - \mu |\)</span> 。</p>
@@ -308,11 +306,8 @@ In theory, there is no difference between theory and practice. But, in practice,
 <h3><span class="header-section-number">5.3.1</span> 成对T检验</h3>
 <p>成对数据的 <span class="math inline">\(SEDM = = \frac{s_d}{\sqrt{n}}\)</span> 。 成对T检验本质上和单样本T检验是一样的，通过计算 <span class="math inline">\(d_i = x_{1i} -x_{2i}\)</span> ，对d值进行单样本t检验。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(iris)
-<span class="kw">attach</span>(iris)</code></pre></div>
-<pre><code>## The following objects are masked from iris (pos = 8):
-## 
-##     Petal.Length, Petal.Width, Sepal.Length, Sepal.Width, Species</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(Sepal.Length, Petal.Length, <span class="dt">paired=</span><span class="ot">TRUE</span>)</code></pre></div>
+<span class="kw">attach</span>(iris)
+<span class="kw">t.test</span>(Sepal.Length, Petal.Length, <span class="dt">paired=</span><span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## 
 ##  Paired t-test
 ## 
@@ -371,7 +366,7 @@ In theory, there is no difference between theory and practice. But, in practice,
 <a href="section-4.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="section-6.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
-<script src="libs/gitbook-2.6.7/js/app.js"></script>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>

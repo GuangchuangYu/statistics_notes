@@ -8,7 +8,7 @@
   <title>统计笔记</title>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="YGC的统计学笔记">
-  <meta name="generator" content="bookdown 0.0.63 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.0.67 and GitBook 2.6.7">
 
   <meta property="og:title" content="统计笔记" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 
 <meta name="author" content="余光创">
 
-<meta name="date" content="2016-04-11">
+<meta name="date" content="2016-04-26">
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -109,8 +109,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2" data-path="r.html"><a href="r.html"><i class="fa fa-check"></i><b>2</b> R语言简介</a><ul>
 <li class="chapter" data-level="2.1" data-path="r.html"><a href="r.html#-flow-control"><i class="fa fa-check"></i><b>2.1</b> 控制流 （Flow Control)</a></li>
 <li class="chapter" data-level="2.2" data-path="r.html"><a href="r.html#-looping"><i class="fa fa-check"></i><b>2.2</b> 循环 (Looping)</a></li>
-<li class="chapter" data-level="2.3" data-path="r.html"><a href="r.html#covariancecorrelation"><i class="fa fa-check"></i><b>2.3</b> 协方差（covariance）和相关性（correlation）</a></li>
-<li class="chapter" data-level="2.4" data-path="r.html"><a href="r.html#section-2.4"><i class="fa fa-check"></i><b>2.4</b> 对称性度量</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>3</b> 使用ggplot2画图</a><ul>
 <li class="chapter" data-level="3.1" data-path="ggplot2.html"><a href="ggplot2.html#why-use-ggplot2"><i class="fa fa-check"></i><b>3.1</b> Why use ggplot2</a></li>
@@ -575,7 +573,7 @@ p &lt;-<span class="st"> </span>p+<span class="kw">theme_bw</span>()+<span class
 p &lt;-<span class="st"> </span>p+<span class="kw">theme</span>(<span class="dt">axis.text.x=</span><span class="kw">element_text</span>(<span class="dt">face=</span><span class="st">&quot;bold&quot;</span>, <span class="dt">size=</span><span class="dv">14</span>), <span class="dt">axis.text.y=</span><span class="kw">element_text</span>(<span class="dt">face=</span><span class="st">&quot;bold&quot;</span>, <span class="dt">size=</span><span class="dv">14</span>), <span class="dt">axis.title.y=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">18</span>, <span class="dt">face=</span><span class="st">&quot;bold&quot;</span>))
 p &lt;-<span class="st"> </span>p+<span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x=</span><span class="dv">2</span>,<span class="dt">y=</span><span class="fl">3.5</span>, <span class="dt">label=</span><span class="st">&quot;p &lt; 0.005</span><span class="ch">\n</span><span class="st">**&quot;</span>, <span class="dt">size=</span><span class="dv">4</span>)
 <span class="kw">print</span>(p)</code></pre></div>
-<p><img src="_main_files/figure-html/rt-qpcr.fig1-1.png" /><!-- --> 再来一个箱式图，我其实觉得箱式图比柱状图要好一些，这里我除了用箱式图画数据分布之后，把原始的数据点也给画了。</p>
+<p><img src="_main_files/figure-html/rt-qpcr.fig1-1.png" width="576" /> 再来一个箱式图，我其实觉得箱式图比柱状图要好一些，这里我除了用箱式图画数据分布之后，把原始的数据点也给画了。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dd.ctm, <span class="kw">aes</span>(variable, value, <span class="dt">fill=</span>variable, <span class="dt">colour=</span>variable))
 p2 &lt;-<span class="st"> </span>p2+<span class="kw">geom_boxplot</span>(<span class="dt">alpha=</span>.<span class="dv">3</span>, <span class="dt">width=</span>.<span class="dv">5</span>)+<span class="kw">geom_dotplot</span>(<span class="dt">binaxis=</span><span class="st">&#39;y&#39;</span>, <span class="dt">stackdir=</span><span class="st">&#39;center&#39;</span>, <span class="dt">dotsize=</span>.<span class="dv">5</span>)
 p2 &lt;-<span class="st"> </span>p2+<span class="kw">theme_bw</span>()+<span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>) +<span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>)+<span class="kw">ylab</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;-&quot;</span>, Delta, Delta, <span class="st">&quot;Ct&quot;</span>)))
@@ -583,7 +581,7 @@ p2 &lt;-<span class="st"> </span>p2+<span class="kw">theme</span>(<span class="d
 p2 &lt;-<span class="st"> </span>p2+<span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x=</span><span class="dv">2</span>,<span class="dt">y=</span><span class="fl">3.5</span>, <span class="dt">label=</span><span class="st">&quot;p &lt; 0.005</span><span class="ch">\n</span><span class="st">**&quot;</span>, <span class="dt">size=</span><span class="dv">4</span>)
 <span class="kw">print</span>(p2)</code></pre></div>
 <pre><code>## `stat_bindot()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="_main_files/figure-html/rt-qpcr.fig2-1.png" /><!-- --></p>
+<p><img src="_main_files/figure-html/rt-qpcr.fig2-1.png" width="576" /></p>
 </div>
 <div id="summary" class="section level3">
 <h3><span class="header-section-number">11.1.6</span> Summary</h3>
@@ -602,7 +600,7 @@ p2 &lt;-<span class="st"> </span>p2+<span class="kw">annotate</span>(<span class
 <a href="logistic-regression.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
 
-<script src="libs/gitbook-2.6.7/js/app.js"></script>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>

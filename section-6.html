@@ -8,7 +8,7 @@
   <title>统计笔记</title>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="YGC的统计学笔记">
-  <meta name="generator" content="bookdown 0.0.63 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.0.67 and GitBook 2.6.7">
 
   <meta property="og:title" content="统计笔记" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 
 <meta name="author" content="余光创">
 
-<meta name="date" content="2016-04-11">
+<meta name="date" content="2016-04-26">
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -109,8 +109,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2" data-path="r.html"><a href="r.html"><i class="fa fa-check"></i><b>2</b> R语言简介</a><ul>
 <li class="chapter" data-level="2.1" data-path="r.html"><a href="r.html#-flow-control"><i class="fa fa-check"></i><b>2.1</b> 控制流 （Flow Control)</a></li>
 <li class="chapter" data-level="2.2" data-path="r.html"><a href="r.html#-looping"><i class="fa fa-check"></i><b>2.2</b> 循环 (Looping)</a></li>
-<li class="chapter" data-level="2.3" data-path="r.html"><a href="r.html#covariancecorrelation"><i class="fa fa-check"></i><b>2.3</b> 协方差（covariance）和相关性（correlation）</a></li>
-<li class="chapter" data-level="2.4" data-path="r.html"><a href="r.html#section-2.4"><i class="fa fa-check"></i><b>2.4</b> 对称性度量</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>3</b> 使用ggplot2画图</a><ul>
 <li class="chapter" data-level="3.1" data-path="ggplot2.html"><a href="ggplot2.html#why-use-ggplot2"><i class="fa fa-check"></i><b>3.1</b> Why use ggplot2</a></li>
@@ -258,7 +256,7 @@ mpg$cyl=<span class="kw">factor</span>(mpg$cyl)
 ## 5         audi    a4   2.8 1999   6   auto(l5)   f  16  26  p compact
 ## 6         audi    a4   2.8 1999   6 manual(m5)   f  18  26  p compact</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(displ~cyl, <span class="dt">data=</span>mpg)</code></pre></div>
-<p><img src="_main_files/figure-html/aov1.fig1-1.png" /><!-- --> 如果我们根据不同汽缸数（cylinders, cyl变量）对汽车进行分组，分析发动机排量（engine displacement, displ变量）均值是否不同，从图上可以看到，汽缸数越多，排量越大。</p>
+<p><img src="_main_files/figure-html/aov1.fig1-1.png" width="672" /> 如果我们根据不同汽缸数（cylinders, cyl变量）对汽车进行分组，分析发动机排量（engine displacement, displ变量）均值是否不同，从图上可以看到，汽缸数越多，排量越大。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res=<span class="kw">aov</span>(displ~cyl, <span class="dt">data=</span>mpg)
 <span class="kw">summary</span>(res)</code></pre></div>
 <pre><code>##              Df Sum Sq Mean Sq F value Pr(&gt;F)    
@@ -463,11 +461,11 @@ SS.err</code></pre></div>
 ## Residuals     12 311.25   25.94</code></pre>
 <p>虽然这里相互作用没有显著性，但做为演示，依然可以画一下相互作用图，使用stats包提供的interaction.plot，如果有显著性，可以从图中看出效应。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(data, <span class="kw">interaction.plot</span>(Gender, Dosage, Alertness))</code></pre></div>
-<p><img src="_main_files/figure-html/aov2.fig1-1.png" /><!-- --> 这个图其实就是以Gender为X轴，按Dosage进行分组，以分组的Alertness均值为Y轴，进行画图，自己使用ggplot2来画也是非常简单的，还可以给均值加上errorbar或confidence interval，都是很容易的事情。</p>
+<p><img src="_main_files/figure-html/aov2.fig1-1.png" width="672" /> 这个图其实就是以Gender为X轴，按Dosage进行分组，以分组的Alertness均值为Y轴，进行画图，自己使用ggplot2来画也是非常简单的，还可以给均值加上errorbar或confidence interval，都是很容易的事情。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(ggplot2)
 grp &lt;-<span class="st"> </span><span class="kw">ddply</span>(data, .(Gender, Dosage), function(x) <span class="kw">data.frame</span>(<span class="dt">m=</span><span class="kw">mean</span>(x$Alertness)))
 <span class="kw">ggplot</span>(grp, <span class="kw">aes</span>(Gender, m, <span class="dt">group=</span>Dosage, <span class="dt">shape=</span>Dosage, <span class="dt">color=</span>Dosage, <span class="dt">linetype=</span>Dosage))+<span class="kw">geom_point</span>()+<span class="kw">geom_line</span>()</code></pre></div>
-<p><img src="_main_files/figure-html/aov2.fig2-1.png" /><!-- --></p>
+<p><img src="_main_files/figure-html/aov2.fig2-1.png" width="672" /></p>
 <p>对于分组数据均值是否有差异，也可以画boxplot或者是使用均值和置信区间来画图。</p>
 </div>
 </div>
@@ -620,7 +618,7 @@ data</code></pre></div>
 <a href="t.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="correlation.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
-<script src="libs/gitbook-2.6.7/js/app.js"></script>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
