@@ -19,27 +19,3 @@ the solution.
 ## 循环 (Looping)
 
 
-## 协方差（covariance）和相关性（correlation）
-我们想看两组数据是否独立，或者说想看两组数据是否相关。我们可以使用协方差:
-
-$s_{xy}=\frac{\sum{(x-\bar{x})(y-\bar{y})}}{n-1}$
-
-协方差的取值可以是正、0和负，如果值是正的，表明x和y的趋势一致，即x上升的话，y也是上升的。协方差的值受到x和y单位的影响，为了消除这一影响，将协方差除以x和y的标准差，我们得到的是相关系数。
-
-```{r}
-data(iris)
-attach(iris)
-cov(Sepal.Length, Sepal.Width)
-cov(Sepal.Length, Sepal.Width)/(sd(Sepal.Length) * sd(Sepal.Width))
-cor(Sepal.Length, Sepal.Width)
-```
-
-## 对称性度量
-在使用参数检验之前需要度量我们的数据是否是对称分布的，通常使用偏度系数（skewness coefficient）和峰度系数（kurtosis coefficient)。根据定义，正态分布的偏度和峰度都为0。偏度系数计算的是三阶中心矩，而峰度系数计算的是四阶中心矩。
-
-R并不提供函数度量偏度和峰度，这里使用*psych*包里的skew()和kurtosi()函数。
-```{r}
-library(psych)
-skew(Sepal.Length)
-```
-
