@@ -269,7 +269,7 @@ Karp, N. (2007) Design and Analysis Issues in Quantitative Proteomics Studies, <
 
 </div>
 <p><a href="https://imgs.xkcd.com/comics/significant.png" class="uri">https://imgs.xkcd.com/comics/significant.png</a></p>
-<p>如上图所讽刺的，如果我们对20种不同颜色的jelly beans(糖豆)和acne(粉刺)的相关性做检验，以<span class="math inline">\(\alpha = 0.05\)</span>为阈值，20次检验随机会有20<em>0.05 = 1次出现</em>p*值&lt;<span class="math inline">\(\alpha\)</span>的情况，如图中出现的绿色糖豆具有显著性，但我们并不能因此下结论说绿色糖豆与粉刺有关联，因为这实际上是随机出现的结果，这是I类错误。</p>
+<p>如上图所讽刺的，如果我们对20种不同颜色的jelly beans(糖豆)和acne(粉刺)的相关性做检验，以<span class="math inline">\(\alpha = 0.05\)</span>为阈值，20次检验随机会有20x0.05 = 1次出现<em>p</em>值&lt;<span class="math inline">\(\alpha\)</span>的情况，如图中出现的绿色糖豆具有显著性，但我们并不能因此下结论说绿色糖豆与粉刺有关联，因为这实际上是随机出现的结果，这是I类错误。</p>
 <p>以<span class="math inline">\(\alpha=0.05\)</span>为阈值，我们做一次检验，可信度是0.95, 这里做了20次，那么我们对这20个检验都能够下正确结论的可能性就只有(95%)<sup>20</sup> = 35.8%。</p>
 <p>我们要提高结论的可信度，可以通过降低犯I类错误的概率也是就降低<span class="math inline">\(\alpha\)</span>值来实现。比如设<span class="math inline">\(\alpha=0.001\)</span>，那么我们下正确结论的可能性就变成(99%)<sup>20</sup> = 98%。 对所有的检验进行严格控制，Bonferroni方法就是其中最为简单也最为保守的方法。</p>
 <div id="the-bonferroni-method" class="section level2">
